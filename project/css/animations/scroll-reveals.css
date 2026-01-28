@@ -1,0 +1,470 @@
+/**
+ * Scroll Reveals CSS
+ * Styles for scroll-triggered reveal animations
+ * 
+ * Requirements:
+ * - 4.5: Support reveal types: fade-up, scale, rotate, slide-left, slide-right
+ * - 1.1-1.3: GPU acceleration (transform, opacity, will-change)
+ * - 9.1-9.4: Reduced motion support (@media prefers-reduced-motion)
+ * - 10.1-10.4: Responsive adjustments for mobile
+ * 
+ * Design Reference (Property 11):
+ * - fade-up: opacity = r, translateY = (1-r) * 50px
+ * - scale: opacity = r, scale = 0.8 + r * 0.2
+ * - rotate: opacity = r, rotate3d = (1-r) * 45deg
+ * - slide-left: opacity = r, translateX = (1-r) * -100px
+ * - slide-right: opacity = r, translateX = (1-r) * 100px
+ * 
+ * @module css/animations/scroll-reveals
+ */
+
+/* ==========================================================================
+   CSS Custom Properties for Scroll Reveals
+   ========================================================================== */
+
+:root {
+    /* Reveal animation timing */
+    --reveal-duration: 600ms;
+    --reveal-easing: cubic-bezier(0.4, 0, 0.2, 1);
+    --reveal-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Reveal transform values */
+    --reveal-fade-up-distance: 50px;
+    --reveal-scale-start: 0.8;
+    --reveal-scale-end: 1;
+    --reveal-rotate-angle: 45deg;
+    --reveal-slide-distance: 100px;
+    
+    /* Stagger delay for multiple elements */
+    --reveal-stagger-delay: 100ms;
+}
+
+/* ==========================================================================
+   Base Reveal Element Styles
+   Common styles for all reveal elements
+   ========================================================================== */
+
+[data-reveal] {
+    /* GPU acceleration - Requirements 1.1, 1.2, 1.3 */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    
+    /* Smooth transitions */
+    transition: 
+        opacity var(--reveal-duration) var(--reveal-easing),
+        transform var(--reveal-duration) var(--reveal-easing);
+    
+    /* Will-change for performance (applied selectively) */
+    will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   Initial Hidden States
+   Each reveal type has a specific initial state
+   ========================================================================== */
+
+/* Fade Up - Initial State */
+/* Property 11: fade-up: opacity = 0, translateY = 50px */
+[data-reveal="fade-up"] {
+    opacity: 0;
+    transform: translate3d(0, var(--reveal-fade-up-distance), 0);
+}
+
+/* Scale - Initial State */
+/* Property 11: scale: opacity = 0, scale = 0.8 */
+[data-reveal="scale"] {
+    opacity: 0;
+    transform: scale3d(var(--reveal-scale-start), var(--reveal-scale-start), 1);
+}
+
+/* Rotate - Initial State */
+/* Property 11: rotate: opacity = 0, rotate3d = 45deg */
+[data-reveal="rotate"] {
+    opacity: 0;
+    transform: rotate3d(0, 0, 1, var(--reveal-rotate-angle));
+}
+
+/* Slide Left - Initial State */
+/* Property 11: slide-left: opacity = 0, translateX = -100px */
+[data-reveal="slide-left"] {
+    opacity: 0;
+    transform: translate3d(calc(var(--reveal-slide-distance) * -1), 0, 0);
+}
+
+/* Slide Right - Initial State */
+/* Property 11: slide-right: opacity = 0, translateX = 100px */
+[data-reveal="slide-right"] {
+    opacity: 0;
+    transform: translate3d(var(--reveal-slide-distance), 0, 0);
+}
+
+/* ==========================================================================
+   Revealed States
+   Applied when element enters viewport (via JS or .revealed class)
+   ========================================================================== */
+
+/* Fade Up - Revealed State */
+[data-reveal="fade-up"].revealed,
+.reveal-visible[data-reveal="fade-up"] {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+/* Scale - Revealed State */
+[data-reveal="scale"].revealed,
+.reveal-visible[data-reveal="scale"] {
+    opacity: 1;
+    transform: scale3d(var(--reveal-scale-end), var(--reveal-scale-end), 1);
+}
+
+/* Rotate - Revealed State */
+[data-reveal="rotate"].revealed,
+.reveal-visible[data-reveal="rotate"] {
+    opacity: 1;
+    transform: rotate3d(0, 0, 1, 0deg);
+}
+
+/* Slide Left - Revealed State */
+[data-reveal="slide-left"].revealed,
+.reveal-visible[data-reveal="slide-left"] {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+/* Slide Right - Revealed State */
+[data-reveal="slide-right"].revealed,
+.reveal-visible[data-reveal="slide-right"] {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+/* ==========================================================================
+   Staggered Reveal Animations
+   For groups of elements that reveal sequentially
+   ========================================================================== */
+
+/* Stagger delay classes */
+[data-reveal-delay="1"] {
+    transition-delay: calc(var(--reveal-stagger-delay) * 1);
+}
+
+[data-reveal-delay="2"] {
+    transition-delay: calc(var(--reveal-stagger-delay) * 2);
+}
+
+[data-reveal-delay="3"] {
+    transition-delay: calc(var(--reveal-stagger-delay) * 3);
+}
+
+[data-reveal-delay="4"] {
+    transition-delay: calc(var(--reveal-stagger-delay) * 4);
+}
+
+[data-reveal-delay="5"] {
+    transition-delay: calc(var(--reveal-stagger-delay) * 5);
+}
+
+[data-reveal-delay="6"] {
+    transition-delay: calc(var(--reveal-stagger-delay) * 6);
+}
+
+/* Stagger group - auto-apply delays to children */
+.reveal-stagger > [data-reveal]:nth-child(1) {
+    transition-delay: calc(var(--reveal-stagger-delay) * 0);
+}
+
+.reveal-stagger > [data-reveal]:nth-child(2) {
+    transition-delay: calc(var(--reveal-stagger-delay) * 1);
+}
+
+.reveal-stagger > [data-reveal]:nth-child(3) {
+    transition-delay: calc(var(--reveal-stagger-delay) * 2);
+}
+
+.reveal-stagger > [data-reveal]:nth-child(4) {
+    transition-delay: calc(var(--reveal-stagger-delay) * 3);
+}
+
+.reveal-stagger > [data-reveal]:nth-child(5) {
+    transition-delay: calc(var(--reveal-stagger-delay) * 4);
+}
+
+.reveal-stagger > [data-reveal]:nth-child(6) {
+    transition-delay: calc(var(--reveal-stagger-delay) * 5);
+}
+
+.reveal-stagger > [data-reveal]:nth-child(n+7) {
+    transition-delay: calc(var(--reveal-stagger-delay) * 6);
+}
+
+/* ==========================================================================
+   Alternative Easing Variants
+   Different easing functions for varied effects
+   ========================================================================== */
+
+/* Bounce easing variant */
+[data-reveal-easing="bounce"] {
+    transition-timing-function: var(--reveal-easing-bounce);
+}
+
+/* Slow easing variant */
+[data-reveal-easing="slow"] {
+    --reveal-duration: 1000ms;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Fast easing variant */
+[data-reveal-easing="fast"] {
+    --reveal-duration: 400ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* ==========================================================================
+   Parallax Element Styles
+   For elements with data-parallax attribute
+   ========================================================================== */
+
+[data-parallax] {
+    /* GPU acceleration for smooth parallax */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+}
+
+/* ==========================================================================
+   GPU Acceleration Utility Classes
+   Requirements: 1.1-1.3 - Hardware acceleration
+   ========================================================================== */
+
+.reveal-gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+.reveal-will-change-transform {
+    will-change: transform;
+}
+
+.reveal-will-change-opacity {
+    will-change: opacity;
+}
+
+.reveal-will-change-all {
+    will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   Reduced Motion Support
+   Requirements: 9.1-9.4 - Accessibility for motion sensitivity
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    /* Disable all reveal animations */
+    [data-reveal],
+    [data-reveal="fade-up"],
+    [data-reveal="scale"],
+    [data-reveal="rotate"],
+    [data-reveal="slide-left"],
+    [data-reveal="slide-right"] {
+        /* Show content immediately - Requirement 9.2 */
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    /* Disable parallax effects */
+    [data-parallax] {
+        transform: none !important;
+        transition: none !important;
+        will-change: auto !important;
+    }
+    
+    /* Remove will-change to save resources */
+    [data-reveal],
+    [data-parallax],
+    .reveal-gpu-accelerated,
+    .reveal-will-change-transform,
+    .reveal-will-change-opacity,
+    .reveal-will-change-all {
+        will-change: auto !important;
+    }
+    
+    /* Disable stagger delays */
+    [data-reveal-delay],
+    .reveal-stagger > [data-reveal] {
+        transition-delay: 0ms !important;
+    }
+}
+
+/* ==========================================================================
+   Responsive Adjustments
+   Requirements: 10.1-10.4 - Mobile optimization
+   ========================================================================== */
+
+/* Tablet and below */
+@media (max-width: 1024px) {
+    :root {
+        /* Reduce animation distances for smaller screens */
+        --reveal-fade-up-distance: 40px;
+        --reveal-slide-distance: 80px;
+        --reveal-rotate-angle: 30deg;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    :root {
+        /* Further reduce for mobile */
+        --reveal-duration: 500ms;
+        --reveal-fade-up-distance: 30px;
+        --reveal-slide-distance: 60px;
+        --reveal-rotate-angle: 20deg;
+        --reveal-stagger-delay: 80ms;
+    }
+    
+    /* Simplify transforms on mobile for performance */
+    [data-reveal="rotate"] {
+        /* Use simpler 2D rotation on mobile */
+        transform: rotate(var(--reveal-rotate-angle));
+    }
+    
+    [data-reveal="rotate"].revealed,
+    .reveal-visible[data-reveal="rotate"] {
+        transform: rotate(0deg);
+    }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+    :root {
+        /* Minimal animations for small screens */
+        --reveal-duration: 400ms;
+        --reveal-fade-up-distance: 20px;
+        --reveal-slide-distance: 40px;
+        --reveal-rotate-angle: 15deg;
+        --reveal-stagger-delay: 60ms;
+    }
+}
+
+/* ==========================================================================
+   High Contrast Mode Support
+   ========================================================================== */
+
+@media (prefers-contrast: high) {
+    /* Ensure content is visible regardless of animation state */
+    [data-reveal] {
+        opacity: 1 !important;
+    }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+    /* Show all content for printing */
+    [data-reveal],
+    [data-reveal="fade-up"],
+    [data-reveal="scale"],
+    [data-reveal="rotate"],
+    [data-reveal="slide-left"],
+    [data-reveal="slide-right"] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    /* Hide parallax effects */
+    [data-parallax] {
+        transform: none !important;
+    }
+}
+
+/* ==========================================================================
+   Keyframe Animations (Alternative to JS-driven)
+   For use when CSS-only animations are preferred
+   ========================================================================== */
+
+/* Fade Up Animation */
+@keyframes reveal-fade-up {
+    from {
+        opacity: 0;
+        transform: translate3d(0, var(--reveal-fade-up-distance), 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Scale Animation */
+@keyframes reveal-scale {
+    from {
+        opacity: 0;
+        transform: scale3d(var(--reveal-scale-start), var(--reveal-scale-start), 1);
+    }
+    to {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+/* Rotate Animation */
+@keyframes reveal-rotate {
+    from {
+        opacity: 0;
+        transform: rotate3d(0, 0, 1, var(--reveal-rotate-angle));
+    }
+    to {
+        opacity: 1;
+        transform: rotate3d(0, 0, 1, 0deg);
+    }
+}
+
+/* Slide Left Animation */
+@keyframes reveal-slide-left {
+    from {
+        opacity: 0;
+        transform: translate3d(calc(var(--reveal-slide-distance) * -1), 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Slide Right Animation */
+@keyframes reveal-slide-right {
+    from {
+        opacity: 0;
+        transform: translate3d(var(--reveal-slide-distance), 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* CSS-only animation classes (use with .animate class trigger) */
+[data-reveal="fade-up"].animate-css {
+    animation: reveal-fade-up var(--reveal-duration) var(--reveal-easing) forwards;
+}
+
+[data-reveal="scale"].animate-css {
+    animation: reveal-scale var(--reveal-duration) var(--reveal-easing) forwards;
+}
+
+[data-reveal="rotate"].animate-css {
+    animation: reveal-rotate var(--reveal-duration) var(--reveal-easing) forwards;
+}
+
+[data-reveal="slide-left"].animate-css {
+    animation: reveal-slide-left var(--reveal-duration) var(--reveal-easing) forwards;
+}
+
+[data-reveal="slide-right"].animate-css {
+    animation: reveal-slide-right var(--reveal-duration) var(--reveal-easing) forwards;
+}
+

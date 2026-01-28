@@ -1,0 +1,913 @@
+# TASK: REDESIGN HOÀN TOÀN GIAO DIỆN - Modern, Premium, Interactive
+
+## 🎯 MỤC TIÊU
+Nâng cấp toàn bộ visual design và animations của website hiện tại lên level chuyên nghiệp, hiện đại, với "WOW factor" cao. Website phải khiến người xem muốn dừng lại và khám phá.
+
+---
+
+## 🎨 DESIGN DIRECTION - "Contemporary Premium"
+
+### Visual Style:
+- **Modern minimalism** với bold typography
+- **Glassmorphism** effects (frosted glass, blur backgrounds)
+- **Vibrant gradients** và **color transitions**
+- **3D depth** với shadows và layering
+- **Micro-interactions** ở mọi nơi có thể
+- **Dark mode aesthetic** với pops of color
+- **Fluid animations** thay vì static elements
+
+### Inspiration Keywords:
+Apple website, Stripe landing page, Awwwards winners, Behance top designs, Dribbble trendings
+
+---
+
+## 🌈 COLOR SYSTEM OVERHAUL
+
+### New Primary Palette:
+```css
+:root {
+    /* Vibrant gradients */
+    --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    --gradient-sunset: linear-gradient(120deg, #fa709a 0%, #fee140 100%);
+    --gradient-ocean: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --gradient-forest: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+    
+    /* Dark mode base */
+    --bg-dark: #0f0f23;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    
+    /* Accent colors */
+    --accent-purple: #b57bee;
+    --accent-pink: #ff6ec7;
+    --accent-blue: #4cc9f0;
+    --accent-yellow: #ffd60a;
+    
+    /* Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.18);
+}
+```
+
+### Color Usage:
+- Background: Deep dark (#0f0f23) với animated gradient overlays
+- Cards: Glassmorphism với backdrop-filter: blur(10px)
+- Text: Pure white với subtle glows
+- Accents: Vibrant gradients cho CTAs và highlights
+
+---
+
+## ✨ TYPOGRAPHY UPGRADE
+
+### Font Stack:
+```css
+/* Ultra-modern fonts */
+--font-display: 'Space Grotesk', -apple-system, sans-serif; /* Headings */
+--font-body: 'Inter', -apple-system, sans-serif; /* Body text */
+--font-mono: 'JetBrains Mono', monospace; /* Code/tech elements */
+
+/* Size scale - Bold & Impactful */
+--text-xs: 0.75rem;
+--text-sm: 0.875rem;
+--text-base: 1rem;
+--text-lg: 1.125rem;
+--text-xl: 1.25rem;
+--text-2xl: 1.5rem;
+--text-3xl: 1.875rem;
+--text-4xl: 2.25rem;
+--text-5xl: 3rem;
+--text-6xl: 3.75rem;
+--text-7xl: 4.5rem;
+--text-8xl: 6rem; /* Hero titles */
+
+/* Weights */
+--font-normal: 400;
+--font-medium: 500;
+--font-semibold: 600;
+--font-bold: 700;
+--font-extrabold: 800;
+```
+
+### Typography Effects:
+- **Hero titles**: Gradient text với animation
+- **Hover states**: Color shift animations
+- **Subheadings**: Subtle glow effects
+- **Links**: Animated underlines
+
+---
+
+## 🎭 ANIMATION SYSTEM - "Buttery Smooth"
+
+### 1. PAGE LOAD ANIMATIONS
+
+#### Staggered Entrance:
+```javascript
+// Tất cả elements xuất hiện với stagger effect
+const staggerElements = document.querySelectorAll('.stagger-item');
+staggerElements.forEach((el, index) => {
+    el.style.animationDelay = `${index * 0.1}s`;
+    el.classList.add('fade-in-up');
+});
+```
+
+#### Hero Animation Sequence:
+```css
+/* Hero elements xuất hiện theo sequence */
+.hero-title {
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+               gradientShift 3s ease-in-out infinite;
+}
+
+.hero-subtitle {
+    animation: fadeInUp 0.8s 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.hero-cta {
+    animation: fadeInUp 0.8s 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+               float 3s ease-in-out infinite;
+}
+```
+
+### 2. SCROLL ANIMATIONS - Advanced
+
+#### Parallax Effects:
+```javascript
+// Multi-layer parallax
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    
+    // Background moves slower
+    document.querySelector('.parallax-bg').style.transform = 
+        `translateY(${scrolled * 0.5}px)`;
+    
+    // Foreground moves faster
+    document.querySelector('.parallax-fg').style.transform = 
+        `translateY(${scrolled * -0.3}px)`;
+});
+```
+
+#### Reveal Animations:
+```javascript
+// Intersection Observer với advanced options
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Add reveal class
+            entry.target.classList.add('revealed');
+            
+            // Trigger child animations
+            const children = entry.target.querySelectorAll('[data-reveal-child]');
+            children.forEach((child, index) => {
+                setTimeout(() => {
+                    child.classList.add('revealed');
+                }, index * 100);
+            });
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '-50px'
+});
+```
+
+### 3. HOVER INTERACTIONS - Micro-animations
+
+#### Card Hover:
+```css
+.card {
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(102, 126, 234, 0.4);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Tilt effect on hover */
+.card:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) translateY(-10px);
+}
+```
+
+#### Button Hover:
+```css
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    transition: all 0.3s ease;
+}
+
+/* Shine effect */
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255,255,255,0.3), 
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+/* Ripple effect on click */
+.btn-primary:active {
+    transform: scale(0.95);
+}
+```
+
+### 4. TIMELINE ANIMATIONS - Cinematic
+```css
+/* Timeline line grows as you scroll */
+.timeline-line {
+    height: 0%;
+    transition: height 0.3s ease-out;
+}
+
+.timeline-line.active {
+    height: var(--scroll-progress);
+}
+
+/* Timeline items */
+.timeline-item {
+    opacity: 0;
+    transform: translateX(-100px) rotateY(-20deg);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateX(0) rotateY(0);
+}
+
+.timeline-item:nth-child(even) {
+    transform: translateX(100px) rotateY(20deg);
+}
+
+/* Pulse animation on active node */
+.timeline-node.active {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 20px rgba(102, 126, 234, 0);
+    }
+}
+```
+
+### 5. MOSAIC ANIMATIONS - Dynamic Grid
+```css
+/* Mosaic tiles */
+.mosaic-tile {
+    position: relative;
+    overflow: hidden;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover effect - Magnetic attraction */
+.mosaic-tile:hover {
+    z-index: 10;
+    transform: scale(1.1) translateZ(50px);
+    box-shadow: 
+        0 20px 60px rgba(0,0,0,0.3),
+        0 0 40px var(--tile-color);
+}
+
+/* Gradient border animation */
+.mosaic-tile::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: conic-gradient(
+        from var(--angle),
+        var(--tile-color) 0deg,
+        transparent 60deg,
+        transparent 300deg,
+        var(--tile-color) 360deg
+    );
+    border-radius: inherit;
+    animation: rotate 3s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.mosaic-tile:hover::before {
+    opacity: 1;
+}
+
+@keyframes rotate {
+    to { --angle: 360deg; }
+}
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* Tile content reveal */
+.tile-overlay {
+    transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mosaic-tile:hover .tile-overlay {
+    transform: translateY(0);
+}
+
+/* Icon animation */
+.tile-icon {
+    transition: all 0.4s;
+}
+
+.mosaic-tile:hover .tile-icon {
+    transform: scale(1.2) rotate(10deg);
+    filter: drop-shadow(0 0 20px var(--tile-color));
+}
+```
+
+---
+
+## 🎪 HERO SECTION - "Showstopper"
+
+### Design:
+```html
+<section class="hero">
+    <!-- Animated gradient background -->
+    <div class="hero-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+    
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Content -->
+    <div class="hero-content">
+        <h1 class="hero-title">
+            <span class="gradient-text">Đa Dạng</span>
+            <span class="gradient-text">Tôn Trọng</span>
+            <span class="gradient-text">Hòa Hợp</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+            Khám phá hành trình tôn giáo và chính sách đa dạng văn hóa tại Việt Nam
+        </p>
+        
+        <div class="hero-cta">
+            <button class="btn-primary btn-glow">
+                <span>Bắt đầu khám phá</span>
+                <svg class="btn-icon">...</svg>
+            </button>
+            <button class="btn-secondary btn-glass">
+                <span>Tìm hiểu thêm</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+        <div class="mouse">
+            <div class="wheel"></div>
+        </div>
+    </div>
+</section>
+```
+
+### CSS:
+```css
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--bg-dark);
+}
+
+/* Animated gradient orbs */
+.gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    animation: float 20s ease-in-out infinite;
+}
+
+.orb-1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #667eea, transparent);
+    top: -200px;
+    left: -200px;
+    animation-delay: 0s;
+}
+
+.orb-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #764ba2, transparent);
+    bottom: -150px;
+    right: -150px;
+    animation-delay: -7s;
+}
+
+.orb-3 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #f093fb, transparent);
+    top: 50%;
+    left: 50%;
+    animation-delay: -14s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    33% {
+        transform: translate(100px, -100px) scale(1.1);
+    }
+    66% {
+        transform: translate(-100px, 100px) scale(0.9);
+    }
+}
+
+/* Gradient text */
+.gradient-text {
+    display: block;
+    background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 5s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Glowing button */
+.btn-glow {
+    position: relative;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: none;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s;
+}
+
+.btn-glow::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+    filter: blur(10px);
+}
+
+.btn-glow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 60px rgba(102, 126, 234, 0.6);
+}
+
+.btn-glow:hover::before {
+    opacity: 1;
+    animation: rotate 3s linear infinite;
+}
+
+/* Glass button */
+.btn-glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-glass:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+```
+
+---
+
+## 🎯 NAVIGATION - Floating & Modern
+```css
+.navbar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s;
+}
+
+.navbar.scrolled {
+    background: rgba(15, 15, 35, 0.8);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transform: translateX(-50%);
+    transition: width 0.3s;
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+.nav-link:hover::before {
+    width: 80%;
+}
+
+.nav-link.active {
+    background: rgba(102, 126, 234, 0.2);
+    color: white;
+}
+```
+
+---
+
+## 🎨 CARDS - Glassmorphism với Depth
+```css
+.card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+/* Gradient border on hover */
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 
+        0 20px 60px rgba(0,0,0,0.3),
+        0 0 40px rgba(102, 126, 234, 0.2);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Shine effect */
+.card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s, transform 0.4s;
+}
+
+.card:hover::after {
+    opacity: 1;
+    transform: translate(25%, 25%);
+}
+```
+
+---
+
+## 🌟 ADDITIONAL EFFECTS
+
+### Cursor Trail:
+```javascript
+// Custom cursor với trail effect
+const cursor = document.querySelector('.cursor');
+const cursorTrail = document.querySelector('.cursor-trail');
+
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    
+    setTimeout(() => {
+        cursorTrail.style.left = e.clientX + 'px';
+        cursorTrail.style.top = e.clientY + 'px';
+    }, 100);
+});
+```
+
+### Particles Background:
+```javascript
+// Floating particles
+function createParticles() {
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        container.appendChild(particle);
+    }
+}
+```
+
+### Text Scramble Effect:
+```javascript
+// Scramble text animation on hover
+class TextScramble {
+    constructor(el) {
+        this.el = el;
+        this.chars = '!<>-_\\/[]{}—=+*^?#________';
+        this.update = this.update.bind(this);
+    }
+    
+    setText(newText) {
+        const oldText = this.el.innerText;
+        const length = Math.max(oldText.length, newText.length);
+        const promise = new Promise((resolve) => this.resolve = resolve);
+        this.queue = [];
+        
+        for (let i = 0; i < length; i++) {
+            const from = oldText[i] || '';
+            const to = newText[i] || '';
+            const start = Math.floor(Math.random() * 40);
+            const end = start + Math.floor(Math.random() * 40);
+            this.queue.push({ from, to, start, end });
+        }
+        
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+        this.update();
+        return promise;
+    }
+    
+    update() {
+        let output = '';
+        let complete = 0;
+        
+        for (let i = 0, n = this.queue.length; i < n; i++) {
+            let { from, to, start, end, char } = this.queue[i];
+            
+            if (this.frame >= end) {
+                complete++;
+                output += to;
+            } else if (this.frame >= start) {
+                if (!char || Math.random() < 0.28) {
+                    char = this.randomChar();
+                    this.queue[i].char = char;
+                }
+                output += `<span class="dud">${char}</span>`;
+            } else {
+                output += from;
+            }
+        }
+        
+        this.el.innerHTML = output;
+        
+        if (complete === this.queue.length) {
+            this.resolve();
+        } else {
+            this.frameRequest = requestAnimationFrame(this.update);
+            this.frame++;
+        }
+    }
+    
+    randomChar() {
+        return this.chars[Math.floor(Math.random() * this.chars.length)];
+    }
+}
+```
+
+---
+
+## 📱 RESPONSIVE ENHANCEMENTS
+
+### Mobile Navigation:
+```css
+/* Hamburger menu animation */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
+}
+
+/* Mobile menu slide-in */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    height: 100vh;
+    background: rgba(15, 15, 35, 0.95);
+    backdrop-filter: blur(20px);
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+```
+
+---
+
+## ✅ FINAL CHECKLIST
+
+Đảm bảo redesign bao gồm:
+
+✅ **Visual Upgrades**:
+- [ ] Dark theme với vibrant accents
+- [ ] Glassmorphism effects toàn bộ cards
+- [ ] Gradient text cho headings
+- [ ] Glowing buttons và CTAs
+- [ ] Custom cursor trail
+
+✅ **Animations**:
+- [ ] Page load stagger animations
+- [ ] Scroll-triggered reveals
+- [ ] Parallax effects
+- [ ] Hover micro-interactions
+- [ ] Smooth page transitions
+
+✅ **Hero Section**:
+- [ ] Animated gradient background
+- [ ] Floating particles
+- [ ] Gradient text animation
+- [ ] Glowing CTAs
+- [ ] Scroll indicator
+
+✅ **Timeline**:
+- [ ] Cinematic scroll animations
+- [ ] Pulsing active nodes
+- [ ] 3D transform effects
+- [ ] Progress indicator
+
+✅ **Mosaic**:
+- [ ] Magnetic hover effects
+- [ ] Animated gradient borders
+- [ ] Smooth overlay reveals
+- [ ] Icon animations
+
+✅ **Performance**:
+- [ ] 60fps animations
+- [ ] Optimized transforms
+- [ ] RequestAnimationFrame usage
+- [ ] Debounced scroll listeners
+
+---
+
+## 🎯 SUCCESS METRIC
+
+Website được coi là "ĐẸP" khi:
+- ✨ Có "WOW factor" ngay khi load
+- 🎨 Visual hierarchy rõ ràng và hấp dẫn
+- 🎭 Animations smooth và có mục đích
+- 💎 Feels premium và polished
+- 📱 Responsive hoàn hảo trên mọi devices
+- ⚡ Performance vẫn cao (Lighthouse > 90)
+
+---
+
+REDESIGN TOÀN BỘ với mindset: "Mỗi pixel phải có mục đích, mỗi animation phải kể câu chuyện!"
+
+🚀 LÀM CHO WEBSITE NÀY TRÔNG NHƯ MỘT SẢN PHẨM TỪ SILICON VALLEY!
+```
+
+---
+
+# 🎨 Version ngắn gọn (nếu Kiro cần):
+```
+TASK: REDESIGN WEBSITE - MODERN PREMIUM STYLE
+
+VISUAL:
+- Dark theme (#0f0f23) + vibrant gradients
+- Glassmorphism tất cả cards (backdrop-filter: blur)
+- Gradient text cho headings
+- Glowing buttons với shine effects
+
+ANIMATIONS:
+- Hero: Floating gradient orbs + particles
+- Scroll: Parallax + intersection observer reveals
+- Cards: 3D tilt + magnetic hover
+- Timeline: Cinematic scroll với pulse nodes
+- Mosaic: Scale + gradient border rotation
+- Page transitions: Smooth fade
+
+EFFECTS:
+- Custom cursor trail
+- Text scramble on hover
+- Ripple effects on click
+- Stagger animations everywhere
+- 60fps smooth transitions
+
+Make it look like: Apple + Stripe + Awwwards winner
+
+PRIORITY: WOW FACTOR > Everything (but keep 60fps)

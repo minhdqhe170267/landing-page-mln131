@@ -1,0 +1,751 @@
+/**
+ * Hero Animations CSS
+ * Styles for hero section animation components
+ * 
+ * Requirements:
+ * - 2.1: Canvas for mesh gradient background (full coverage, behind content)
+ * - 2.4-2.6: Particle container and individual particle styles (3D depth, opacity variations)
+ * - 2.7-2.8: Text reveal character styles (initial hidden state, revealed state, glitch effect)
+ * - 2.9: Magnetic button styles (hover states, transform origin)
+ * - 1.1-1.3: GPU acceleration (transform, opacity, will-change)
+ * - 9.1-9.4: Reduced motion support (@media prefers-reduced-motion)
+ * 
+ * @module css/animations/hero-animations
+ */
+
+/* ==========================================================================
+   CSS Custom Properties for Hero Animations
+   ========================================================================== */
+
+:root {
+    /* Hero section colors */
+    --hero-bg-primary: #1a1a2e;
+    --hero-bg-secondary: #16213e;
+    --hero-gradient-blue: rgb(102, 126, 234);
+    --hero-gradient-purple: rgb(118, 75, 162);
+    --hero-gradient-pink: rgb(240, 147, 251);
+    --hero-gradient-coral: rgb(250, 112, 154);
+    
+    /* Particle colors */
+    --particle-color: rgba(255, 255, 255, 0.9);
+    --particle-glow: rgba(255, 255, 255, 0.3);
+    
+    /* Text reveal colors */
+    --text-reveal-color: #ffffff;
+    --text-reveal-glitch-color: var(--hero-gradient-pink);
+    
+    /* Magnetic button colors */
+    --magnetic-btn-bg: linear-gradient(135deg, var(--hero-gradient-blue), var(--hero-gradient-purple));
+    --magnetic-btn-hover-bg: linear-gradient(135deg, var(--hero-gradient-purple), var(--hero-gradient-pink));
+    --magnetic-btn-text: #ffffff;
+    --magnetic-btn-shadow: rgba(102, 126, 234, 0.4);
+    
+    /* Animation timing */
+    --hero-transition-fast: 200ms;
+    --hero-transition-normal: 400ms;
+    --hero-transition-slow: 800ms;
+    --hero-easing: cubic-bezier(0.4, 0, 0.2, 1);
+    --hero-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ==========================================================================
+   Hero Section Container
+   ========================================================================== */
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--hero-bg-primary);
+    
+    /* GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    text-align: center;
+}
+
+/* ==========================================================================
+   Mesh Gradient Canvas
+   Requirements: 2.1 - Canvas for mesh gradient background
+   ========================================================================== */
+
+.hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    
+    /* GPU acceleration for smooth rendering */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: contents;
+}
+
+/* Fallback gradient when canvas is not supported */
+.hero-canvas-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: linear-gradient(
+        135deg,
+        var(--hero-bg-primary) 0%,
+        var(--hero-gradient-purple) 50%,
+        var(--hero-gradient-blue) 100%
+    );
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   Particle System
+   Requirements: 2.4-2.6 - 3D floating particles with depth
+   ========================================================================== */
+
+.hero-particles,
+.particle-system-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    
+    /* GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Individual particle styles */
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    
+    /* Radial gradient for soft glow effect */
+    background: radial-gradient(
+        circle,
+        var(--particle-color) 0%,
+        var(--particle-glow) 70%,
+        transparent 100%
+    );
+    
+    /* GPU acceleration for smooth transforms */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+}
+
+/* Particle depth variations - closer particles */
+.particle--near {
+    opacity: 0.9;
+    filter: blur(0px);
+}
+
+/* Particle depth variations - mid-distance particles */
+.particle--mid {
+    opacity: 0.6;
+    filter: blur(0.5px);
+}
+
+/* Particle depth variations - far particles */
+.particle--far {
+    opacity: 0.3;
+    filter: blur(1px);
+}
+
+/* Particle glow effect */
+.particle--glow {
+    box-shadow: 
+        0 0 10px var(--particle-color),
+        0 0 20px var(--particle-glow);
+}
+
+/* Particle color variations */
+.particle--blue {
+    background: radial-gradient(
+        circle,
+        var(--hero-gradient-blue) 0%,
+        rgba(102, 126, 234, 0.3) 70%,
+        transparent 100%
+    );
+}
+
+.particle--purple {
+    background: radial-gradient(
+        circle,
+        var(--hero-gradient-purple) 0%,
+        rgba(118, 75, 162, 0.3) 70%,
+        transparent 100%
+    );
+}
+
+.particle--pink {
+    background: radial-gradient(
+        circle,
+        var(--hero-gradient-pink) 0%,
+        rgba(240, 147, 251, 0.3) 70%,
+        transparent 100%
+    );
+}
+
+/* ==========================================================================
+   Text Reveal Animation
+   Requirements: 2.7-2.8 - Glitch to solid text reveal with stagger
+   ========================================================================== */
+
+.hero-title {
+    position: relative;
+    z-index: 10;
+    color: var(--text-reveal-color);
+    font-size: clamp(2rem, 8vw, 5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    
+    /* GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Individual character span */
+.text-reveal-char {
+    display: inline-block;
+    opacity: 0;
+    color: var(--text-reveal-color);
+    
+    /* GPU acceleration for smooth animation */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: opacity, transform;
+    
+    /* Transition for smooth reveal */
+    transition: 
+        opacity var(--hero-transition-slow) var(--hero-easing),
+        transform var(--hero-transition-slow) var(--hero-easing);
+}
+
+/* Space character - preserve whitespace */
+.text-reveal-space {
+    width: 0.3em;
+}
+
+/* Character in glitching state */
+.text-reveal-char.text-reveal-glitching {
+    color: var(--text-reveal-glitch-color);
+    text-shadow: 
+        2px 0 var(--hero-gradient-blue),
+        -2px 0 var(--hero-gradient-coral);
+    
+    /* Subtle transform during glitch */
+    transform: translateZ(0) skewX(-5deg);
+}
+
+/* Character revealed (final state) */
+.text-reveal-char.text-reveal-revealed {
+    opacity: 1;
+    color: var(--text-reveal-color);
+    text-shadow: none;
+    transform: translateZ(0) skewX(0deg);
+}
+
+/* Glitch animation keyframes */
+@keyframes text-glitch {
+    0%, 100% {
+        transform: translateZ(0) skewX(0deg);
+        text-shadow: none;
+    }
+    20% {
+        transform: translateZ(0) skewX(-5deg);
+        text-shadow: 2px 0 var(--hero-gradient-blue), -2px 0 var(--hero-gradient-coral);
+    }
+    40% {
+        transform: translateZ(0) skewX(3deg);
+        text-shadow: -2px 0 var(--hero-gradient-pink), 2px 0 var(--hero-gradient-purple);
+    }
+    60% {
+        transform: translateZ(0) skewX(-2deg);
+        text-shadow: 1px 0 var(--hero-gradient-blue), -1px 0 var(--hero-gradient-coral);
+    }
+    80% {
+        transform: translateZ(0) skewX(1deg);
+        text-shadow: -1px 0 var(--hero-gradient-pink), 1px 0 var(--hero-gradient-purple);
+    }
+}
+
+/* Apply glitch animation to glitching characters */
+.text-reveal-char.text-reveal-glitching {
+    animation: text-glitch 100ms steps(2) infinite;
+}
+
+/* Hero subtitle (if present) */
+.hero-subtitle {
+    position: relative;
+    z-index: 10;
+    margin-top: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 400;
+    opacity: 0;
+    
+    /* GPU acceleration */
+    transform: translateY(20px) translateZ(0);
+    backface-visibility: hidden;
+    will-change: opacity, transform;
+    
+    /* Delayed fade-in animation */
+    animation: hero-subtitle-reveal 0.8s var(--hero-easing) 1.5s forwards;
+}
+
+@keyframes hero-subtitle-reveal {
+    to {
+        opacity: 1;
+        transform: translateY(0) translateZ(0);
+    }
+}
+
+/* ==========================================================================
+   Magnetic Button
+   Requirements: 2.9 - Magnetic hover effect for CTA buttons
+   ========================================================================== */
+
+.hero-cta,
+.magnetic-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2.5rem;
+    margin-top: 2rem;
+    
+    /* Styling */
+    background: var(--magnetic-btn-bg);
+    color: var(--magnetic-btn-text);
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    
+    /* GPU acceleration for smooth magnetic effect */
+    transform: translateZ(0);
+    transform-origin: center center;
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform;
+    
+    /* Smooth transition for magnetic movement */
+    transition: 
+        transform var(--hero-transition-fast) var(--hero-easing),
+        box-shadow var(--hero-transition-fast) var(--hero-easing),
+        background var(--hero-transition-normal) var(--hero-easing);
+    
+    /* Shadow for depth */
+    box-shadow: 
+        0 4px 15px var(--magnetic-btn-shadow),
+        0 0 0 0 rgba(255, 255, 255, 0);
+    
+    /* Prevent text selection during drag */
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Magnetic button hover state (when not using JS magnetic effect) */
+.hero-cta:hover,
+.magnetic-button:hover {
+    background: var(--magnetic-btn-hover-bg);
+    box-shadow: 
+        0 6px 25px var(--magnetic-btn-shadow),
+        0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Magnetic button active/pressed state */
+.hero-cta:active,
+.magnetic-button:active {
+    transform: scale(0.98) translateZ(0);
+}
+
+/* Magnetic button focus state for accessibility */
+.hero-cta:focus,
+.magnetic-button:focus {
+    outline: none;
+    box-shadow: 
+        0 4px 15px var(--magnetic-btn-shadow),
+        0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+/* Magnetic button focus-visible for keyboard navigation */
+.hero-cta:focus-visible,
+.magnetic-button:focus-visible {
+    outline: 2px solid var(--hero-gradient-pink);
+    outline-offset: 4px;
+}
+
+/* Button inner content wrapper (for additional effects) */
+.magnetic-button__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    /* GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Button icon (if present) */
+.magnetic-button__icon {
+    width: 1.25em;
+    height: 1.25em;
+    transition: transform var(--hero-transition-fast) var(--hero-easing);
+}
+
+.hero-cta:hover .magnetic-button__icon,
+.magnetic-button:hover .magnetic-button__icon {
+    transform: translateX(4px);
+}
+
+/* Button ripple effect */
+.magnetic-button__ripple {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    
+    /* GPU acceleration */
+    will-change: width, height, opacity;
+}
+
+.magnetic-button__ripple.active {
+    animation: magnetic-ripple 0.6s var(--hero-easing) forwards;
+}
+
+@keyframes magnetic-ripple {
+    to {
+        width: 300%;
+        height: 300%;
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   Secondary/Ghost Button Variant
+   ========================================================================== */
+
+.hero-cta--secondary,
+.magnetic-button--secondary {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: none;
+}
+
+.hero-cta--secondary:hover,
+.magnetic-button--secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   Hero Scroll Indicator
+   ========================================================================== */
+
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    
+    /* GPU acceleration */
+    transform: translateX(-50%) translateZ(0);
+    backface-visibility: hidden;
+    will-change: opacity;
+    
+    /* Fade in animation */
+    opacity: 0;
+    animation: hero-scroll-indicator-reveal 0.6s var(--hero-easing) 2s forwards;
+}
+
+@keyframes hero-scroll-indicator-reveal {
+    to {
+        opacity: 1;
+    }
+}
+
+.hero-scroll-indicator__mouse {
+    width: 24px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    position: relative;
+}
+
+.hero-scroll-indicator__wheel {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 4px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 2px;
+    
+    /* GPU acceleration */
+    transform: translateX(-50%) translateZ(0);
+    will-change: transform, opacity;
+    
+    /* Scroll animation */
+    animation: hero-scroll-wheel 1.5s var(--hero-easing) infinite;
+}
+
+@keyframes hero-scroll-wheel {
+    0% {
+        transform: translateX(-50%) translateY(0) translateZ(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) translateY(16px) translateZ(0);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   GPU Acceleration Utility Classes
+   Requirements: 1.1-1.3 - Hardware acceleration
+   ========================================================================== */
+
+.gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+.will-change-transform {
+    will-change: transform;
+}
+
+.will-change-opacity {
+    will-change: opacity;
+}
+
+.will-change-transform-opacity {
+    will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   Reduced Motion Support
+   Requirements: 9.1-9.4 - Accessibility for motion sensitivity
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    /* Disable all continuous animations */
+    .hero-canvas,
+    .particle,
+    .particle-system-wrapper,
+    .hero-particles {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    /* Hide particles completely */
+    .particle-system-wrapper,
+    .hero-particles {
+        display: none !important;
+    }
+    
+    /* Show text immediately without animation */
+    .text-reveal-char {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    .text-reveal-char.text-reveal-glitching {
+        animation: none !important;
+        text-shadow: none !important;
+        transform: none !important;
+    }
+    
+    /* Show subtitle immediately */
+    .hero-subtitle {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+    
+    /* Disable magnetic button animations */
+    .hero-cta,
+    .magnetic-button {
+        transition: none !important;
+        will-change: auto !important;
+    }
+    
+    /* Keep basic hover feedback */
+    .hero-cta:hover,
+    .magnetic-button:hover {
+        background: var(--magnetic-btn-hover-bg);
+    }
+    
+    /* Disable scroll indicator animation */
+    .hero-scroll-indicator {
+        opacity: 1 !important;
+        animation: none !important;
+    }
+    
+    .hero-scroll-indicator__wheel {
+        animation: none !important;
+    }
+    
+    /* Disable ripple effect */
+    .magnetic-button__ripple {
+        display: none !important;
+    }
+    
+    /* Remove will-change to save resources */
+    * {
+        will-change: auto !important;
+    }
+}
+
+/* ==========================================================================
+   Responsive Adjustments
+   Requirements: 10.1-10.4 - Mobile optimization
+   ========================================================================== */
+
+/* Tablet and below */
+@media (max-width: 1024px) {
+    .hero-title {
+        font-size: clamp(1.75rem, 6vw, 3.5rem);
+    }
+    
+    .hero-cta,
+    .magnetic-button {
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .hero-content {
+        padding: 1.5rem;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.5rem, 8vw, 2.5rem);
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(0.875rem, 4vw, 1.125rem);
+        margin-top: 1rem;
+    }
+    
+    .hero-cta,
+    .magnetic-button {
+        padding: 0.75rem 1.75rem;
+        font-size: 0.9375rem;
+        margin-top: 1.5rem;
+        
+        /* Disable magnetic effect on touch devices via CSS */
+        /* JS will also disable it, but this is a fallback */
+    }
+    
+    /* Reduce particle visibility on mobile for performance */
+    .particle {
+        opacity: 0.5;
+    }
+    
+    .hero-scroll-indicator {
+        bottom: 1.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: clamp(1.25rem, 10vw, 2rem);
+    }
+    
+    .hero-cta,
+    .magnetic-button {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* ==========================================================================
+   High Contrast Mode Support
+   ========================================================================== */
+
+@media (prefers-contrast: high) {
+    .hero-cta,
+    .magnetic-button {
+        border: 2px solid currentColor;
+    }
+    
+    .text-reveal-char {
+        text-shadow: none !important;
+    }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+    .hero-canvas,
+    .hero-particles,
+    .particle-system-wrapper,
+    .hero-scroll-indicator {
+        display: none !important;
+    }
+    
+    .hero-section {
+        background: white !important;
+        min-height: auto !important;
+    }
+    
+    .hero-title,
+    .hero-subtitle {
+        color: black !important;
+        opacity: 1 !important;
+    }
+    
+    .text-reveal-char {
+        opacity: 1 !important;
+        color: black !important;
+    }
+}

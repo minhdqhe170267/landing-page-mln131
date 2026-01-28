@@ -1,0 +1,985 @@
+/**
+ * timeline.css - Timeline page specific styles
+ * Vietnam Religious Diversity Landing Page
+ * 
+ * Styles for the vertical zigzag timeline layout
+ * Requirements: 4.1, 4.6
+ */
+
+/* ========================================
+   Progress Indicator
+   Requirement 4.6: Progress indicator showing scroll position
+   ======================================== */
+.timeline-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: var(--color-border);
+  z-index: var(--z-sticky);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.timeline-progress--visible {
+  opacity: 1;
+}
+
+.timeline-progress__bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  transition: width var(--transition-fast);
+}
+
+/* ========================================
+   Page Header Styles
+   ======================================== */
+.page-header {
+  padding: var(--spacing-3xl) 0;
+  color: var(--color-background);
+  text-align: center;
+}
+
+.page-header__content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.page-header__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-background);
+  margin-bottom: var(--spacing-md);
+}
+
+.page-header__subtitle {
+  font-size: var(--font-size-lg);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ========================================
+   Timeline Section
+   ======================================== */
+/* ========================================
+   Timeline Section
+   ======================================== */
+.timeline-section {
+  padding: var(--spacing-3xl) 0;
+  background-color: transparent;
+  /* Changed from surface to transparent to let body bg show */
+}
+
+/* ========================================
+   Timeline Container
+   Requirement 4.1: Vertical zigzag layout (alternating left-right)
+   ======================================== */
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--spacing-2xl) 0;
+}
+
+/* ========================================
+   Central Line
+   ======================================== */
+.timeline__line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--gradient-primary);
+  /* Use premium gradient */
+  transform: translateX(-50%);
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+  /* Add glow */
+}
+
+/* Line glow effect */
+.timeline__line::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  /* Slightly thinner but more intense glow */
+  background: inherit;
+  transform: translateX(-50%);
+  border-radius: var(--radius-full);
+  filter: blur(8px);
+  opacity: 0.7;
+}
+
+/* ========================================
+   Timeline Items
+   ======================================== */
+.timeline__item {
+  position: relative;
+  width: 50%;
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-3xl);
+  /* Increased spacing */
+}
+
+.timeline__item:last-child {
+  margin-bottom: 0;
+}
+
+/* Odd items - Left side */
+.timeline__item--left {
+  left: 0;
+  padding-right: var(--spacing-3xl);
+  text-align: right;
+}
+
+/* Even items - Right side */
+.timeline__item--right {
+  left: 50%;
+  padding-left: var(--spacing-3xl);
+  text-align: left;
+}
+
+/* ========================================
+   Timeline Dots
+   ======================================== */
+.timeline__dot {
+  position: absolute;
+  top: var(--spacing-lg);
+  width: 24px;
+  /* Larger dot */
+  height: 24px;
+  background-color: var(--bg-dark);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+  border-radius: var(--radius-full);
+  z-index: 2;
+  transition: all var(--transition-normal);
+}
+
+/* Active state for dots (filled gradient) */
+.timeline__dot.active,
+.timeline__item:hover .timeline__dot,
+.timeline__item:focus-within .timeline__dot {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  box-shadow: 0 0 25px rgba(102, 126, 234, 0.8);
+  transform: scale(1.2);
+}
+
+/* Dot positioning for left items */
+.timeline__item--left .timeline__dot {
+  right: -12px;
+  /* Adjusted for larger dot */
+}
+
+/* Dot positioning for right items */
+.timeline__item--right .timeline__dot {
+  left: -12px;
+  /* Adjusted for larger dot */
+}
+
+
+/* ========================================
+   Timeline Content Cards (Glassmorphism)
+   ======================================== */
+.timeline__content {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+/* Remove CSS arrows for glassmorphism cleanliness */
+.timeline__item--left .timeline__content::after,
+.timeline__item--right .timeline__content::after {
+  content: none;
+}
+
+/* Card hover effect */
+.timeline__content:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ========================================
+   Timeline Card Content
+   ======================================== */
+.timeline__years {
+  display: inline-block;
+  background: var(--gradient-ocean);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: 0.05em;
+}
+
+.timeline__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+  line-height: var(--line-height-tight);
+}
+
+.timeline__summary {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-md);
+}
+
+/* ========================================
+   Timeline Button
+   ======================================== */
+.timeline__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  min-height: 40px;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-text);
+  transition: all var(--transition-fast);
+}
+
+.timeline__btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.timeline__btn::after {
+  content: '→';
+  transition: transform var(--transition-fast);
+  margin-left: 4px;
+}
+
+.timeline__btn:hover::after {
+  transform: translateX(4px);
+}
+
+/* Button small variant */
+.btn-sm {
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: var(--font-size-sm);
+  min-height: 36px;
+}
+
+/* ========================================
+   Modal Styles
+   ======================================== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.modal[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal Overlay */
+.modal__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 15, 35, 0.8);
+  /* Darker overlay */
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+}
+
+/* Modal Content */
+.modal__content {
+  position: relative;
+  background: var(--bg-dark);
+  /* Fallback */
+  background: linear-gradient(135deg, rgba(30, 30, 40, 0.95) 0%, rgba(20, 20, 30, 0.98) 100%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: scale(0.9) translateY(20px);
+  transition: transform var(--transition-normal);
+}
+
+.modal[aria-hidden="false"] .modal__content {
+  transform: scale(1) translateY(0);
+}
+
+/* Modal Close Button */
+.modal__close {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xl);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  z-index: 10;
+}
+
+.modal__close:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-text);
+  transform: rotate(90deg);
+}
+
+.modal__close:focus {
+  outline: 3px solid var(--color-focus, var(--color-primary));
+  outline-offset: 2px;
+}
+
+/* Modal Image */
+.modal__image-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+}
+
+.modal__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Modal Title */
+.modal__title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  padding: var(--spacing-lg) var(--spacing-xl) var(--spacing-md);
+  margin: 0;
+}
+
+/* Modal Body */
+.modal__body {
+  padding: 0 var(--spacing-xl) var(--spacing-xl);
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  line-height: var(--line-height-relaxed);
+}
+
+.modal__body p {
+  margin-bottom: var(--spacing-md);
+}
+
+.modal__body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Modal Summary */
+.modal__summary {
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Modal Details */
+.modal__details {
+  color: var(--color-text-light);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Modal Body Lists */
+.modal__body ul,
+.modal__body ol {
+  margin-bottom: var(--spacing-md);
+  padding-left: var(--spacing-lg);
+}
+
+.modal__body li {
+  margin-bottom: var(--spacing-sm);
+  list-style: disc;
+}
+
+/* ========================================
+   Animation States for Timeline Items
+   ======================================== */
+.timeline__item.animate-on-scroll {
+  opacity: 0;
+}
+
+.timeline__item--left.animate-on-scroll {
+  transform: translateX(-30px);
+}
+
+.timeline__item--right.animate-on-scroll {
+  transform: translateX(30px);
+}
+
+.timeline__item.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+/* Stagger animation delay */
+.timeline__item:nth-child(1).is-visible {
+  transition-delay: 0ms;
+}
+
+.timeline__item:nth-child(2).is-visible {
+  transition-delay: 100ms;
+}
+
+.timeline__item:nth-child(3).is-visible {
+  transition-delay: 200ms;
+}
+
+.timeline__item:nth-child(4).is-visible {
+  transition-delay: 300ms;
+}
+
+.timeline__item:nth-child(5).is-visible {
+  transition-delay: 400ms;
+}
+
+.timeline__item:nth-child(6).is-visible {
+  transition-delay: 500ms;
+}
+
+/* ========================================
+   Responsive Styles - Mobile First
+   ======================================== */
+
+/* Mobile: Single column layout */
+@media (max-width: 767px) {
+  .timeline__line {
+    left: 20px;
+  }
+
+  .timeline__item {
+    width: 100%;
+    left: 0 !important;
+    padding-left: 50px;
+    /* Adjusted for line position */
+    padding-right: var(--spacing-md);
+    text-align: left !important;
+  }
+
+  .timeline__item--left,
+  .timeline__item--right {
+    padding-left: 50px;
+    padding-right: var(--spacing-md);
+  }
+
+  /* All dots on the left */
+  .timeline__dot {
+    left: 8px !important;
+    /* Center on line */
+    right: auto !important;
+  }
+
+  /* Page header adjustments */
+  .page-header__title {
+    font-size: var(--font-size-xl);
+  }
+
+  .page-header__subtitle {
+    font-size: var(--font-size-base);
+  }
+
+  /* Modal adjustments */
+  .modal__content {
+    max-height: 85vh;
+    margin: var(--spacing-md);
+  }
+
+  .modal__image-container {
+    height: 150px;
+  }
+
+  .modal__title {
+    font-size: var(--font-size-lg);
+    padding: var(--spacing-md) var(--spacing-lg) var(--spacing-sm);
+  }
+
+  .modal__body {
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* Small devices (640px+) */
+@media (min-width: 640px) {
+  .page-header {
+    padding: var(--spacing-4xl) 0;
+  }
+
+  .page-header__title {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+/* Medium devices (768px+) - Zigzag layout enabled */
+@media (min-width: 768px) {
+  .timeline__line {
+    left: 50%;
+  }
+
+  .timeline__item {
+    width: 50%;
+  }
+
+  .timeline__item--left {
+    left: 0;
+    padding-right: var(--spacing-3xl);
+    padding-left: var(--spacing-lg);
+    text-align: right;
+  }
+
+  .timeline__item--right {
+    left: 50%;
+    padding-left: var(--spacing-3xl);
+    padding-right: var(--spacing-lg);
+    text-align: left;
+  }
+
+  .timeline__item--left .timeline__dot {
+    right: -12px;
+    left: auto;
+  }
+
+  .timeline__item--right .timeline__dot {
+    left: -12px;
+    right: auto;
+  }
+
+  /* Remove arrows in responsive too just in case */
+  .timeline__item--left .timeline__content::after,
+  .timeline__item--right .timeline__content::after {
+    content: none;
+  }
+
+  .page-header__title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .page-header__subtitle {
+    font-size: var(--font-size-lg);
+  }
+}
+
+/* Large devices (1024px+) */
+@media (min-width: 1024px) {
+  .timeline {
+    max-width: 1100px;
+  }
+
+  .timeline__content {
+    padding: var(--spacing-xl) var(--spacing-2xl);
+  }
+
+  .timeline__title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .modal__content {
+    max-width: 700px;
+  }
+
+  .modal__image-container {
+    height: 250px;
+  }
+}
+
+/* Extra large devices (1280px+) */
+@media (min-width: 1280px) {
+  .timeline {
+    max-width: 1200px;
+  }
+
+  .timeline__item {
+    padding: var(--spacing-xl);
+  }
+}
+
+/* ========================================
+   Reduced Motion Preference
+   Requirement 9.4: Respect prefers-reduced-motion
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .timeline-progress__bar {
+    transition: none;
+  }
+
+  .timeline__dot,
+  .timeline__content,
+  .modal,
+  .modal__content {
+    transition: none;
+  }
+
+  .timeline__item.animate-on-scroll {
+    opacity: 1;
+    transform: none;
+  }
+
+  .timeline__item.animate-on-scroll.is-visible {
+    transition: none;
+  }
+
+  .timeline__btn::after {
+    transition: none;
+  }
+}
+
+/* ========================================
+   Focus Styles for Accessibility
+   Requirement 11.6: Visible focus indicators
+   ======================================== */
+.timeline__btn:focus {
+  outline: 3px solid var(--color-focus, var(--color-primary));
+  outline-offset: 2px;
+}
+
+.timeline__item:focus-within .timeline__content {
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.4), var(--shadow-lg);
+}
+
+/* ========================================
+   Print Styles
+   ======================================== */
+@media print {
+  .timeline-progress {
+    display: none;
+  }
+
+  .timeline__line {
+    background: #000;
+  }
+
+  .timeline__line::before {
+    display: none;
+  }
+
+  .timeline__dot {
+    border-color: #000;
+  }
+
+  .timeline__content {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .modal {
+    display: none;
+  }
+}
+
+
+/* ========================================
+   Premium Timeline Styles
+   Requirements: 9.1, 9.2, 9.4
+   ======================================== */
+
+/* Premium Timeline Section */
+.timeline-section--premium {
+  background: transparent;
+  padding: var(--spacing-4xl) 0;
+}
+
+/* Premium Timeline Line with Gradient - Requirement 9.4 */
+.timeline--premium .timeline__line {
+  background: linear-gradient(180deg,
+      var(--gradient-primary-start) 0%,
+      var(--gradient-primary-mid) 50%,
+      var(--gradient-primary-end) 100%);
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Enhanced glow effect for premium line */
+.timeline--premium .timeline__line::before {
+  background: linear-gradient(180deg,
+      rgba(102, 126, 234, 0.5) 0%,
+      rgba(118, 75, 162, 0.5) 50%,
+      rgba(240, 147, 251, 0.5) 100%);
+  width: 16px;
+  filter: blur(8px);
+}
+
+/* Pulsing Glow Effect for Nodes - Requirement 9.1 */
+.timeline--premium .timeline__dot {
+  background: var(--bg-dark);
+  border-color: var(--gradient-primary-start);
+  animation: nodePulse 2s ease-in-out infinite;
+  will-change: box-shadow;
+  /* GPU optimization for pulse animation - Requirement 13.7 */
+}
+
+@keyframes nodePulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+  }
+}
+
+/* Premium dot inner glow */
+.timeline--premium .timeline__dot::after {
+  background: linear-gradient(135deg,
+      var(--gradient-primary-start) 0%,
+      var(--gradient-primary-mid) 100%);
+}
+
+/* Premium dot hover state */
+.timeline--premium .timeline__item:hover .timeline__dot,
+.timeline--premium .timeline__item:focus-within .timeline__dot {
+  background: linear-gradient(135deg,
+      var(--gradient-primary-start) 0%,
+      var(--gradient-primary-mid) 100%);
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
+}
+
+/* 3D Transform Animations for Items - Requirement 9.2 */
+.timeline--premium .timeline__item {
+  perspective: 1000px;
+}
+
+.timeline--premium .timeline__item--left.animate-on-scroll {
+  transform: translateX(-50px) rotateY(10deg);
+  opacity: 0;
+}
+
+.timeline--premium .timeline__item--right.animate-on-scroll {
+  transform: translateX(50px) rotateY(-10deg);
+  opacity: 0;
+}
+
+.timeline--premium .timeline__item.is-visible {
+  transform: translateX(0) rotateY(0);
+  opacity: 1;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Scale effect on viewport entry - Requirement 9.5 */
+.timeline--premium .timeline__item.animate-on-scroll .timeline__content {
+  transform: scale(0.95);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline--premium .timeline__item.is-visible .timeline__content {
+  transform: scale(1);
+}
+
+/* Premium Timeline Content Cards */
+.timeline--premium .timeline__content {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  /* Ensure image stays within radius */
+}
+
+/* Timeline Image */
+.timeline__image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform var(--transition-normal);
+}
+
+.timeline__content:hover .timeline__image {
+  transform: scale(1.05);
+}
+
+/* Premium card hover effect */
+.timeline--premium .timeline__content:hover {
+  background: var(--glass-bg-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(102, 126, 234, 0.2);
+}
+
+/* Premium card arrows - Remove for glassmorphism */
+.timeline--premium .timeline__item--left .timeline__content::after,
+.timeline--premium .timeline__item--right .timeline__content::after {
+  content: none;
+}
+
+/* Premium Timeline Typography */
+.timeline--premium .timeline__title {
+  color: #ffffff;
+  font-family: var(--font-display);
+}
+
+.timeline--premium .timeline__summary {
+  color: #e0e0e8;
+}
+
+.timeline--premium .timeline__years {
+  background: linear-gradient(135deg,
+      var(--gradient-primary-start) 0%,
+      var(--gradient-primary-mid) 100%);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  -webkit-text-fill-color: #ffffff;
+  /* Override transparent from base style */
+  color: #ffffff;
+  background-clip: border-box;
+  /* Reset if previously text */
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  /* Increased padding */
+}
+
+/* Premium Timeline Button */
+.timeline--premium .timeline__btn {
+  background: linear-gradient(135deg,
+      var(--gradient-primary-start) 0%,
+      var(--gradient-primary-mid) 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  transition: all var(--transition-normal);
+}
+
+.timeline--premium .timeline__btn:hover {
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Premium Page Header */
+.page-header--premium {
+  background: transparent;
+}
+
+.page-header--premium .page-header__title {
+  background: linear-gradient(135deg,
+      var(--gradient-primary-start) 0%,
+      var(--gradient-primary-mid) 50%,
+      var(--gradient-primary-end) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-header--premium .page-header__subtitle {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ========================================
+   Premium Timeline Responsive Styles
+   ======================================== */
+
+/* Mobile: Simplified 3D effects */
+@media (max-width: 767px) {
+
+  .timeline--premium .timeline__item--left.animate-on-scroll,
+  .timeline--premium .timeline__item--right.animate-on-scroll {
+    transform: translateX(-30px) rotateY(5deg);
+  }
+
+  .timeline--premium .timeline__item.is-visible {
+    transform: translateX(0) rotateY(0);
+  }
+
+  /* Remove arrows */
+  .timeline--premium .timeline__content::after {
+    content: none !important;
+  }
+}
+
+/* ========================================
+   Premium Timeline Reduced Motion
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .timeline--premium .timeline__dot {
+    animation: none;
+  }
+
+  .timeline--premium .timeline__item--left.animate-on-scroll,
+  .timeline--premium .timeline__item--right.animate-on-scroll {
+    transform: none;
+    opacity: 1;
+  }
+
+  .timeline--premium .timeline__item.is-visible {
+    transition: none;
+  }
+
+  .timeline--premium .timeline__item.animate-on-scroll .timeline__content {
+    transform: none;
+  }
+
+  .timeline--premium .timeline__btn:hover {
+    transform: none;
+  }
+}
+
+/* ========================================
+   Premium Timeline Focus Styles
+   ======================================== */
+.timeline--premium .timeline__btn:focus {
+  outline: 3px solid var(--gradient-primary-start);
+  outline-offset: 2px;
+}
+
+.timeline--premium .timeline__item:focus-within .timeline__content {
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.4),
+    0 12px 40px rgba(0, 0, 0, 0.4);
+}

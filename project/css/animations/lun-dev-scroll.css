@@ -1,0 +1,141 @@
+/**
+ * Lun Dev Style Scroll Animations
+ * Based on "Crazy 3D Image Slider" video aesthetic
+ * Uses CSS Scroll-driven Animations (animation-timeline)
+ */
+
+@keyframes autoShowAnimation {
+    from {
+        opacity: 0;
+        transform: translateY(100px) scale(0.8);
+        filter: blur(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* Timeline specific animations - slide from left */
+@keyframes timelineSlideLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-80px) rotateY(15deg);
+        filter: blur(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) rotateY(0);
+        filter: blur(0);
+    }
+}
+
+/* Timeline specific animations - slide from right */
+@keyframes timelineSlideRight {
+    from {
+        opacity: 0;
+        transform: translateX(80px) rotateY(-15deg);
+        filter: blur(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) rotateY(0);
+        filter: blur(0);
+    }
+}
+
+/* Base class for auto-showing elements */
+.auto-show {
+    view-timeline-name: --element-view;
+    animation: autoShowAnimation cubic-bezier(0.25, 0.1, 0.25, 1) both;
+    animation-timeline: view();
+    /* Start animating when element enters 5% of viewport, finish when it covers 30% or is fully visible */
+    animation-range: entry 5% cover 30%;
+
+    /* Hardware acceleration */
+    will-change: transform, opacity, filter;
+}
+
+/* Timeline items - left side animation */
+.timeline__item--left.auto-show {
+    animation: timelineSlideLeft 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+
+/* Timeline items - right side animation */
+.timeline__item--right.auto-show {
+    animation: timelineSlideRight 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+
+/* Fix for last timeline item - complete animation earlier */
+.timeline__item:last-child.auto-show {
+    animation-range: entry 0% entry 80%;
+}
+
+/* Staggered delays for children if needed */
+.auto-show-stagger>*:nth-child(1) {
+    animation-range: entry 5% cover 30%;
+}
+
+.auto-show-stagger>*:nth-child(2) {
+    animation-range: entry 10% cover 35%;
+}
+
+.auto-show-stagger>*:nth-child(3) {
+    animation-range: entry 15% cover 40%;
+}
+
+.auto-show-stagger>*:nth-child(4) {
+    animation-range: entry 20% cover 45%;
+}
+
+.auto-show-stagger>*:nth-child(5) {
+    animation-range: entry 25% cover 50%;
+}
+
+/* Specific overrides for different layout types */
+.auto-show-card {
+    animation-range: entry 0% cover 25%;
+}
+
+/* For browsers that don't support animation-timeline yet (Fallbacks) */
+@supports not (animation-timeline: view()) {
+    .auto-show {
+        opacity: 1;
+        /* Fallback to visible */
+        transform: none;
+        filter: none;
+        animation: none;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .timeline__item--left.auto-show,
+    .timeline__item--right.auto-show {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        animation: none;
+    }
+
+    /* We can rely on the existing JS IntersectionObserver as fallback if classes are mixed, 
+       but for now we ensure content isn't hidden. */
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .auto-show,
+    .timeline__item--left.auto-show,
+    .timeline__item--right.auto-show {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+}

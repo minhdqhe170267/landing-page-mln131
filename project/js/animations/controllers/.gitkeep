@@ -1,0 +1,4 @@
+# Animation Controllers
+# Contains: hero-controller.js, particle-controller.js, page-transition.js,
+#           scroll-animation.js, timeline-animation.js, mosaic-animation.js,
+#           mouse-trail.js, mesh-gradient.js, text-reveal.js, magnetic-button.js

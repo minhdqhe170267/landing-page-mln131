@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Landing page về đa dạng tôn giáo và chính sách tôn giáo Việt Nam - Đa Dạng, Tôn Trọng, Hòa Hợp">
+  <meta name="keywords" content="tôn giáo, Việt Nam, đa dạng, chính sách, FPT">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Đa Dạng Tôn Giáo Việt Nam - Trang Chủ">
+  <meta property="og:description"
+    content="Landing page về đa dạng tôn giáo và chính sách tôn giáo Việt Nam - Đa Dạng, Tôn Trọng, Hòa Hợp">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://da-dang-ton-giao.vercel.app/index.html">
+  <meta property="og:image" content="https://da-dang-ton-giao.vercel.app/assets/images/og-image.jpg">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:site_name" content="Đa Dạng Tôn Giáo Việt Nam">
+
+  <title>Đa Dạng Tôn Giáo Việt Nam - Trang Chủ</title>
+
+  <!-- Structured Data - Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Đa Dạng Tôn Giáo Việt Nam",
+    "url": "https://da-dang-ton-giao.vercel.app",
+    "description": "Landing page về đa dạng tôn giáo và chính sách tôn giáo Việt Nam - Website học tập của sinh viên FPT"
+  }
+  </script>
+
+  <!-- Structured Data - WebPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Đa Dạng Tôn Giáo Việt Nam - Trang Chủ",
+    "description": "Landing page về đa dạng tôn giáo và chính sách tôn giáo Việt Nam - Đa Dạng, Tôn Trọng, Hòa Hợp",
+    "url": "https://da-dang-ton-giao.vercel.app/index.html"
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Cinematic Animation Styles -->
+  <link rel="stylesheet" href="css/animations/cinematic-base.css">
+  <link rel="stylesheet" href="css/animations/hero-animations.css">
+  <link rel="stylesheet" href="css/animations/page-transitions.css">
+  <link rel="stylesheet" href="css/animations/scroll-reveals.css">
+  <link rel="stylesheet" href="css/animations/lun-dev-scroll.css">
+</head>
+
+<body>
+  <!-- Skip Link for Accessibility -->
+  <a href="#main-content" class="skip-link">Bỏ qua đến nội dung chính</a>
+
+  <!-- Main Navigation -->
+  <header class="header">
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <div class="container nav__container">
+        <!-- Logo/Brand -->
+        <a href="index.html" class="nav__brand" aria-label="Trang chủ - Đa Dạng Tôn Giáo Việt Nam">
+          <img src="assets/images/logo.svg" alt="Logo" class="nav__brand-logo" />
+          <span class="nav__brand-text">Đa Dạng Tôn Giáo</span>
+        </a>
+
+        <!-- Hamburger Menu Button (Mobile) -->
+        <button class="nav__hamburger" type="button" aria-label="Mở menu điều hướng" aria-expanded="false"
+          aria-controls="nav-menu">
+          <span class="nav__hamburger-line" aria-hidden="true"></span>
+          <span class="nav__hamburger-line" aria-hidden="true"></span>
+          <span class="nav__hamburger-line" aria-hidden="true"></span>
+        </button>
+
+        <!-- Navigation Menu -->
+        <ul class="nav__menu" id="nav-menu" role="menubar">
+          <li class="nav__item" role="none">
+            <a href="index.html" class="nav__link nav__link--active" role="menuitem" aria-current="page">
+              Trang Chủ
+            </a>
+          </li>
+          <li class="nav__item" role="none">
+            <a href="timeline.html" class="nav__link" role="menuitem">
+              Lịch Sử
+            </a>
+          </li>
+          <li class="nav__item" role="none">
+            <a href="mosaic.html" class="nav__link" role="menuitem">
+              Tôn Giáo
+            </a>
+          </li>
+          <li class="nav__item" role="none">
+            <a href="fpt-students.html" class="nav__link" role="menuitem">
+              Sinh Viên FPT
+            </a>
+          </li>
+          <li class="nav__item" role="none">
+            <a href="about.html" class="nav__link" role="menuitem">
+              Giới Thiệu
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero hero--premium hero--cinematic" id="hero" aria-labelledby="hero-title">
+      <!-- Mesh Gradient Canvas Background -->
+      <canvas class="hero__mesh-gradient" id="mesh-gradient-canvas" aria-hidden="true"></canvas>
+
+      <!-- Gradient Orbs Background -->
+      <div class="hero__orbs" aria-hidden="true">
+        <div class="hero__orb hero__orb--1"></div>
+        <div class="hero__orb hero__orb--2"></div>
+        <div class="hero__orb hero__orb--3"></div>
+      </div>
+
+      <!-- Particles Canvas -->
+      <canvas class="hero__particles" id="particles-canvas" aria-hidden="true"></canvas>
+
+      <!-- Hero Content -->
+      <div class="container">
+        <div class="hero__content text-center">
+          <h1 id="hero-title" class="hero__title gradient-text" data-text-reveal>
+            Đa Dạng - Tôn Trọng - Hòa Hợp
+          </h1>
+          <p class="hero__subtitle auto-show" data-aos="fade-up">
+            Khám phá sự đa dạng tôn giáo Việt Nam và vai trò của sinh viên FPT trong xây dựng môi trường đa văn hóa hài
+            hòa
+          </p>
+          <div class="hero__cta flex justify-center gap-md auto-show" data-aos="fade-up">
+            <a href="timeline.html" class="btn btn-white btn-lg" data-magnetic>
+              Khám Phá Lịch Sử
+            </a>
+            <a href="mosaic.html" class="btn btn-white btn-lg" data-magnetic>
+              Tìm Hiểu Tôn Giáo
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="section overview" aria-labelledby="overview-title">
+      <div class="container">
+        <header class="section-header">
+          <h2 id="overview-title" class="section-title" data-aos="fade-up">Tổng Quan</h2>
+          <p class="section-subtitle" data-aos="fade-up">Ba trụ cột chính trong nghiên cứu đa dạng tôn giáo Việt Nam
+          </p>
+        </header>
+        <div class="overview__grid grid grid-cols-1 gap-lg">
+          <article class="card overview__card animate-on-scroll" data-aos="zoom-in">
+            <h3 class="overview__card-title">Lý Luận</h3>
+            <p class="overview__card-text">Quan điểm lý luận về tôn giáo trong thời kỳ quá độ lên chủ nghĩa xã hội</p>
+          </article>
+          <article class="card overview__card animate-on-scroll" data-aos="zoom-in">
+            <h3 class="overview__card-title">Thực Trạng</h3>
+            <p class="overview__card-text">Thực trạng tôn giáo và chính sách tôn giáo của Đảng, Nhà nước Việt Nam</p>
+          </article>
+          <article class="card overview__card animate-on-scroll" data-aos="zoom-in">
+            <h3 class="overview__card-title">Hành Động</h3>
+            <p class="overview__card-text">Yêu cầu đối với sinh viên FPT trong việc tôn trọng sự đa dạng tôn giáo</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Stats Section -->
+    <section class="section stats bg-surface" aria-labelledby="stats-title">
+      <div class="container">
+        <header class="section-header">
+          <h2 id="stats-title" class="section-title" data-aos="fade-up">Thống Kê Nhanh</h2>
+        </header>
+        <div class="stats__grid grid grid-cols-2 gap-lg">
+          <div class="stats__item text-center animate-on-scroll" data-aos="zoom-in">
+            <span class="stats__number counter" data-target="16" aria-live="polite">0</span>
+            <span class="stats__label">Tôn giáo được công nhận</span>
+          </div>
+          <div class="stats__item text-center animate-on-scroll" data-aos="zoom-in">
+            <span class="stats__number counter" data-target="27" data-suffix="+" aria-live="polite">0</span>
+            <span class="stats__label">Triệu tín đồ</span>
+          </div>
+          <div class="stats__item text-center animate-on-scroll" data-aos="zoom-in">
+            <span class="stats__number counter" data-target="29000" data-suffix="+" aria-live="polite">0</span>
+            <span class="stats__label">Cơ sở thờ tự</span>
+          </div>
+          <div class="stats__item text-center animate-on-scroll" data-aos="zoom-in">
+            <span class="stats__number counter" data-target="43" aria-live="polite">0</span>
+            <span class="stats__label">Tổ chức tôn giáo</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Footer Section -->
+    <section class="section cta-footer bg-gradient" aria-labelledby="cta-title">
+      <div class="container text-center">
+        <h2 id="cta-title" class="cta-footer__title" data-aos="fade-up">Khám Phá Thêm</h2>
+        <p class="cta-footer__text" data-aos="fade-up">Tìm hiểu sâu hơn về lịch sử, các tôn giáo và vai trò của sinh
+          viên</p>
+        <div class="cta-footer__links flex justify-center gap-md flex-wrap" data-aos="fade-up">
+          <a href="timeline.html" class="btn btn-white" data-magnetic>Lịch Sử Chính Sách</a>
+          <a href="mosaic.html" class="btn btn-outline-white" data-magnetic>Các Tôn Giáo</a>
+          <a href="fpt-students.html" class="btn btn-outline-white" data-magnetic>Sinh Viên FPT</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__content text-center">
+        <p class="footer__copyright">© 2026 Đa Dạng Tôn Giáo Việt Nam. Website học tập của sinh viên FPT.</p>
+        <nav class="footer__nav" aria-label="Footer navigation">
+          <a href="about.html" class="footer__link">Giới Thiệu</a>
+          <span class="footer__separator" aria-hidden="true">|</span>
+          <a href="about.html#references" class="footer__link">Tài Liệu Tham Khảo</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Page Transition Overlay -->
+  <div class="page-transition-overlay" id="page-transition-overlay" aria-hidden="true"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="js/animations.js"></script>
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/scroll-effects.js"></script>
+  <script type="module" src="js/hero-effects.js"></script>
+</body>
+
+</html>

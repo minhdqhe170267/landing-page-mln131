@@ -1,0 +1,930 @@
+/**
+ * Cinematic Base CSS
+ * Base styles, CSS custom properties, and @property definitions for the animation system
+ * 
+ * Requirements:
+ * - 7.5: CSS custom properties for animation configuration
+ * - 1.1-1.3: GPU acceleration utilities
+ * - 8.1: Performance optimization with will-change
+ * - 9.1-9.4: Reduced motion support
+ * 
+ * This file provides the foundation for all cinematic animations including:
+ * - Global animation custom properties
+ * - @property definitions for advanced CSS animations
+ * - GPU acceleration helper classes
+ * - Base animation keyframes
+ * - Reduced motion support
+ * 
+ * @module css/animations/cinematic-base
+ */
+
+/* ==========================================================================
+   @property Definitions for Advanced Animations
+   Enable smooth animation of properties that normally can't be animated
+   ========================================================================== */
+
+/* Gradient angle for rotating gradient borders (Requirement 6.4, 6.5) */
+@property --gradient-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* Gradient position for shimmer effects */
+@property --gradient-position {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+}
+
+/* Glow opacity for inner glow effects (Requirement 6.6) */
+@property --glow-opacity {
+    syntax: '<number>';
+    initial-value: 0;
+    inherits: false;
+}
+
+/* Border opacity for animated borders */
+@property --border-opacity {
+    syntax: '<number>';
+    initial-value: 0;
+    inherits: false;
+}
+
+/* Hue rotation for color cycling effects (Requirement 7.2) */
+@property --hue-rotate {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* Progress value for timeline and scroll animations (Requirement 5.2) */
+@property --progress {
+    syntax: '<number>';
+    initial-value: 0;
+    inherits: false;
+}
+
+/* Scale factor for transform animations */
+@property --scale-factor {
+    syntax: '<number>';
+    initial-value: 1;
+    inherits: false;
+}
+
+/* Blur amount for dynamic blur effects */
+@property --blur-amount {
+    syntax: '<length>';
+    initial-value: 0px;
+    inherits: false;
+}
+
+/* Mouse position tracking for interactive effects (Requirement 6.6) */
+@property --mouse-x {
+    syntax: '<percentage>';
+    initial-value: 50%;
+    inherits: false;
+}
+
+@property --mouse-y {
+    syntax: '<percentage>';
+    initial-value: 50%;
+    inherits: false;
+}
+
+/* Particle life for trail effects (Requirement 7.3) */
+@property --particle-life {
+    syntax: '<number>';
+    initial-value: 1;
+    inherits: false;
+}
+
+/* ==========================================================================
+   CSS Custom Properties - Animation Configuration
+   Requirement 7.5: CSS custom properties for animation configuration
+   ========================================================================== */
+
+:root {
+    /* ========================================
+       Target Performance Settings
+       Requirement 1.4: Target 120fps
+       ======================================== */
+    --animation-target-fps: 120;
+    --animation-frame-time: 8.33ms; /* 1000ms / 120fps */
+    
+    /* ========================================
+       Global Animation Timing
+       ======================================== */
+    --animation-duration-instant: 100ms;
+    --animation-duration-fast: 200ms;
+    --animation-duration-normal: 400ms;
+    --animation-duration-slow: 600ms;
+    --animation-duration-slower: 800ms;
+    --animation-duration-slowest: 1000ms;
+    
+    /* ========================================
+       Easing Functions
+       ======================================== */
+    /* Standard easings */
+    --ease-linear: linear;
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Custom cinematic easings */
+    --ease-cinematic: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --ease-elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+    --ease-sharp: cubic-bezier(0.4, 0, 0.6, 1);
+    
+    /* Page transition easing (Requirement 3.2) */
+    --ease-page-transition: cubic-bezier(0.77, 0, 0.175, 1);
+    
+    /* ========================================
+       Hero Section Animation Config
+       Requirements: 2.1-2.9
+       ======================================== */
+    /* Mesh Gradient (Requirement 2.2, 2.3) */
+    --hero-mesh-point-count: 5;
+    --hero-mesh-speed: 0.5;
+    
+    /* Particle System (Requirement 2.6) */
+    --hero-particle-count: 100;
+    --hero-particle-count-mobile: 30;
+    --hero-particle-min-size: 2px;
+    --hero-particle-max-size: 6px;
+    --hero-particle-max-depth: 1000;
+    --hero-particle-mouse-influence: 0.1;
+    
+    /* Text Reveal (Requirement 2.8) */
+    --hero-text-stagger-delay: 50ms;
+    --hero-text-reveal-duration: 800ms;
+    
+    /* Magnetic Button (Requirement 2.9) */
+    --hero-magnetic-strength: 0.3;
+    --hero-magnetic-scale: 1.1;
+    
+    /* ========================================
+       Page Transition Config
+       Requirements: 3.1-3.5
+       ======================================== */
+    --page-transition-duration: 800ms;
+    --page-transition-easing: var(--ease-page-transition);
+    --page-transition-z-index: 9999;
+    
+    /* ========================================
+       Scroll Animation Config
+       Requirements: 4.1-4.6
+       ======================================== */
+    /* Lerp smoothing (Requirement 4.1) */
+    --scroll-lerp-ease: 0.1;
+    
+    /* Parallax settings (Requirement 4.2) */
+    --scroll-parallax-speed: 0.5;
+    
+    /* Reveal animation distances */
+    --scroll-reveal-fade-distance: 50px;
+    --scroll-reveal-slide-distance: 100px;
+    --scroll-reveal-rotate-angle: 45deg;
+    --scroll-reveal-scale-start: 0.8;
+    
+    /* Stagger delay for grouped reveals */
+    --scroll-reveal-stagger: 100ms;
+    
+    /* ========================================
+       Timeline Animation Config
+       Requirements: 5.1-5.6
+       ======================================== */
+    --timeline-node-ripple-duration: 600ms;
+    --timeline-item-stagger: 100ms;
+    --timeline-progress-glow: rgba(102, 126, 234, 0.5);
+    
+    /* ========================================
+       Mosaic Animation Config
+       Requirements: 6.1-6.7
+       ======================================== */
+    /* 3D Tilt (Requirement 6.1, 6.2) */
+    --mosaic-tilt-max-angle: 15deg;
+    --mosaic-perspective: 1000px;
+    
+    /* Neighbor Push (Requirement 6.3) */
+    --mosaic-push-force: 30px;
+    --mosaic-push-radius: 200px;
+    
+    /* Floating Animation (Requirement 6.7) */
+    --mosaic-float-amplitude: 8px;
+    --mosaic-float-duration: 4s;
+    --mosaic-float-rotate-amplitude: 2deg;
+    
+    /* Gradient Border (Requirement 6.4, 6.5) */
+    --mosaic-gradient-rotation-speed: 3s;
+    
+    /* ========================================
+       Mouse Trail Config
+       Requirements: 7.1-7.4
+       ======================================== */
+    --mouse-trail-max-particles: 30;
+    --mouse-trail-min-size: 5px;
+    --mouse-trail-max-size: 15px;
+    --mouse-trail-decay: 0.02;
+    --mouse-trail-hue-speed: 2;
+    
+    /* ========================================
+       Color Palette for Animations
+       ======================================== */
+    /* Primary gradient colors */
+    --anim-color-blue: #667eea;
+    --anim-color-purple: #764ba2;
+    --anim-color-pink: #f093fb;
+    --anim-color-coral: #fa709a;
+    --anim-color-yellow: #fee140;
+    --anim-color-cyan: #4facfe;
+    --anim-color-teal: #00f2fe;
+    
+    /* Glow colors */
+    --anim-glow-primary: rgba(102, 126, 234, 0.5);
+    --anim-glow-secondary: rgba(118, 75, 162, 0.4);
+    --anim-glow-accent: rgba(240, 147, 251, 0.3);
+    
+    /* Particle colors */
+    --anim-particle-color: rgba(255, 255, 255, 0.9);
+    --anim-particle-glow: rgba(255, 255, 255, 0.3);
+    
+    /* ========================================
+       Z-Index Scale for Animations
+       ======================================== */
+    --z-particles: 2;
+    --z-content: 10;
+    --z-overlay: 100;
+    --z-transition: 9999;
+    --z-mouse-trail: 10000;
+}
+
+/* ==========================================================================
+   GPU Acceleration Utility Classes
+   Requirements: 1.1, 1.2, 1.3 - Hardware acceleration
+   ========================================================================== */
+
+/* Full GPU acceleration with 3D perspective */
+.gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Lightweight GPU acceleration (no perspective) */
+.gpu-accelerated-light {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* 3D transform style preservation */
+.preserve-3d {
+    transform-style: preserve-3d;
+}
+
+/* ==========================================================================
+   Will-Change Utility Classes
+   Requirement 8.2: Selective will-change usage
+   ========================================================================== */
+
+.will-change-transform {
+    will-change: transform;
+}
+
+.will-change-opacity {
+    will-change: opacity;
+}
+
+.will-change-transform-opacity {
+    will-change: transform, opacity;
+}
+
+.will-change-filter {
+    will-change: filter;
+}
+
+.will-change-contents {
+    will-change: contents;
+}
+
+.will-change-clip-path {
+    will-change: clip-path;
+}
+
+/* Clear will-change (for cleanup after animation) */
+.will-change-auto {
+    will-change: auto;
+}
+
+/* ==========================================================================
+   Animation State Classes
+   ========================================================================== */
+
+/* Element is currently animating */
+.is-animating {
+    pointer-events: none;
+}
+
+/* Animation is paused */
+.animation-paused {
+    animation-play-state: paused !important;
+}
+
+/* Animation is running */
+.animation-running {
+    animation-play-state: running !important;
+}
+
+/* Element has completed its animation */
+.animation-complete {
+    animation: none !important;
+}
+
+/* ==========================================================================
+   Base Animation Keyframes
+   Shared keyframes used across multiple components
+   ========================================================================== */
+
+/* Fade In */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Fade Out */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Fade In Up */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, var(--scroll-reveal-fade-distance), 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Fade In Down */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate3d(0, calc(var(--scroll-reveal-fade-distance) * -1), 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Scale In */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale3d(var(--scroll-reveal-scale-start), var(--scroll-reveal-scale-start), 1);
+    }
+    to {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+/* Scale Out */
+@keyframes scaleOut {
+    from {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+    to {
+        opacity: 0;
+        transform: scale3d(var(--scroll-reveal-scale-start), var(--scroll-reveal-scale-start), 1);
+    }
+}
+
+/* Rotate In */
+@keyframes rotateIn {
+    from {
+        opacity: 0;
+        transform: rotate3d(0, 0, 1, var(--scroll-reveal-rotate-angle));
+    }
+    to {
+        opacity: 1;
+        transform: rotate3d(0, 0, 1, 0deg);
+    }
+}
+
+/* Slide In Left */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translate3d(calc(var(--scroll-reveal-slide-distance) * -1), 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Slide In Right */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translate3d(var(--scroll-reveal-slide-distance), 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Pulse Glow - for active elements */
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 var(--anim-glow-primary),
+                    0 0 20px var(--anim-glow-secondary);
+    }
+    50% {
+        box-shadow: 0 0 0 15px transparent,
+                    0 0 30px var(--anim-glow-primary);
+    }
+}
+
+/* Gradient Rotation - for animated borders */
+@keyframes gradientRotate {
+    0% {
+        --gradient-angle: 0deg;
+    }
+    100% {
+        --gradient-angle: 360deg;
+    }
+}
+
+/* Shimmer Effect */
+@keyframes shimmer {
+    0% {
+        --gradient-position: -100%;
+    }
+    100% {
+        --gradient-position: 200%;
+    }
+}
+
+/* Float Animation - subtle floating effect */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) translateZ(0);
+    }
+    50% {
+        transform: translateY(calc(var(--mosaic-float-amplitude) * -1)) translateZ(0);
+    }
+}
+
+/* Float with Rotation */
+@keyframes floatRotate {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) translateZ(0);
+    }
+    25% {
+        transform: translateY(calc(var(--mosaic-float-amplitude) * -0.5)) rotate(var(--mosaic-float-rotate-amplitude)) translateZ(0);
+    }
+    50% {
+        transform: translateY(calc(var(--mosaic-float-amplitude) * -1)) rotate(0deg) translateZ(0);
+    }
+    75% {
+        transform: translateY(calc(var(--mosaic-float-amplitude) * -0.5)) rotate(calc(var(--mosaic-float-rotate-amplitude) * -1)) translateZ(0);
+    }
+}
+
+/* Ripple Effect */
+@keyframes ripple {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* Hue Rotation - for color cycling */
+@keyframes hueRotate {
+    0% {
+        --hue-rotate: 0deg;
+    }
+    100% {
+        --hue-rotate: 360deg;
+    }
+}
+
+/* Particle Fade Out */
+@keyframes particleFadeOut {
+    0% {
+        opacity: 1;
+        transform: scale(1) translateZ(0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5) translateZ(0);
+    }
+}
+
+/* ==========================================================================
+   Animation Utility Classes
+   ========================================================================== */
+
+/* Apply fade in animation */
+.animate-fade-in {
+    animation: fadeIn var(--animation-duration-normal) var(--ease-out) forwards;
+}
+
+/* Apply fade in up animation */
+.animate-fade-in-up {
+    animation: fadeInUp var(--animation-duration-normal) var(--ease-out) forwards;
+}
+
+/* Apply scale in animation */
+.animate-scale-in {
+    animation: scaleIn var(--animation-duration-normal) var(--ease-out) forwards;
+}
+
+/* Apply float animation */
+.animate-float {
+    animation: float var(--mosaic-float-duration) var(--ease-in-out) infinite;
+}
+
+/* Apply pulse glow animation */
+.animate-pulse-glow {
+    animation: pulseGlow 2s var(--ease-in-out) infinite;
+}
+
+/* Apply gradient rotation */
+.animate-gradient-rotate {
+    animation: gradientRotate var(--mosaic-gradient-rotation-speed) linear infinite;
+}
+
+/* ==========================================================================
+   Gradient Border Base Styles
+   Requirements: 6.4, 6.5, 7.5 - Animated gradient borders
+   ========================================================================== */
+
+/* Base class for elements with animated gradient borders */
+.gradient-border {
+    position: relative;
+    --gradient-angle: 0deg;
+    --border-opacity: 0;
+}
+
+/* Gradient border pseudo-element */
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    z-index: -1;
+    
+    /* Conic gradient using @property */
+    background: conic-gradient(
+        from var(--gradient-angle),
+        var(--anim-color-blue),
+        var(--anim-color-purple),
+        var(--anim-color-pink),
+        var(--anim-color-coral),
+        var(--anim-color-blue)
+    );
+    
+    /* Mask to create border effect */
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    
+    /* Initially hidden */
+    opacity: var(--border-opacity);
+    
+    /* GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: opacity;
+    
+    transition: opacity var(--animation-duration-normal) var(--ease-out);
+}
+
+/* Show gradient border on hover */
+.gradient-border:hover::before {
+    --border-opacity: 1;
+    animation: gradientRotate var(--mosaic-gradient-rotation-speed) linear infinite;
+}
+
+/* ==========================================================================
+   Inner Glow Base Styles
+   Requirement 6.6: Inner glow using CSS custom properties
+   ========================================================================== */
+
+/* Base class for elements with inner glow */
+.inner-glow {
+    position: relative;
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+    --glow-opacity: 0;
+}
+
+/* Inner glow pseudo-element */
+.inner-glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+    
+    /* Radial gradient following mouse position */
+    background: radial-gradient(
+        circle at var(--mouse-x) var(--mouse-y),
+        var(--anim-glow-primary) 0%,
+        transparent 50%
+    );
+    
+    opacity: var(--glow-opacity);
+    
+    /* GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: opacity;
+    
+    transition: opacity var(--animation-duration-fast) var(--ease-out);
+}
+
+/* Show inner glow on hover */
+.inner-glow:hover::after {
+    --glow-opacity: 0.6;
+}
+
+/* ==========================================================================
+   Mouse Trail Particle Base Styles
+   Requirements: 7.1-7.4
+   ========================================================================== */
+
+.mouse-trail-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: var(--z-mouse-trail);
+    border-radius: 50%;
+    
+    /* GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+    
+    /* Gradient background with hue rotation */
+    background: radial-gradient(
+        circle,
+        hsl(var(--hue-rotate), 80%, 60%) 0%,
+        hsl(var(--hue-rotate), 80%, 40%) 50%,
+        transparent 100%
+    );
+}
+
+/* ==========================================================================
+   Canvas Container Base Styles
+   Requirement 8.5: Canvas optimization
+   ========================================================================== */
+
+.animation-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    
+    /* GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: contents;
+}
+
+/* ==========================================================================
+   Reduced Motion Support
+   Requirements: 9.1-9.4 - Accessibility for motion sensitivity
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    /* Disable all animations globally */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    /* Remove will-change to save resources */
+    .will-change-transform,
+    .will-change-opacity,
+    .will-change-transform-opacity,
+    .will-change-filter,
+    .will-change-contents,
+    .will-change-clip-path,
+    .gpu-accelerated,
+    .gpu-accelerated-light {
+        will-change: auto !important;
+    }
+    
+    /* Hide continuous animation elements */
+    .mouse-trail-particle,
+    .animation-canvas {
+        display: none !important;
+    }
+    
+    /* Show content immediately */
+    [data-reveal],
+    .animate-fade-in,
+    .animate-fade-in-up,
+    .animate-scale-in {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    /* Disable floating animations */
+    .animate-float {
+        animation: none !important;
+    }
+    
+    /* Disable gradient rotation */
+    .gradient-border::before,
+    .animate-gradient-rotate {
+        animation: none !important;
+    }
+    
+    /* Disable pulse glow */
+    .animate-pulse-glow {
+        animation: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Keep basic hover feedback without animation */
+    .gradient-border:hover::before {
+        opacity: 1;
+        animation: none !important;
+    }
+    
+    .inner-glow:hover::after {
+        opacity: 0.4;
+        background: radial-gradient(
+            circle at 50% 50%,
+            var(--anim-glow-primary) 0%,
+            transparent 50%
+        );
+    }
+}
+
+/* ==========================================================================
+   Responsive Animation Adjustments
+   Requirements: 10.1-10.4 - Mobile optimization
+   ========================================================================== */
+
+/* Tablet and below */
+@media (max-width: 1024px) {
+    :root {
+        /* Reduce animation distances */
+        --scroll-reveal-fade-distance: 40px;
+        --scroll-reveal-slide-distance: 80px;
+        --scroll-reveal-rotate-angle: 30deg;
+        
+        /* Reduce mosaic effects */
+        --mosaic-tilt-max-angle: 10deg;
+        --mosaic-perspective: 800px;
+        --mosaic-float-amplitude: 6px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    :root {
+        /* Further reduce for mobile */
+        --hero-particle-count: var(--hero-particle-count-mobile);
+        --scroll-reveal-fade-distance: 30px;
+        --scroll-reveal-slide-distance: 60px;
+        --scroll-reveal-rotate-angle: 20deg;
+        --scroll-reveal-stagger: 80ms;
+        
+        /* Reduce mosaic effects */
+        --mosaic-tilt-max-angle: 0deg; /* Disable tilt on mobile */
+        --mosaic-float-amplitude: 4px;
+        --mosaic-float-duration: 5s;
+        
+        /* Faster transitions for mobile */
+        --animation-duration-slow: 500ms;
+        --animation-duration-slower: 600ms;
+        --animation-duration-slowest: 800ms;
+        --page-transition-duration: 600ms;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+    :root {
+        /* Minimal animations for small screens */
+        --scroll-reveal-fade-distance: 20px;
+        --scroll-reveal-slide-distance: 40px;
+        --scroll-reveal-rotate-angle: 15deg;
+        --scroll-reveal-stagger: 60ms;
+        
+        /* Disable floating on very small screens */
+        --mosaic-float-amplitude: 0px;
+        
+        /* Even faster transitions */
+        --page-transition-duration: 500ms;
+    }
+}
+
+/* Touch device specific */
+@media (hover: none) and (pointer: coarse) {
+    :root {
+        /* Disable 3D tilt on touch devices */
+        --mosaic-tilt-max-angle: 0deg;
+    }
+    
+    /* Disable floating animation on touch */
+    .animate-float {
+        animation: none;
+    }
+}
+
+/* ==========================================================================
+   High Contrast Mode Support
+   ========================================================================== */
+
+@media (prefers-contrast: high) {
+    /* Ensure animations don't interfere with readability */
+    .gradient-border::before {
+        display: none;
+    }
+    
+    .inner-glow::after {
+        display: none;
+    }
+    
+    .animate-pulse-glow {
+        animation: none;
+        box-shadow: 0 0 0 2px currentColor;
+    }
+}
+
+/* ==========================================================================
+   High Performance Mode
+   For devices that support CSS containment
+   ========================================================================== */
+
+@supports (contain: layout style paint) {
+    .animation-container {
+        contain: layout style;
+    }
+    
+    .animation-canvas {
+        contain: strict;
+    }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+    /* Hide all animation-related elements */
+    .animation-canvas,
+    .mouse-trail-particle,
+    .gradient-border::before,
+    .inner-glow::after {
+        display: none !important;
+    }
+    
+    /* Show all content without animations */
+    [data-reveal],
+    .animate-fade-in,
+    .animate-fade-in-up,
+    .animate-scale-in {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

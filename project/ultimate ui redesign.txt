@@ -1,0 +1,946 @@
+# MISSION: TẠO ANIMATIONS "LÓA MẮT" - LEVEL PRODUCTION STUDIO
+
+## 🎯 MỤC TIÊU TUYỆT ĐỐI
+Website phải có animations ở mức ĐIỆN ẢNH - khiến người xem phải "WOW" và nhớ mãi. 
+Mọi transition phải MƯỢT NHƯ LỤA ở 120fps, không được giật lag dù chỉ 1 frame.
+
+Performance trước tiên: Sử dụng GPU acceleration, transform thay vì position, will-change optimization.
+
+---
+
+## 🚀 CORE ANIMATION PRINCIPLES
+
+### GPU-Accelerated Properties (CHỈ dùng những này):
+```css
+/* ✅ SỬ DỤNG - GPU accelerated */
+transform: translate3d(), scale3d(), rotate3d()
+opacity
+filter
+backdrop-filter
+
+/* ❌ TRÁNH - CPU heavy, gây lag */
+top, left, right, bottom
+width, height
+margin, padding
+background-position
+```
+
+### Hardware Acceleration:
+```css
+.smooth-element {
+    /* Force GPU rendering */
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+```
+
+---
+
+## 💫 HERO SECTION - "CINEMATIC ENTRANCE"
+
+### 1. Animated Mesh Gradient Background
+```html
+
+```
+```javascript
+// Animated gradient mesh - 120fps smooth
+class GradientAnimation {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d', { alpha: false });
+        this.resize();
+        this.colors = [
+            { r: 102, g: 126, b: 234 },
+            { r: 118, g: 75, b: 162 },
+            { r: 240, g: 147, b: 251 },
+            { r: 250, g: 112, b: 154 }
+        ];
+        this.points = [];
+        this.initPoints();
+        this.animate();
+    }
+    
+    resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+    }
+    
+    initPoints() {
+        const numPoints = 5;
+        for (let i = 0; i < numPoints; i++) {
+            this.points.push({
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height,
+                vx: (Math.random() - 0.5) * 2,
+                vy: (Math.random() - 0.5) * 2,
+                radius: Math.random() * 300 + 200,
+                color: this.colors[i % this.colors.length]
+            });
+        }
+    }
+    
+    animate() {
+        // Clear canvas
+        this.ctx.fillStyle = '#0f0f23';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // Update and draw points
+        this.points.forEach(point => {
+            // Update position
+            point.x += point.vx;
+            point.y += point.vy;
+            
+            // Bounce off edges
+            if (point.x < 0 || point.x > this.canvas.width) point.vx *= -1;
+            if (point.y < 0 || point.y > this.canvas.height) point.vy *= -1;
+            
+            // Create gradient
+            const gradient = this.ctx.createRadialGradient(
+                point.x, point.y, 0,
+                point.x, point.y, point.radius
+            );
+            
+            gradient.addColorStop(0, `rgba(${point.color.r}, ${point.color.g}, ${point.color.b}, 0.4)`);
+            gradient.addColorStop(1, 'transparent');
+            
+            // Draw
+            this.ctx.fillStyle = gradient;
+            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        });
+        
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
+// Initialize
+const gradientCanvas = document.getElementById('gradient-canvas');
+new GradientAnimation(gradientCanvas);
+```
+
+### 2. 3D Floating Particles with Physics
+```javascript
+// Three.js-like particle system (pure JS for performance)
+class ParticleSystem {
+    constructor(container) {
+        this.container = container;
+        this.particles = [];
+        this.mouse = { x: 0, y: 0 };
+        this.init();
+        this.bindEvents();
+        this.animate();
+    }
+    
+    init() {
+        for (let i = 0; i < 100; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle-3d';
+            
+            const size = Math.random() * 4 + 2;
+            const depth = Math.random() * 1000;
+            
+            particle.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(102, 126, 234, 0.8), transparent);
+                left: ${Math.random() * 100}%;
+                top: ${Math.random() * 100}%;
+                transform: translateZ(${depth}px);
+                will-change: transform;
+                pointer-events: none;
+            `;
+            
+            this.particles.push({
+                element: particle,
+                baseX: Math.random() * 100,
+                baseY: Math.random() * 100,
+                baseZ: depth,
+                speedX: (Math.random() - 0.5) * 0.5,
+                speedY: (Math.random() - 0.5) * 0.5,
+                speedZ: (Math.random() - 0.5) * 2
+            });
+            
+            this.container.appendChild(particle);
+        }
+    }
+    
+    bindEvents() {
+        document.addEventListener('mousemove', (e) => {
+            this.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+            this.mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
+        });
+    }
+    
+    animate() {
+        this.particles.forEach(particle => {
+            // Update position with mouse influence
+            particle.baseX += particle.speedX + this.mouse.x * 0.1;
+            particle.baseY += particle.speedY + this.mouse.y * 0.1;
+            particle.baseZ += particle.speedZ;
+            
+            // Wrap around edges
+            if (particle.baseX < -10) particle.baseX = 110;
+            if (particle.baseX > 110) particle.baseX = -10;
+            if (particle.baseY < -10) particle.baseY = 110;
+            if (particle.baseY > 110) particle.baseY = -10;
+            if (particle.baseZ < -500) particle.baseZ = 500;
+            if (particle.baseZ > 500) particle.baseZ = -500;
+            
+            // Apply transform (GPU accelerated)
+            particle.element.style.transform = `
+                translate3d(
+                    ${particle.baseX}%,
+                    ${particle.baseY}%,
+                    ${particle.baseZ}px
+                )
+            `;
+            
+            // Fade based on Z depth
+            const opacity = 1 - Math.abs(particle.baseZ) / 500;
+            particle.element.style.opacity = opacity;
+        });
+        
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
+// Initialize
+const particleContainer = document.querySelector('.particle-container');
+new ParticleSystem(particleContainer);
+```
+
+### 3. Text Reveal Animation - "Glitch to Solid"
+```javascript
+class TextReveal {
+    constructor(element) {
+        this.element = element;
+        this.text = element.textContent;
+        this.chars = this.text.split('');
+        this.element.textContent = '';
+        this.reveal();
+    }
+    
+    reveal() {
+        this.chars.forEach((char, index) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.style.cssText = `
+                display: inline-block;
+                opacity: 0;
+                transform: translateY(100px) rotateX(90deg);
+                filter: blur(10px);
+                will-change: transform, opacity, filter;
+            `;
+            this.element.appendChild(span);
+            
+            // Stagger animation
+            setTimeout(() => {
+                span.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                span.style.opacity = '1';
+                span.style.transform = 'translateY(0) rotateX(0)';
+                span.style.filter = 'blur(0)';
+            }, index * 50);
+        });
+    }
+}
+
+// Apply to hero title
+document.querySelectorAll('.hero-title span').forEach(el => {
+    new TextReveal(el);
+});
+```
+
+### 4. Magnetic Button Effect
+```javascript
+class MagneticButton {
+    constructor(element) {
+        this.element = element;
+        this.boundingRect = element.getBoundingClientRect();
+        this.bind();
+    }
+    
+    bind() {
+        this.element.addEventListener('mousemove', (e) => {
+            const rect = this.element.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            // Calculate distance from center
+            const distance = Math.sqrt(x * x + y * y);
+            const maxDistance = Math.sqrt(
+                Math.pow(rect.width / 2, 2) + Math.pow(rect.height / 2, 2)
+            );
+            
+            // Magnetic strength (stronger when closer)
+            const strength = Math.max(0, 1 - distance / maxDistance);
+            
+            // Apply transform
+            this.element.style.transform = `
+                translate3d(${x * strength * 0.3}px, ${y * strength * 0.3}px, 0)
+                scale(${1 + strength * 0.1})
+            `;
+        });
+        
+        this.element.addEventListener('mouseleave', () => {
+            this.element.style.transform = 'translate3d(0, 0, 0) scale(1)';
+        });
+    }
+}
+
+// Apply to all buttons
+document.querySelectorAll('.btn-primary').forEach(btn => {
+    new MagneticButton(btn);
+});
+```
+
+---
+
+## 🎬 PAGE TRANSITIONS - "SCENE CHANGES"
+
+### Liquid Wipe Transition
+```javascript
+class PageTransition {
+    constructor() {
+        this.overlay = document.createElement('div');
+        this.overlay.className = 'page-transition-overlay';
+        document.body.appendChild(this.overlay);
+        this.bind();
+    }
+    
+    bind() {
+        document.querySelectorAll('a[href$=".html"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (link.hostname === window.location.hostname) {
+                    e.preventDefault();
+                    this.transition(link.href);
+                }
+            });
+        });
+    }
+    
+    transition(url) {
+        // Animate overlay in
+        this.overlay.style.clipPath = 'circle(0% at 50% 50%)';
+        this.overlay.style.transition = 'clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1)';
+        
+        // Trigger animation
+        requestAnimationFrame(() => {
+            this.overlay.style.clipPath = 'circle(150% at 50% 50%)';
+        });
+        
+        // Navigate after animation
+        setTimeout(() => {
+            window.location.href = url;
+        }, 800);
+    }
+}
+
+new PageTransition();
+```
+```css
+.page-transition-overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+    z-index: 9999;
+    clip-path: circle(0% at 50% 50%);
+    will-change: clip-path;
+    pointer-events: none;
+}
+```
+
+### Alternative: Curtain Reveal
+```css
+.curtain-transition {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.curtain-transition::before,
+.curtain-transition::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.curtain-transition::before {
+    left: 0;
+    transform: translateX(-100%);
+}
+
+.curtain-transition::after {
+    right: 0;
+    transform: translateX(100%);
+}
+
+.curtain-transition.active::before {
+    transform: translateX(0);
+}
+
+.curtain-transition.active::after {
+    transform: translateX(0);
+}
+```
+
+---
+
+## ⚡ SCROLL ANIMATIONS - "BUTTER SMOOTH"
+
+### Advanced Parallax with Lerp (Linear Interpolation)
+```javascript
+class SmoothParallax {
+    constructor() {
+        this.scrollY = 0;
+        this.currentY = 0;
+        this.ease = 0.1; // Smoothing factor
+        this.elements = [];
+        this.bind();
+        this.animate();
+    }
+    
+    bind() {
+        // Register parallax elements
+        document.querySelectorAll('[data-parallax]').forEach(el => {
+            const speed = parseFloat(el.dataset.parallax) || 0.5;
+            this.elements.push({ element: el, speed });
+        });
+        
+        // Update scroll position
+        window.addEventListener('scroll', () => {
+            this.scrollY = window.pageYOffset;
+        });
+    }
+    
+    lerp(start, end, factor) {
+        return start + (end - start) * factor;
+    }
+    
+    animate() {
+        // Smooth scroll interpolation
+        this.currentY = this.lerp(this.currentY, this.scrollY, this.ease);
+        
+        // Update elements
+        this.elements.forEach(({ element, speed }) => {
+            const offset = this.currentY * speed;
+            element.style.transform = `translate3d(0, ${-offset}px, 0)`;
+        });
+        
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
+new SmoothParallax();
+```
+
+### Scroll-Triggered Animations with IntersectionObserver
+```javascript
+class ScrollReveal {
+    constructor() {
+        this.observer = new IntersectionObserver(
+            (entries) => this.handleIntersect(entries),
+            {
+                threshold: [0, 0.25, 0.5, 0.75, 1],
+                rootMargin: '-10% 0px -10% 0px'
+            }
+        );
+        
+        this.bind();
+    }
+    
+    bind() {
+        document.querySelectorAll('[data-reveal]').forEach(el => {
+            this.observer.observe(el);
+        });
+    }
+    
+    handleIntersect(entries) {
+        entries.forEach(entry => {
+            const element = entry.target;
+            const revealType = element.dataset.reveal;
+            const ratio = entry.intersectionRatio;
+            
+            if (entry.isIntersecting) {
+                this.reveal(element, revealType, ratio);
+            }
+        });
+    }
+    
+    reveal(element, type, ratio) {
+        switch(type) {
+            case 'fade-up':
+                element.style.opacity = ratio;
+                element.style.transform = `translate3d(0, ${(1 - ratio) * 50}px, 0)`;
+                break;
+                
+            case 'scale':
+                element.style.opacity = ratio;
+                element.style.transform = `scale3d(${0.8 + ratio * 0.2}, ${0.8 + ratio * 0.2}, 1)`;
+                break;
+                
+            case 'rotate':
+                element.style.opacity = ratio;
+                element.style.transform = `rotate3d(1, 1, 0, ${(1 - ratio) * 45}deg)`;
+                break;
+                
+            case 'slide-left':
+                element.style.opacity = ratio;
+                element.style.transform = `translate3d(${(1 - ratio) * -100}px, 0, 0)`;
+                break;
+                
+            case 'slide-right':
+                element.style.opacity = ratio;
+                element.style.transform = `translate3d(${(1 - ratio) * 100}px, 0, 0)`;
+                break;
+        }
+    }
+}
+
+new ScrollReveal();
+```
+
+---
+
+## 🎨 TIMELINE - "CINEMATIC JOURNEY"
+
+### Animated Progress Line with SVG
+```html
+
+    
+        
+            
+            
+            
+        
+    
+    
+
+```
+```javascript
+class AnimatedTimeline {
+    constructor() {
+        this.path = document.querySelector('.timeline-path');
+        this.pathLength = this.path.getTotalLength();
+        this.items = document.querySelectorAll('.timeline-item');
+        this.bind();
+    }
+    
+    bind() {
+        window.addEventListener('scroll', () => {
+            requestAnimationFrame(() => this.update());
+        });
+    }
+    
+    update() {
+        const timelineRect = document.querySelector('.timeline-container').getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Calculate progress (0 to 1)
+        const progress = Math.max(0, Math.min(1,
+            (windowHeight - timelineRect.top) / (timelineRect.height + windowHeight)
+        ));
+        
+        // Animate path
+        const drawLength = this.pathLength * progress;
+        this.path.style.strokeDashoffset = this.pathLength - drawLength;
+        
+        // Animate timeline items
+        this.items.forEach((item, index) => {
+            const itemProgress = (progress * this.items.length) - index;
+            const itemRatio = Math.max(0, Math.min(1, itemProgress));
+            
+            if (itemRatio > 0) {
+                item.style.opacity = itemRatio;
+                item.style.transform = `
+                    translate3d(
+                        ${index % 2 === 0 ? -50 : 50}px,
+                        ${(1 - itemRatio) * 100}px,
+                        0
+                    )
+                    scale3d(${0.8 + itemRatio * 0.2}, ${0.8 + itemRatio * 0.2}, 1)
+                    rotateY(${(1 - itemRatio) * (index % 2 === 0 ? -30 : 30)}deg)
+                `;
+                
+                // Add class for additional CSS animations
+                if (itemRatio > 0.8) {
+                    item.classList.add('fully-visible');
+                }
+            }
+        });
+    }
+}
+
+new AnimatedTimeline();
+```
+
+### Pulsing Nodes with Ripple Effect
+```css
+.timeline-node {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 50%;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.timeline-node::before,
+.timeline-node::after {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    border: 2px solid #667eea;
+    opacity: 0;
+    animation: ripple 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.timeline-node::after {
+    animation-delay: 1s;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+.timeline-node.active {
+    animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 
+            0 0 20px rgba(102, 126, 234, 0.6),
+            0 0 40px rgba(102, 126, 234, 0.4),
+            0 0 60px rgba(102, 126, 234, 0.2);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 
+            0 0 30px rgba(102, 126, 234, 0.8),
+            0 0 60px rgba(102, 126, 234, 0.6),
+            0 0 90px rgba(102, 126, 234, 0.4);
+        transform: scale(1.1);
+    }
+}
+```
+
+---
+
+## 🎯 MOSAIC - "FLUID GRID MAGIC"
+
+### Dynamic Grid with Bento Box Layout
+```javascript
+class FluidMosaic {
+    constructor(container) {
+        this.container = container;
+        this.tiles = container.querySelectorAll('.mosaic-tile');
+        this.mouse = { x: 0, y: 0 };
+        this.bind();
+        this.animate();
+    }
+    
+    bind() {
+        // Track mouse for magnetic effect
+        this.container.addEventListener('mousemove', (e) => {
+            const rect = this.container.getBoundingClientRect();
+            this.mouse.x = e.clientX - rect.left;
+            this.mouse.y = e.clientY - rect.top;
+        });
+        
+        // Individual tile interactions
+        this.tiles.forEach(tile => {
+            this.bindTile(tile);
+        });
+    }
+    
+    bindTile(tile) {
+        let isHovering = false;
+        
+        tile.addEventListener('mouseenter', () => {
+            isHovering = true;
+            
+            // Elevate tile
+            tile.style.zIndex = '100';
+            
+            // Push away neighbors
+            this.pushNeighbors(tile);
+        });
+        
+        tile.addEventListener('mouseleave', () => {
+            isHovering = false;
+            
+            tile.style.zIndex = '';
+            
+            // Reset neighbors
+            this.resetNeighbors();
+        });
+        
+        // 3D tilt effect
+        tile.addEventListener('mousemove', (e) => {
+            if (!isHovering) return;
+            
+            const rect = tile.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / centerY * 10;
+            const rotateY = (centerX - x) / centerX * 10;
+            
+            tile.style.transform = `
+                perspective(1000px)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                scale3d(1.15, 1.15, 1.15)
+                translateZ(50px)
+            `;
+        });
+    }
+    
+    pushNeighbors(activeTile) {
+        const activeRect = activeTile.getBoundingClientRect();
+        const activeCenterX = activeRect.left + activeRect.width / 2;
+        const activeCenterY = activeRect.top + activeRect.height / 2;
+        
+        this.tiles.forEach(tile => {
+            if (tile === activeTile) return;
+            
+            const rect = tile.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            // Calculate distance and direction
+            const dx = centerX - activeCenterX;
+            const dy = centerY - activeCenterY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            // Only affect nearby tiles
+            if (distance < 400) {
+                const force = Math.max(0, 1 - distance / 400);
+                const pushX = (dx / distance) * force * 30;
+                const pushY = (dy / distance) * force * 30;
+                
+                tile.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                tile.style.transform = `
+                    translate3d(${pushX}px, ${pushY}px, 0)
+                    scale3d(${1 - force * 0.1}, ${1 - force * 0.1}, 1)
+                `;
+            }
+        });
+    }
+    
+    resetNeighbors() {
+        this.tiles.forEach(tile => {
+            tile.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            tile.style.transform = 'translate3d(0, 0, 0) scale3d(1, 1, 1)';
+        });
+    }
+    
+    animate() {
+        // Continuous subtle animation
+        this.tiles.forEach((tile, index) => {
+            const time = Date.now() * 0.001;
+            const offset = index * 0.5;
+            
+            // Gentle floating motion
+            const floatY = Math.sin(time + offset) * 5;
+            const floatRotate = Math.sin(time * 0.5 + offset) * 2;
+            
+            // Only apply if not being hovered
+            if (!tile.matches(':hover')) {
+                tile.style.transform = `
+                    translate3d(0, ${floatY}px, 0)
+                    rotateZ(${floatRotate}deg)
+                `;
+            }
+        });
+        
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
+new FluidMosaic(document.querySelector('.mosaic-grid'));
+```
+
+### Animated Gradient Borders
+```css
+.mosaic-tile {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    overflow: hidden;
+    will-change: transform;
+}
+
+/* Rotating gradient border */
+.mosaic-tile::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: conic-gradient(
+        from var(--gradient-angle),
+        #667eea 0deg,
+        #764ba2 120deg,
+        #f093fb 240deg,
+        #667eea 360deg
+    );
+    border-radius: inherit;
+    animation: rotate-gradient 4s linear infinite;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: -1;
+}
+
+.mosaic-tile:hover::before {
+    opacity: 1;
+}
+
+@keyframes rotate-gradient {
+    to {
+        --gradient-angle: 360deg;
+    }
+}
+
+@property --gradient-angle {
+    syntax: '';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* Inner glow */
+.mosaic-tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at var(--mouse-x) var(--mouse-y),
+        rgba(102, 126, 234, 0.2) 0%,
+        transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.mosaic-tile:hover::after {
+    opacity: 1;
+}
+```
+```javascript
+// Track mouse position for inner glow
+document.querySelectorAll('.mosaic-tile').forEach(tile => {
+    tile.addEventListener('mousemove', (e) => {
+        const rect = tile.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        
+        tile.style.setProperty('--mouse-x', `${x}%`);
+        tile.style.setProperty('--mouse-y', `${y}%`);
+    });
+});
+```
+
+---
+
+## 💎 ADVANCED EFFECTS
+
+### 1. Mouse Trail with Particles
+```javascript
+class MouseTrail {
+    constructor() {
+        this.particles = [];
+        this.maxParticles = 30;
+        this.hue = 0;
+        this.bind();
+        this.animate();
+    }
+    
+    bind() {
+        document.addEventListener('mousemove', (e) => {
+            this.addParticle(e.clientX, e.clientY);
+        });
+    }
+    
+    addParticle(x, y) {
+        const particle = document.createElement('div');
+        particle.className = 'trail-particle';
+        
+        const size = Math.random() * 10 + 5;
+        this.hue = (this.hue + 1) % 360;
+        
+        particle.style.cssText = `
+            position: fixed;
+            width: ${size}px;
+            height: ${size}px;
+            left: ${x - size/2}px;
+            top: ${y - size/2}px;
+            border-radius: 50%;
+            background: hsl(${this.hue}, 100%, 70%);
+            pointer-events: none;
+            z-index: 9999;
+            will-change: transform, opacity;
+        `;
+        
+        document.body.appendChild(particle);
+        
+        this.particles.push({
+            element: particle,
+            life: 1,
+            vx: (Math.random() - 0.5) * 2,
+            vy: (Math.random() - 0.5) * 2
+        });
+        
+        // Limit particles
+        if (this.particles.length > this.maxParticles) {
+            const old = this.particles.shift();
+        old.element.remove();
+    }
+}
+
+animate() {
+    this.particles.forEach((particle, index) => {
+        particle.life -= 0.02;
+        
+        if (particle.life <= 0) {
+            particle.element.remove();
+            this.particles.splice(index, 1);
+            return;
+        }
+        
+        const currentTransform = particle.element.style.transform;
+        const match = currentTransform.match(/translate3d\(([^,]+),([^,]+)/);
+        const currentX = match ? parseFloat(match[1]) : 0;
+        const currentY = match ? parseFloat(match[2]) : 0;
+        
+        particle.element.style.transform = `
+            translate3d(
+                ${currentX + particle.vx}px,
+                ${currentY + particle.vy}px,
+                0
+            )
+            scale(${particle.life})
+        `;
+        particle.element.style.opacity = particle.life;
+    });
+    
+    requestAnimationFrame(() => this.animate());
+}

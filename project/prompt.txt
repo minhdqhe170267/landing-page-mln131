@@ -1,0 +1,772 @@
+# YÊU CẦU DỰ ÁN: Landing Page về Đa dạng Tôn giáo và Chính sách Tôn giáo Việt Nam
+
+## 🎯 MỤC TIÊU DỰ ÁN
+Tạo một landing page tương tác, hiện đại về chủ đề: "Từ quan điểm lý luận về tôn giáo trong thời kỳ quá độ lên chủ nghĩa xã hội, phân tích thực trạng tôn giáo và chính sách tôn giáo của Đảng, Nhà nước Việt Nam hiện nay. Liên hệ yêu cầu đặt ra đối với sinh viên Trường Đại học FPT trong việc tôn trọng sự đa dạng tôn giáo, xây dựng môi trường học tập và làm việc đa văn hóa, hài hòa."
+
+---
+
+## 🛠️ CÔNG NGHỆ YÊU CẦU
+
+### Stack:
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla - KHÔNG dùng framework)
+- **Hosting**: Vercel (static hosting)
+- **Version Control**: Git + GitHub
+
+### Yêu cầu kỹ thuật:
+- Responsive design (mobile-first)
+- Cross-browser compatibility (Chrome, Firefox, Safari, Edge)
+- Page load time < 2 giây
+- Accessibility (WCAG 2.1 Level AA)
+- SEO optimized
+
+---
+
+## 📐 CẤU TRÚC WEBSITE
+
+### Multi-page structure:
+```
+/
+├── index.html           # Landing page chính
+├── timeline.html        # Timeline Journey (Lịch sử chính sách)
+├── mosaic.html          # Mosaic of Harmony (Đa dạng tôn giáo)
+├── fpt-students.html    # Yêu cầu sinh viên FPT
+├── about.html           # Giới thiệu dự án
+│
+├── css/
+│   ├── main.css
+│   ├── animations.css
+│   ├── timeline.css
+│   ├── mosaic.css
+│   └── responsive.css
+│
+├── js/
+│   ├── main.js
+│   ├── scroll-effects.js
+│   ├── timeline.js
+│   └── mosaic.js
+│
+└── assets/
+    ├── images/
+    ├── icons/
+    └── data.json
+```
+
+---
+
+## 🎨 THIẾT KẾ & TRẢI NGHIỆM NGƯỜI DÙNG
+
+### 1. TRANG CHỦ (index.html)
+
+#### Hero Section:
+- **Visual**: Gradient background với pattern tinh tế
+- **Headline**: "Đa Dạng - Tôn Trọng - Hòa Hợp"
+- **Subheading**: Giới thiệu ngắn gọn về chủ đề (2-3 câu)
+- **CTA buttons**: 
+  - "Khám phá Timeline" → link tới timeline.html
+  - "Xem Mosaic" → link tới mosaic.html
+- **Animation**: Fade in từ trên xuống, parallax scrolling nhẹ
+
+#### Navigation:
+- Sticky navigation bar
+- Menu items: Trang chủ | Timeline | Mosaic | Sinh viên FPT | Giới thiệu
+- Smooth scroll
+- Mobile hamburger menu
+
+#### Overview Section:
+- Grid layout 3 cột (responsive → 1 cột trên mobile):
+  1. **Lý luận** - Icon + mô tả ngắn về quan điểm Mác-Lênin về tôn giáo
+  2. **Thực trạng** - Icon + thống kê tôn giáo tại Việt Nam
+  3. **Hành động** - Icon + vai trò sinh viên FPT
+- Hover effect: card nổi lên, shadow tăng
+
+#### Quick Stats Section:
+- Animated counter numbers:
+  - Số lượng tôn giáo được công nhận tại VN
+  - Tỷ lệ tín đồ
+  - Số chính sách tôn giáo quan trọng
+- Count-up animation khi scroll vào view
+
+#### CTA Footer:
+- "Bắt đầu hành trình khám phá"
+- Buttons dẫn tới các trang nội dung chính
+
+---
+
+### 2. TIMELINE JOURNEY (timeline.html)
+
+#### Thiết kế:
+- **Layout**: Vertical timeline (zigzag trái-phải)
+- **Các mốc thời gian**:
+  1. **1945-1954**: Thời kỳ kháng chiến - Chính sách đoàn kết tôn giáo
+  2. **1954-1975**: Hai miền Nam-Bắc - Tiếp tục chính sách hòa hợp
+  3. **1975-1986**: Thống nhất đất nước - Điều chỉnh chính sách
+  4. **1986-2000**: Đổi mới - Pháp lệnh tín ngưỡng, tôn giáo 1991
+  5. **2000-2016**: Hội nhập - Pháp lệnh 2004, sửa đổi 2013
+  6. **2016-nay**: Luật Tín ngưỡng, Tôn giáo 2016 và triển khai
+
+#### Tính năng:
+- **Scroll-triggered animations**:
+  - Mỗi timeline item fade in + slide từ trái/phải
+  - Stagger effect (lần lượt từng item)
+  - Active state khi scroll đến
+  
+- **Interactive elements**:
+  - Click vào mốc → popup/modal với thông tin chi tiết
+  - Văn bản chính sách, hình ảnh lịch sử
+  - Close modal bằng X hoặc click outside
+
+- **Visual design**:
+  - Đường timeline dọc ở giữa (line CSS)
+  - Nodes tròn với icon đặc trưng mỗi thời kỳ
+  - Cards với shadow, border-radius
+  - Color coding theo thời kỳ (gradient nhẹ)
+
+- **Progress indicator**:
+  - Fixed progress bar bên trái/phải
+  - Highlight mốc hiện tại đang xem
+
+#### Animation code mẫu cần implement:
+```javascript
+// Intersection Observer cho timeline items
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.classList.add('visible');
+            }, index * 150); // Stagger delay
+        }
+    });
+}, {
+    threshold: 0.3,
+    rootMargin: '0px 0px -100px 0px'
+});
+```
+
+---
+
+### 3. MOSAIC OF HARMONY (mosaic.html)
+
+#### Thiết kế:
+- **Grid Layout**: CSS Grid với các tile khác nhau về kích thước
+- **Các tôn giáo/tín ngưỡng cần hiển thị**:
+  1. Phật giáo (Buddhism) - Màu vàng cam
+  2. Công giáo (Catholicism) - Màu trắng xanh
+  3. Tin Lành (Protestantism) - Màu xanh dương
+  4. Hồi giáo (Islam) - Màu xanh lá
+  5. Cao Đài - Màu nhiều màu (rainbow)
+  6. Hòa Hảo - Màu nâu đất
+  7. Tín ngưỡng dân gian - Màu đỏ vàng
+  8. Không tôn giáo/Vô thần - Màu xám
+
+#### Layout grid:
+```css
+.mosaic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 40px;
+}
+
+/* Một số tile lớn hơn để tạo visual interest */
+.tile:nth-child(1) { grid-column: span 2; }
+.tile:nth-child(5) { grid-row: span 2; }
+```
+
+#### Mỗi tile bao gồm:
+- **Icon/Symbol**: Biểu tượng tôn giáo (SVG hoặc icon font)
+- **Tên tôn giáo**: Typography rõ ràng
+- **Thống kê ngắn**: Số tín đồ, % dân số
+- **Background**: Gradient hoặc pattern đặc trưng
+
+#### Hover interactions:
+```css
+.tile {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tile:hover {
+    transform: scale(1.05) translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+
+.tile-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.tile:hover .tile-overlay {
+    transform: translateY(0);
+}
+```
+
+#### Nội dung overlay khi hover:
+- Mô tả ngắn về tôn giáo
+- Đặc điểm chính
+- Vai trò trong xã hội VN
+- "Tìm hiểu thêm →" link
+
+#### Filter/Sort feature (optional enhancement):
+- Buttons ở trên: "Tất cả" | "Theo số tín đồ" | "Theo lịch sử"
+- Smooth transition khi filter
+
+---
+
+### 4. TRANG SINH VIÊN FPT (fpt-students.html)
+
+#### Sections:
+
+##### **Hero với quote:**
+> "Trong môi trường đa văn hóa, sự tôn trọng là nền tảng của sự phát triển"
+
+##### **Principles Section - 4 Cột:**
+1. **Tôn trọng** (Respect)
+   - Icon: 🤝
+   - Mô tả: Tôn trọng niềm tin, không phân biệt đối xử
+   
+2. **Hiểu biết** (Understanding)
+   - Icon: 📚
+   - Mô tả: Học hỏi về các tôn giáo, văn hóa khác nhau
+   
+3. **Đối化** (Dialogue)
+   - Icon: 💬
+   - Mô tả: Giao tiếp cởi mở, không áp đặt
+   
+4. **Hòa hợp** (Harmony)
+   - Icon: ☮️
+   - Mô tả: Xây dựng môi trường hòa bình, đoàn kết
+
+##### **Practical Guidelines:**
+- Accordion/Expandable list:
+  - Trong lớp học
+  - Trong ký túc xá
+  - Trong hoạt động nhóm
+  - Khi tham gia sự kiện
+
+##### **Student Testimonials:**
+- Card carousel với câu chuyện từ sinh viên các tôn giáo
+- Avatar + tên + tôn giáo + quote
+- Swipeable trên mobile
+
+##### **Pledge/Commitment Section:**
+- Interactive form: "Cam kết của tôi"
+- Checkboxes với các nguyên tắc
+- Submit → hiện certificate digital (có thể screenshot)
+
+---
+
+### 5. TRANG GIỚI THIỆU (about.html)
+
+#### Nội dung:
+- Về dự án nghiên cứu
+- Mục tiêu
+- Phương pháp nghiên cứu
+- Tài liệu tham khảo
+- Thông tin liên hệ
+
+---
+
+## 🎨 THIẾT KẾ HỆ THỐNG
+
+### Color Palette:
+```css
+:root {
+    /* Primary colors */
+    --primary-purple: #667eea;
+    --primary-violet: #764ba2;
+    
+    /* Secondary colors */
+    --secondary-orange: #f6ad55;
+    --secondary-yellow: #f6e05e;
+    --secondary-green: #68d391;
+    --secondary-blue: #4299e1;
+    
+    /* Neutral colors */
+    --neutral-dark: #2d3748;
+    --neutral-medium: #718096;
+    --neutral-light: #e2e8f0;
+    --neutral-white: #ffffff;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-warm: linear-gradient(135deg, #f6ad55 0%, #f6e05e 100%);
+}
+```
+
+### Typography:
+```css
+/* Headings */
+--font-heading: 'Playfair Display', serif; /* Hoặc 'Merriweather' */
+--font-body: 'Inter', sans-serif; /* Hoặc 'Open Sans' */
+
+h1 { font-size: clamp(2rem, 5vw, 4rem); }
+h2 { font-size: clamp(1.5rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.25rem, 3vw, 2rem); }
+body { font-size: clamp(1rem, 2vw, 1.125rem); }
+```
+
+### Spacing System:
+```css
+--space-xs: 0.5rem;
+--space-sm: 1rem;
+--space-md: 1.5rem;
+--space-lg: 2rem;
+--space-xl: 3rem;
+--space-2xl: 4rem;
+--space-3xl: 6rem;
+```
+
+### Border Radius:
+```css
+--radius-sm: 0.375rem;
+--radius-md: 0.5rem;
+--radius-lg: 1rem;
+--radius-xl: 1.5rem;
+--radius-full: 9999px;
+```
+
+### Shadows:
+```css
+--shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+--shadow-md: 0 4px 6px rgba(0,0,0,0.15);
+--shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+--shadow-xl: 0 20px 40px rgba(0,0,0,0.25);
+```
+
+---
+
+## ✨ ANIMATIONS & INTERACTIONS
+
+### Scroll Animations:
+1. **Fade in up**: Elements xuất hiện từ dưới lên khi scroll
+2. **Slide from side**: Elements trượt từ trái/phải
+3. **Scale up**: Elements phóng to nhẹ
+4. **Stagger**: Nhiều elements xuất hiện lần lượt
+
+### Implementation với Intersection Observer:
+```javascript
+const animateOnScroll = () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('aos-animate');
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -100px 0px'
+    });
+
+    document.querySelectorAll('[data-aos]').forEach(el => {
+        observer.observe(el);
+    });
+};
+```
+
+### CSS Animation Classes:
+```css
+[data-aos="fade-up"] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[data-aos="fade-up"].aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+```
+
+### Hover Effects:
+- **Cards**: Lift effect (translateY + shadow)
+- **Buttons**: Scale + color shift
+- **Images**: Zoom in nhẹ
+- **Links**: Underline animation
+
+### Page Transitions:
+```javascript
+// Smooth fade giữa các pages
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('fade-in');
+});
+
+// Khi click link internal
+document.querySelectorAll('a[href$=".html"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+        if (link.hostname === window.location.hostname) {
+            e.preventDefault();
+            document.body.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = link.href;
+            }, 300);
+        }
+    });
+});
+```
+
+---
+
+## 📱 RESPONSIVE DESIGN
+
+### Breakpoints:
+```css
+/* Mobile first approach */
+--breakpoint-sm: 640px;   /* Mobile landscape */
+--breakpoint-md: 768px;   /* Tablet */
+--breakpoint-lg: 1024px;  /* Desktop */
+--breakpoint-xl: 1280px;  /* Large desktop */
+```
+
+### Key responsive behaviors:
+- Navigation: Desktop menu → Mobile hamburger
+- Grid layouts: Multi-column → Single column
+- Font sizes: Clamp() cho fluid typography
+- Images: Responsive với max-width: 100%
+- Touch-friendly: Min 44x44px click targets trên mobile
+
+---
+
+## ♿ ACCESSIBILITY
+
+### Requirements:
+1. **Semantic HTML**: Đúng tags (header, nav, main, section, article, footer)
+2. **Alt text**: Tất cả images phải có alt
+3. **ARIA labels**: Cho interactive elements
+4. **Keyboard navigation**: Tab order hợp lý, focus visible
+5. **Color contrast**: WCAG AA (4.5:1 cho text)
+6. **Skip links**: "Skip to main content"
+7. **Screen reader friendly**: Announcements cho dynamic content
+
+---
+
+## 🚀 PERFORMANCE
+
+### Optimization:
+1. **Images**: 
+   - WebP format với fallback
+   - Lazy loading: `loading="lazy"`
+   - Responsive images: `srcset`
+   
+2. **CSS**:
+   - Minify production CSS
+   - Critical CSS inline trong <head>
+   - Non-critical CSS async load
+   
+3. **JavaScript**:
+   - Minify JS
+   - Defer non-critical scripts
+   - Event delegation thay vì nhiều listeners
+   
+4. **Fonts**:
+   - Font-display: swap
+   - Preload critical fonts
+   - Subset fonts (chỉ characters cần thiết)
+
+### Target metrics:
+- First Contentful Paint: < 1.5s
+- Largest Contentful Paint: < 2.5s
+- Total Blocking Time: < 200ms
+- Cumulative Layout Shift: < 0.1
+
+---
+
+## 📊 DATA STRUCTURE
+
+### data.json example:
+```json
+{
+  "timeline": [
+    {
+      "id": 1,
+      "period": "1945-1954",
+      "title": "Thời kỳ kháng chiến",
+      "description": "Chính sách đoàn kết tôn giáo trong kháng chiến...",
+      "keyEvents": [
+        "1945: Độc lập",
+        "1946: Kháng chiến",
+        "1954: Điện Biên Phủ"
+      ],
+      "policies": ["Đoàn kết", "Tự do tín ngưỡng"],
+      "image": "assets/images/timeline-1.jpg"
+    }
+  ],
+  "religions": [
+    {
+      "id": 1,
+      "name": "Phật giáo",
+      "nameEn": "Buddhism",
+      "followers": "14.9 triệu",
+      "percentage": "14.91%",
+      "description": "Tôn giáo lớn nhất Việt Nam...",
+      "color": "#f6ad55",
+      "icon": "buddha",
+      "history": "Du nhập từ thế kỷ 2...",
+      "practices": ["Thiền định", "Lễ Phật", "Từ thiện"]
+    }
+  ],
+  "principles": [
+    {
+      "id": 1,
+      "title": "Tôn trọng",
+      "icon": "respect",
+      "description": "Tôn trọng niềm tin...",
+      "examples": [
+        "Không phê phán tôn giáo người khác",
+        "Tôn trọng ngày lễ tôn giáo"
+      ]
+    }
+  ]
+}
+```
+
+---
+
+## 📝 NỘI DUNG CẦN CHUẨN BỊ
+
+### Text content:
+1. **Lý luận**: 
+   - Quan điểm Mác-Lênin về tôn giáo (200-300 từ)
+   - Chính sách tôn giáo trong CNXH (300-400 từ)
+
+2. **Timeline**: 
+   - 6 mốc thời gian chính (mỗi mốc 150-200 từ)
+   - Các văn bản pháp luật quan trọng
+
+3. **Tôn giáo**:
+   - 8 tôn giáo/tín ngưỡng (mỗi cái 100-150 từ)
+   - Thống kê, đặc điểm
+
+4. **Sinh viên FPT**:
+   - 4 nguyên tắc (mỗi cái 100 từ)
+   - Guidelines thực tế (10-15 điểm)
+   - 3-5 testimonials
+
+### Images needed:
+- Hero background (1920x1080)
+- Timeline images (6 ảnh, 800x600)
+- Religion icons/symbols (8 SVG)
+- Student photos (5 ảnh, 400x400)
+- Icons cho principles (20-30 icons)
+
+---
+
+## 🔧 VERCEL DEPLOYMENT
+
+### vercel.json config:
+```json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Deploy steps:
+1. Push code lên GitHub
+2. Import project vào Vercel
+3. Auto-detect static site
+4. Deploy
+5. (Optional) Setup custom domain
+
+---
+
+## ✅ DELIVERABLES
+
+Cung cấp đầy đủ:
+
+1. **Source code**:
+   - Tất cả HTML files
+   - CSS files (organized)
+   - JavaScript files (commented)
+   - assets folder
+   - README.md với hướng dẫn
+
+2. **Documentation**:
+   - Cấu trúc project
+   - Cách chạy local
+   - Cách deploy lên Vercel
+   - Browser support
+   - Credits/licenses
+
+3. **Demo**:
+   - Live URL trên Vercel
+   - Screenshot các trang chính
+
+4. **Code quality**:
+   - Clean, readable code
+   - Comments cho các sections
+   - Consistent naming conventions
+   - No console errors
+   - W3C validation passed
+
+---
+
+## 🎯 SUCCESS CRITERIA
+
+Website được coi là thành công khi:
+
+✅ **Functionality**:
+- Tất cả links hoạt động
+- Animations smooth, không lag
+- Responsive trên mọi devices
+- No JavaScript errors
+
+✅ **Performance**:
+- Lighthouse score > 90
+- Load time < 2s
+- Smooth 60fps animations
+
+✅ **Design**:
+- Consistent với color palette
+- Typography hierarchy rõ ràng
+- Visual hierarchy tốt
+- Professional appearance
+
+✅ **Content**:
+- Đầy đủ nội dung theo yêu cầu
+- Grammar/spelling correct
+- Images có alt text
+- Links có title attributes
+
+✅ **Deployment**:
+- Successfully deployed trên Vercel
+- HTTPS enabled
+- Fast global CDN
+- Preview deployments working
+
+---
+
+## 💡 BONUS FEATURES (Optional)
+
+Nếu có thời gian, thêm:
+
+1. **Dark mode toggle**: Switch giữa light/dark theme
+2. **Language switcher**: Tiếng Việt ⟷ English
+3. **Search functionality**: Tìm kiếm trong timeline/mosaic
+4. **Print stylesheet**: In đẹp cho academic purposes
+5. **Social sharing**: Share buttons cho từng page
+6. **Breadcrumbs**: Navigation breadcrumbs
+7. **Back to top button**: Smooth scroll to top
+8. **Loading animation**: Skeleton screens hoặc spinner
+9. **404 page**: Custom error page
+10. **Analytics**: Google Analytics integration
+
+---
+
+## 📚 RESOURCES & REFERENCES
+
+### Fonts (Google Fonts):
+- https://fonts.google.com/specimen/Playfair+Display
+- https://fonts.google.com/specimen/Inter
+
+### Icons:
+- Lucide Icons: https://lucide.dev
+- Font Awesome: https://fontawesome.com (free tier)
+
+### Colors:
+- Coolors palette: https://coolors.co
+- Color contrast checker: https://webaim.org/resources/contrastchecker/
+
+### Validation:
+- HTML: https://validator.w3.org
+- CSS: https://jigsaw.w3.org/css-validator
+- Accessibility: https://wave.webaim.org
+
+### Performance:
+- Lighthouse: Built-in Chrome DevTools
+- PageSpeed Insights: https://pagespeed.web.dev
+
+---
+
+## 🚨 IMPORTANT NOTES
+
+1. **KHÔNG dùng localStorage/sessionStorage** - Vercel không hỗ trợ
+2. **KHÔNG cần backend** - Hoàn toàn static site
+3. **External scripts chỉ từ CDN** - https://cdnjs.cloudflare.com
+4. **Tất cả paths phải relative** - Để work trên mọi environment
+5. **Test trên nhiều browsers** - Chrome, Firefox, Safari, Edge
+6. **Mobile-first approach** - Design cho mobile trước
+
+---
+
+## 📞 SUPPORT & CONTACT
+
+Nếu có vấn đề:
+1. Check browser console cho errors
+2. Validate HTML/CSS
+3. Test trên incognito mode
+4. Clear cache và retry
+
+---
+
+Chúc bạn hoàn thành dự án thành công! 🚀✨
+
+🎯 Phiên bản TÓM TẮT (Short version)
+Nếu bạn cần version ngắn gọn hơn cho AI:
+markdown# TASK: Tạo Landing Page về Đa dạng Tôn giáo Việt Nam
+
+## TECH STACK
+- HTML5, CSS3, Vanilla JavaScript (no frameworks)
+- Multi-page site (5 pages: index, timeline, mosaic, students, about)
+- Deploy: Vercel static hosting
+- Responsive, animations, accessibility
+
+## KEY FEATURES
+1. **Timeline Journey** (timeline.html):
+   - Vertical timeline về lịch sử chính sách tôn giáo VN (1945-nay)
+   - Scroll-triggered animations (Intersection Observer)
+   - Interactive modals với chi tiết
+
+2. **Mosaic of Harmony** (mosaic.html):
+   - CSS Grid với 8 tiles (các tôn giáo VN)
+   - Hover effects: scale + overlay thông tin
+   - Color-coded theo tôn giáo
+
+3. **FPT Students Page** (fpt-students.html):
+   - 4 principles: Tôn trọng, Hiểu biết, Đối thoại, Hòa hợp
+   - Guidelines accordion
+   - Student testimonials carousel
+
+## DESIGN
+- Colors: Purple gradient primary (#667eea, #764ba2)
+- Fonts: Playfair Display (headings), Inter (body)
+- Animations: Fade in, slide, scale with stagger effects
+- Mobile-first responsive
+
+## DELIVERABLES
+- Full source code (HTML/CSS/JS)
+- data.json với content
+- README.md
+- Vercel-ready structure
+- Lighthouse score > 90
+
+Tạo website hoàn chỉnh, professional, ready to deploy!

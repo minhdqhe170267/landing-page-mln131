@@ -1,0 +1,751 @@
+/**
+ * Mosaic Animations CSS
+ * Styles for mosaic grid animations with 3D tilt, gradient borders, and inner glow
+ * 
+ * Requirements:
+ * - 6.4: Animated gradient borders using conic-gradient and @property
+ * - 6.5: Rotating gradient border animation on hover
+ * - 6.6: Inner glow effect using CSS custom properties (--mouse-x, --mouse-y)
+ * 
+ * @module css/animations/mosaic-animations
+ */
+
+/* ==========================================================================
+   @property Definitions for Animated Gradients
+   Requirement 6.4: Enable smooth gradient animation with @property
+   ========================================================================== */
+
+@property --gradient-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@property --gradient-position {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+}
+
+@property --glow-opacity {
+    syntax: '<number>';
+    initial-value: 0;
+    inherits: false;
+}
+
+@property --border-opacity {
+    syntax: '<number>';
+    initial-value: 0;
+    inherits: false;
+}
+
+/* ==========================================================================
+   CSS Custom Properties for Mosaic Animations
+   ========================================================================== */
+
+:root {
+    /* Mosaic colors */
+    --mosaic-bg: #1a1a2e;
+    --mosaic-tile-bg: rgba(30, 30, 50, 0.9);
+    --mosaic-tile-bg-hover: rgba(40, 40, 70, 0.95);
+    
+    /* Gradient border colors */
+    --mosaic-gradient-1: #667eea;
+    --mosaic-gradient-2: #764ba2;
+    --mosaic-gradient-3: #f093fb;
+    --mosaic-gradient-4: #fa709a;
+    --mosaic-gradient-5: #667eea;
+    
+    /* Inner glow colors */
+    --mosaic-glow-color: rgba(102, 126, 234, 0.6);
+    --mosaic-glow-color-hover: rgba(240, 147, 251, 0.8);
+    
+    /* Shadow colors */
+    --mosaic-shadow: rgba(0, 0, 0, 0.3);
+    --mosaic-shadow-hover: rgba(102, 126, 234, 0.4);
+    
+    /* Animation timing */
+    --mosaic-transition-fast: 200ms;
+    --mosaic-transition-normal: 300ms;
+    --mosaic-transition-slow: 500ms;
+    --mosaic-easing: cubic-bezier(0.4, 0, 0.2, 1);
+    --mosaic-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* 3D settings */
+    --mosaic-perspective: 1000px;
+    --mosaic-tilt-max: 15deg;
+    --mosaic-scale-hover: 1.05;
+    
+    /* Floating animation */
+    --mosaic-float-amplitude: 8px;
+    --mosaic-float-duration: 4s;
+}
+
+/* ==========================================================================
+   Mosaic Grid Container
+   ========================================================================== */
+
+.mosaic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    
+    /* 3D perspective for child tiles */
+    perspective: var(--mosaic-perspective);
+    transform-style: preserve-3d;
+}
+
+/* ==========================================================================
+   Base Mosaic Tile Styles
+   Requirement 6.4, 6.5: Base styles with 3D perspective
+   ========================================================================== */
+
+.mosaic-tile {
+    position: relative;
+    border-radius: 16px;
+    overflow: visible;
+    
+    /* CSS custom properties for inner glow position */
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+    
+    /* @property values for animation */
+    --gradient-angle: 0deg;
+    --gradient-position: 0%;
+    --glow-opacity: 0;
+    --border-opacity: 0;
+    
+    /* GPU acceleration */
+    transform: translateZ(0);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
+    
+    /* Base shadow */
+    box-shadow: 
+        0 4px 20px var(--mosaic-shadow),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    
+    /* Smooth transitions - including transform for hover scale */
+    transition: 
+        transform var(--mosaic-transition-normal) var(--mosaic-easing),
+        box-shadow var(--mosaic-transition-normal) var(--mosaic-easing),
+        --gradient-angle var(--mosaic-transition-slow) linear,
+        --glow-opacity var(--mosaic-transition-normal) var(--mosaic-easing),
+        --border-opacity var(--mosaic-transition-normal) var(--mosaic-easing);
+}
+
+/* ==========================================================================
+   Animated Gradient Border
+   Requirement 6.4, 6.5: Rotating gradient border using @property
+   ========================================================================== */
+
+.mosaic-tile::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 18px;
+    padding: 2px;
+    z-index: -1;
+    
+    /* Conic gradient border */
+    background: conic-gradient(
+        from var(--gradient-angle),
+        var(--mosaic-gradient-1),
+        var(--mosaic-gradient-2),
+        var(--mosaic-gradient-3),
+        var(--mosaic-gradient-4),
+        var(--mosaic-gradient-5)
+    );
+    
+    /* Mask to create border effect */
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    
+    /* Initially hidden, shown on hover */
+    opacity: var(--border-opacity);
+    
+    /* GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: opacity, background;
+    
+    /* Smooth transition */
+    transition: opacity var(--mosaic-transition-normal) var(--mosaic-easing);
+}
+
+/* ==========================================================================
+   Inner Glow Effect
+   Requirement 6.6: Inner glow using CSS custom properties
+   ========================================================================== */
+
+.mosaic-tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    pointer-events: none;
+    z-index: 1;
+    
+    /* Radial gradient following mouse position */
+    background: radial-gradient(
+        circle at var(--mouse-x) var(--mouse-y),
+        var(--mosaic-glow-color) 0%,
+        transparent 50%
+    );
+    
+    /* Initially hidden */
+    opacity: var(--glow-opacity);
+    
+    /* GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: opacity, background;
+    
+    /* Smooth transition */
+    transition: opacity var(--mosaic-transition-fast) var(--mosaic-easing);
+}
+
+/* ==========================================================================
+   Tile Content Container
+   ========================================================================== */
+
+.mosaic-tile__content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    padding: 1.5rem;
+    border-radius: 16px;
+    background: var(--mosaic-tile-bg);
+    overflow: hidden;
+    
+    /* GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    
+    /* Smooth background transition */
+    transition: background var(--mosaic-transition-normal) var(--mosaic-easing);
+}
+
+.mosaic-tile__image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    
+    /* GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+    
+    transition: transform var(--mosaic-transition-normal) var(--mosaic-easing);
+}
+
+.mosaic-tile__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.mosaic-tile__description {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   Hover States
+   Requirement 6.5: Rotating gradient border animation on hover
+   ========================================================================== */
+
+.mosaic-tile--hovering,
+.mosaic-tile:hover {
+    /* Scale up on hover */
+    transform: scale(1.05) translateZ(0);
+    
+    /* Enhanced shadow on hover */
+    box-shadow: 
+        0 8px 40px var(--mosaic-shadow-hover),
+        0 0 60px rgba(102, 126, 234, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    
+    /* Show gradient border */
+    --border-opacity: 1;
+    
+    /* Show inner glow */
+    --glow-opacity: 0.6;
+}
+
+/* Rotate gradient on hover */
+.mosaic-tile--hovering::before,
+.mosaic-tile:hover::before {
+    animation: rotateGradient 3s linear infinite;
+}
+
+/* Enhanced inner glow on hover */
+.mosaic-tile--hovering::after,
+.mosaic-tile:hover::after {
+    background: radial-gradient(
+        circle at var(--mouse-x) var(--mouse-y),
+        var(--mosaic-glow-color-hover) 0%,
+        var(--mosaic-glow-color) 30%,
+        transparent 60%
+    );
+}
+
+/* Content background change on hover */
+.mosaic-tile--hovering .mosaic-tile__content,
+.mosaic-tile:hover .mosaic-tile__content {
+    background: var(--mosaic-tile-bg-hover);
+}
+
+/* Image scale on hover */
+.mosaic-tile--hovering .mosaic-tile__image,
+.mosaic-tile:hover .mosaic-tile__image {
+    transform: scale(1.05) translateZ(0);
+}
+
+/* ==========================================================================
+   Gradient Border Rotation Animation
+   Requirement 6.5: Rotating gradient border
+   ========================================================================== */
+
+@keyframes rotateGradient {
+    0% {
+        --gradient-angle: 0deg;
+    }
+    100% {
+        --gradient-angle: 360deg;
+    }
+}
+
+/* Alternative shimmer animation for gradient */
+@keyframes shimmerGradient {
+    0% {
+        --gradient-position: 0%;
+    }
+    100% {
+        --gradient-position: 100%;
+    }
+}
+
+/* ==========================================================================
+   Floating Animation
+   Requirement 6.7: Subtle floating animation for non-hovered tiles
+   ========================================================================== */
+
+@keyframes mosaicFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) translateZ(0);
+    }
+    25% {
+        transform: translateY(calc(var(--mosaic-float-amplitude) * -0.5)) rotate(0.5deg) translateZ(0);
+    }
+    50% {
+        transform: translateY(calc(var(--mosaic-float-amplitude) * -1)) rotate(0deg) translateZ(0);
+    }
+    75% {
+        transform: translateY(calc(var(--mosaic-float-amplitude) * -0.5)) rotate(-0.5deg) translateZ(0);
+    }
+}
+
+/* Apply floating animation with staggered delays */
+.mosaic-tile:not(.mosaic-tile--hovering):not(:hover) {
+    animation: mosaicFloat var(--mosaic-float-duration) ease-in-out infinite;
+}
+
+/* Stagger animation delays for natural movement */
+.mosaic-tile:nth-child(1) { animation-delay: 0s; }
+.mosaic-tile:nth-child(2) { animation-delay: 0.5s; }
+.mosaic-tile:nth-child(3) { animation-delay: 1s; }
+.mosaic-tile:nth-child(4) { animation-delay: 1.5s; }
+.mosaic-tile:nth-child(5) { animation-delay: 0.25s; }
+.mosaic-tile:nth-child(6) { animation-delay: 0.75s; }
+.mosaic-tile:nth-child(7) { animation-delay: 1.25s; }
+.mosaic-tile:nth-child(8) { animation-delay: 1.75s; }
+.mosaic-tile:nth-child(9) { animation-delay: 0.125s; }
+.mosaic-tile:nth-child(10) { animation-delay: 0.625s; }
+.mosaic-tile:nth-child(11) { animation-delay: 1.125s; }
+.mosaic-tile:nth-child(12) { animation-delay: 1.625s; }
+
+/* ==========================================================================
+   3D Tilt Effect Styles
+   Requirement 6.1, 6.2: 3D tilt based on mouse position
+   ========================================================================== */
+
+/* When JS applies 3D tilt, disable CSS floating animation */
+.mosaic-tile[style*="rotateX"],
+.mosaic-tile[style*="rotateY"] {
+    animation: none !important;
+}
+
+/* Smooth transition when tilt is reset */
+.mosaic-tile:not(.mosaic-tile--hovering) {
+    transition: 
+        transform var(--mosaic-transition-normal) var(--mosaic-easing),
+        box-shadow var(--mosaic-transition-normal) var(--mosaic-easing),
+        --gradient-angle var(--mosaic-transition-slow) linear,
+        --glow-opacity var(--mosaic-transition-normal) var(--mosaic-easing),
+        --border-opacity var(--mosaic-transition-normal) var(--mosaic-easing);
+}
+
+/* ==========================================================================
+   Neighbor Push Effect Styles
+   Requirement 6.3: Visual feedback for pushed tiles
+   ========================================================================== */
+
+.mosaic-tile--pushed {
+    /* Slightly reduce opacity when pushed */
+    opacity: 0.95;
+}
+
+/* ==========================================================================
+   GPU Acceleration Utility Classes
+   ========================================================================== */
+
+.mosaic-gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: var(--mosaic-perspective);
+}
+
+.mosaic-will-change-transform {
+    will-change: transform;
+}
+
+.mosaic-will-change-opacity {
+    will-change: opacity;
+}
+
+/* ==========================================================================
+   Focus States for Accessibility
+   ========================================================================== */
+
+.mosaic-tile:focus {
+    outline: none;
+}
+
+.mosaic-tile:focus-visible {
+    outline: 2px solid var(--mosaic-gradient-3);
+    outline-offset: 4px;
+    
+    /* Show gradient border on focus */
+    --border-opacity: 1;
+}
+
+.mosaic-tile:focus-visible::before {
+    animation: rotateGradient 3s linear infinite;
+}
+
+/* ==========================================================================
+   Reduced Motion Support
+   Requirement 9.1-9.4: Accessibility for motion sensitivity
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    /* Disable all continuous animations */
+    .mosaic-tile {
+        animation: none !important;
+        transition: none !important;
+        will-change: auto !important;
+    }
+    
+    .mosaic-tile::before,
+    .mosaic-tile::after {
+        animation: none !important;
+        transition: none !important;
+        will-change: auto !important;
+    }
+    
+    .mosaic-tile__content,
+    .mosaic-tile__image {
+        transition: none !important;
+        will-change: auto !important;
+    }
+    
+    /* Show content immediately without animation */
+    .mosaic-tile {
+        transform: none !important;
+        opacity: 1 !important;
+    }
+    
+    /* Keep basic hover feedback without animation */
+    .mosaic-tile:hover {
+        box-shadow: 
+            0 8px 40px var(--mosaic-shadow-hover),
+            0 0 0 2px var(--mosaic-gradient-1);
+    }
+    
+    /* Static gradient border on hover (no rotation) */
+    .mosaic-tile:hover::before {
+        opacity: 1;
+        animation: none !important;
+    }
+    
+    /* Static inner glow on hover */
+    .mosaic-tile:hover::after {
+        opacity: 0.4;
+        background: radial-gradient(
+            circle at 50% 50%,
+            var(--mosaic-glow-color) 0%,
+            transparent 50%
+        );
+    }
+    
+    /* Disable 3D tilt effect */
+    .mosaic-tile--hovering {
+        transform: none !important;
+    }
+    
+    /* Remove will-change to save resources */
+    * {
+        will-change: auto !important;
+    }
+}
+
+/* ==========================================================================
+   Responsive Adjustments
+   Requirement 10.1-10.4: Mobile optimization
+   ========================================================================== */
+
+/* Large screens */
+@media (min-width: 1400px) {
+    .mosaic-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .mosaic-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.75rem;
+    }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .mosaic-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .mosaic-tile__content {
+        padding: 1.25rem;
+    }
+    
+    .mosaic-tile__image {
+        height: 180px;
+    }
+    
+    /* Reduce perspective on tablet */
+    :root {
+        --mosaic-perspective: 800px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .mosaic-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        padding: 1rem;
+    }
+    
+    .mosaic-tile {
+        /* Disable 3D tilt on touch devices (handled by JS too) */
+        transform: none !important;
+        
+        /* Reduce floating animation amplitude */
+        --mosaic-float-amplitude: 4px;
+    }
+    
+    .mosaic-tile__content {
+        padding: 1rem;
+    }
+    
+    .mosaic-tile__image {
+        height: 160px;
+    }
+    
+    .mosaic-tile__title {
+        font-size: 1.125rem;
+    }
+    
+    .mosaic-tile__description {
+        font-size: 0.875rem;
+    }
+    
+    /* Simplify gradient border on mobile */
+    .mosaic-tile::before {
+        inset: -1px;
+        padding: 1px;
+    }
+    
+    /* Reduce glow intensity on mobile */
+    .mosaic-tile:hover::after {
+        opacity: 0.4;
+    }
+    
+    /* Disable floating animation on mobile for performance */
+    .mosaic-tile:not(.mosaic-tile--hovering):not(:hover) {
+        animation: none;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+    .mosaic-grid {
+        padding: 0.75rem;
+        gap: 1rem;
+    }
+    
+    .mosaic-tile__content {
+        padding: 0.875rem;
+    }
+    
+    .mosaic-tile__image {
+        height: 140px;
+        margin-bottom: 0.75rem;
+    }
+    
+    .mosaic-tile__title {
+        font-size: 1rem;
+    }
+    
+    .mosaic-tile__description {
+        font-size: 0.8125rem;
+    }
+}
+
+/* ==========================================================================
+   Touch Device Specific Styles
+   Requirement 10.2: Disable 3D tilt on touch devices
+   ========================================================================== */
+
+@media (hover: none) and (pointer: coarse) {
+    /* Touch devices - disable 3D tilt */
+    .mosaic-tile {
+        transform: none !important;
+    }
+    
+    /* Keep tap feedback */
+    .mosaic-tile:active {
+        transform: scale(0.98) !important;
+        transition: transform 100ms ease-out;
+    }
+    
+    /* Disable floating animation on touch */
+    .mosaic-tile:not(.mosaic-tile--hovering):not(:hover) {
+        animation: none;
+    }
+    
+    /* Show gradient border on tap */
+    .mosaic-tile:active::before {
+        opacity: 1;
+    }
+    
+    /* Show inner glow on tap */
+    .mosaic-tile:active::after {
+        opacity: 0.5;
+        background: radial-gradient(
+            circle at 50% 50%,
+            var(--mosaic-glow-color-hover) 0%,
+            transparent 50%
+        );
+    }
+}
+
+/* ==========================================================================
+   High Contrast Mode Support
+   ========================================================================== */
+
+@media (prefers-contrast: high) {
+    .mosaic-tile {
+        border: 2px solid currentColor;
+    }
+    
+    .mosaic-tile::before {
+        display: none;
+    }
+    
+    .mosaic-tile:hover,
+    .mosaic-tile:focus-visible {
+        border-color: var(--mosaic-gradient-3);
+        box-shadow: 0 0 0 2px var(--mosaic-gradient-3);
+    }
+    
+    .mosaic-tile__title {
+        color: #ffffff;
+    }
+    
+    .mosaic-tile__description {
+        color: rgba(255, 255, 255, 0.9);
+    }
+}
+
+/* ==========================================================================
+   High Performance Mode
+   For devices that support CSS containment
+   ========================================================================== */
+
+@supports (contain: layout style paint) {
+    .mosaic-tile {
+        contain: layout style;
+    }
+    
+    .mosaic-tile__content {
+        contain: layout style paint;
+    }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+    .mosaic-grid {
+        display: block;
+    }
+    
+    .mosaic-tile {
+        display: block;
+        margin-bottom: 1rem;
+        page-break-inside: avoid;
+        transform: none !important;
+        animation: none !important;
+        box-shadow: none !important;
+        border: 1px solid #ccc;
+    }
+    
+    .mosaic-tile::before,
+    .mosaic-tile::after {
+        display: none !important;
+    }
+    
+    .mosaic-tile__content {
+        background: white !important;
+    }
+    
+    .mosaic-tile__title {
+        color: black !important;
+    }
+    
+    .mosaic-tile__description {
+        color: #333 !important;
+    }
+    
+    .mosaic-tile__image {
+        max-height: 150px;
+    }
+}

@@ -1,0 +1,68 @@
+<!-- 
+  Navigation Component
+  Vietnam Religious Diversity Landing Page
+  
+  Semantic HTML với nav, ul, li, a
+  Hamburger menu button for mobile
+  ARIA attributes for accessibility
+  
+  Requirements: 2.1, 2.6, 11.4
+-->
+
+<!-- Skip Link for Accessibility -->
+<a href="#main-content" class="skip-link">Bỏ qua đến nội dung chính</a>
+
+<!-- Main Navigation -->
+<header class="header">
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="container nav__container">
+      <!-- Logo/Brand -->
+      <a href="index.html" class="nav__brand" aria-label="Trang chủ - Đa Dạng Tôn Giáo Việt Nam">
+        <span class="nav__brand-icon" aria-hidden="true">🕊️</span>
+        <span class="nav__brand-text">Đa Dạng Tôn Giáo</span>
+      </a>
+
+      <!-- Hamburger Menu Button (Mobile) -->
+      <button 
+        class="nav__hamburger" 
+        type="button"
+        aria-label="Mở menu điều hướng"
+        aria-expanded="false"
+        aria-controls="nav-menu"
+      >
+        <span class="nav__hamburger-line" aria-hidden="true"></span>
+        <span class="nav__hamburger-line" aria-hidden="true"></span>
+        <span class="nav__hamburger-line" aria-hidden="true"></span>
+      </button>
+
+      <!-- Navigation Menu -->
+      <ul class="nav__menu" id="nav-menu" role="menubar">
+        <li class="nav__item" role="none">
+          <a href="index.html" class="nav__link" role="menuitem">
+            Trang Chủ
+          </a>
+        </li>
+        <li class="nav__item" role="none">
+          <a href="timeline.html" class="nav__link" role="menuitem">
+            Lịch Sử
+          </a>
+        </li>
+        <li class="nav__item" role="none">
+          <a href="mosaic.html" class="nav__link" role="menuitem">
+            Tôn Giáo
+          </a>
+        </li>
+        <li class="nav__item" role="none">
+          <a href="fpt-students.html" class="nav__link" role="menuitem">
+            Sinh Viên FPT
+          </a>
+        </li>
+        <li class="nav__item" role="none">
+          <a href="about.html" class="nav__link" role="menuitem">
+            Giới Thiệu
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
