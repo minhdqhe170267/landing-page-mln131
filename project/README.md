@@ -2,7 +2,7 @@
 
 Landing page multi-page về đa dạng tôn giáo Việt Nam - phân tích quan điểm lý luận về tôn giáo trong thời kỳ quá độ lên chủ nghĩa xã hội, thực trạng và chính sách tôn giáo của Đảng, Nhà nước Việt Nam. Liên hệ yêu cầu đối với sinh viên Đại học FPT trong việc tôn trọng sự đa dạng tôn giáo, xây dựng môi trường học tập và làm việc đa văn hóa, hài hòa.
 
-🌐 **Live Demo:** [https://da-dang-ton-giao.vercel.app](https://da-dang-ton-giao.vercel.app)
+🌐 **Live Demo:** https://landing-page-mln131.vercel.app/
 
 ## 📋 Mục Lục
 
