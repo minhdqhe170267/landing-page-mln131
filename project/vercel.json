@@ -1,6 +1,16 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/religion-buddhism", "destination": "/religion-buddhism.html" },
+    { "source": "/religion-catholicism", "destination": "/religion-catholicism.html" },
+    { "source": "/religion-protestantism", "destination": "/religion-protestantism.html" },
+    { "source": "/religion-islam", "destination": "/religion-islam.html" },
+    { "source": "/religion-caodaism", "destination": "/religion-caodaism.html" },
+    { "source": "/religion-hoahao", "destination": "/religion-hoahao.html" },
+    { "source": "/religion-folk", "destination": "/religion-folk.html" },
+    { "source": "/religion-none", "destination": "/religion-none.html" }
+  ],
   "headers": [
     {
       "source": "/css/(.*)",
