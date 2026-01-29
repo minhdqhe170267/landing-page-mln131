@@ -79,6 +79,12 @@
     animation-range: entry 0% entry 80%;
 }
 
+/* Fix for last section in detail pages */
+.detail-content section:last-child.auto-show,
+section.auto-show:last-of-type {
+    animation-range: entry 0% entry 60%;
+}
+
 /* Staggered delays for children if needed */
 .auto-show-stagger>*:nth-child(1) {
     animation-range: entry 5% cover 30%;
