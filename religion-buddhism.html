@@ -1,113 +1,605 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Khám phá lịch sử Phật giáo Việt Nam qua các thời kỳ từ thế kỷ I đến hiện đại">
     <title>Phật giáo - Đa Dạng Tôn Giáo Việt Nam</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/mosaic.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/animations/cinematic-base.css">
     <link rel="stylesheet" href="css/animations/lun-dev-scroll.css">
+
+    <style>
+        /* Buddhism Page Custom Styles */
+        .buddhism-hero {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            overflow: hidden;
+        }
+
+        .buddhism-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/images/mosaic-buddhism.png') center/cover no-repeat;
+            opacity: 0.25;
+            filter: blur(3px);
+        }
+
+        .buddhism-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, var(--bg-primary), transparent);
+        }
+
+        .buddhism-hero__content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .buddhism-hero__icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .buddhism-hero__title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .buddhism-hero__subtitle {
+            font-size: 1.3rem;
+            color: #FFD700;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .buddhism-hero__desc {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Periods Grid */
+        .periods-section {
+            padding: 80px 20px;
+            background: var(--bg-primary);
+        }
+
+        .periods-section__header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .periods-section__title {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .periods-section__subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .periods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .period-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .period-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.15);
+        }
+
+        .period-card__image {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .period-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .period-card:hover .period-card__image img {
+            transform: scale(1.1);
+        }
+
+        .period-card__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.2));
+        }
+
+        .period-card__number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .period-card__content {
+            padding: 25px;
+        }
+
+        .period-card__era {
+            font-size: 0.85rem;
+            color: #FFD700;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .period-card__title {
+            font-size: 1.4rem;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .period-card__description {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .period-card__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #FFD700;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: gap 0.3s ease;
+        }
+
+        .period-card:hover .period-card__cta {
+            gap: 12px;
+        }
+
+        .period-card__cta svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .period-card:hover .period-card__cta svg {
+            transform: translateX(4px);
+        }
+
+        /* Summary Stats */
+        .stats-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), transparent);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-item__value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #FFD700;
+            margin-bottom: 8px;
+        }
+
+        .stat-item__label {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Quick Info Cards */
+        .quick-info {
+            padding: 80px 20px;
+            background: var(--bg-primary);
+        }
+
+        .quick-info__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .quick-info__card {
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .quick-info__card h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        .quick-info__card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .periods-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .buddhism-hero {
+                min-height: 50vh;
+            }
+
+            .buddhism-hero__icon {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
 </head>
+
 <body class="mosaic-page--premium">
+    <!-- Header -->
     <header class="header">
         <nav class="nav" role="navigation" aria-label="Main navigation">
             <div class="container nav__container">
                 <a href="index.html" class="nav__brand">
-                    <span class="nav__brand-icon">🕊️</span>
+                    <img src="assets/images/logo.svg" alt="Logo" class="nav__brand-logo" />
                     <span class="nav__brand-text">Đa Dạng Tôn Giáo</span>
                 </a>
-                <a href="mosaic.html" class="nav__link">← Quay lại Mosaic</a>
+
+                <button class="nav__hamburger" type="button" aria-label="Mở menu">
+                    <span class="nav__hamburger-line"></span>
+                    <span class="nav__hamburger-line"></span>
+                    <span class="nav__hamburger-line"></span>
+                </button>
+
+                <ul class="nav__menu" id="nav-menu">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Trang Chủ</a></li>
+                    <li class="nav__item"><a href="timeline.html" class="nav__link">Lịch Sử</a></li>
+                    <li class="nav__item"><a href="mosaic.html" class="nav__link nav__link--active">Tôn Giáo</a></li>
+                    <li class="nav__item"><a href="fpt-students.html" class="nav__link">Sinh Viên FPT</a></li>
+                    <li class="nav__item"><a href="about.html" class="nav__link">Giới Thiệu</a></li>
+                </ul>
             </div>
         </nav>
     </header>
 
-    <main class="container" style="padding-top: 100px;">
-        <article class="religion-detail">
-            <div class="detail-header text-center auto-show" style="padding: 40px 20px;">
-                <div class="header-image-container" style="position: relative; max-width: 800px; margin: 0 auto 30px;">
-                    <img src="assets/images/mosaic-buddhism.png" alt="Phật giáo" style="width: 100%; height: 350px; object-fit: cover; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); padding: 30px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
-                        <h1 style="margin: 0 0 10px; font-size: 2.8rem; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Phật giáo</h1>
-                        <span style="font-size: 1.1rem; color: #FFD700; font-weight: 600;">Trên 14 triệu tín đồ</span>
-                    </div>
+    <main>
+        <!-- Hero Section -->
+        <section class="buddhism-hero">
+            <div class="buddhism-hero__content">
+                <div class="buddhism-hero__icon">☸️</div>
+                <h1 class="buddhism-hero__title">Phật Giáo Việt Nam</h1>
+                <p class="buddhism-hero__subtitle">Hơn 14 triệu tín đồ • 18.000+ cơ sở thờ tự</p>
+                <p class="buddhism-hero__desc">Hành trình gần 2000 năm gắn bó với dân tộc, từ thời Bắc thuộc đến hiện
+                    đại</p>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item auto-show">
+                    <div class="stat-item__value">~2000</div>
+                    <div class="stat-item__label">Năm lịch sử</div>
+                </div>
+                <div class="stat-item auto-show">
+                    <div class="stat-item__value">14+</div>
+                    <div class="stat-item__label">Triệu tín đồ</div>
+                </div>
+                <div class="stat-item auto-show">
+                    <div class="stat-item__value">55K+</div>
+                    <div class="stat-item__label">Tăng ni</div>
+                </div>
+                <div class="stat-item auto-show">
+                    <div class="stat-item__value">18K+</div>
+                    <div class="stat-item__label">Chùa chiền</div>
                 </div>
             </div>
-            
-            <div class="detail-content" style="max-width: 900px; margin: 0 auto 60px; display: flex; flex-direction: column; gap: 30px;">
-                <section class="auto-show" style="padding: 30px; border-radius: 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);">
-                    <h3 style="color: #FFD700; font-size: 1.5rem; margin: 0 0 20px; display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 1.3rem;">📜</span> Lịch sử hình thành
-                    </h3>
-                    <div style="color: #e0e0e8; line-height: 1.8; font-size: 1rem;">
-                        <h4>I. Thời kỳ du nhập và Bắc thuộc (TK I - X)</h4>
-                        <p>Phật giáo du nhập vào Việt Nam từ thế kỷ I qua đường biển trực tiếp từ Ấn Độ. <strong>Trung tâm Luy Lâu</strong> (Bắc Ninh) là một trong những trung tâm Phật giáo sớm nhất Đông Nam Á, nơi hình thành các chùa cổ như chùa Dâu, chùa Pháp Vân. Phật giáo dung hợp với tín ngưỡng Tứ Pháp (Mây, Mưa, Sấm, Chớp), thể hiện tính bản địa hóa mạnh mẽ.</p>
-                        <p>Các dòng thiền đầu tiên hình thành: <strong>Tì Ni Đa Lưu Chi</strong> (chú trọng thiền định) và <strong>Vô Ngôn Thông</strong> (đề cao trực giác, 'bất lập văn tự').</p>
-                        
-                        <h4>II. Thời Lý - Trần: Đỉnh cao (TK X - XIV)</h4>
-                        <p><strong>Thời Lý:</strong> Phật giáo cực thịnh, các vua sùng Phật, chùa tháp được xây dựng khắp nơi. Phật giáo là nền tảng đạo đức, chi phối văn hóa - nghệ thuật.</p>
-                        <p><strong>Thời Trần:</strong> Ra đời <strong>Thiền phái Trúc Lâm Yên Tử</strong> do vua Trần Nhân Tông sáng lập - dòng thiền mang bản sắc Việt, đề cao tinh thần nhập thế, gắn tu hành với trách nhiệm quốc gia.</p>
-                        
-                        <h4>III. Thời Hậu Lê - Tây Sơn (TK XV - XVIII)</h4>
-                        <p>Nho giáo trở thành tư tưởng chính thống, Phật giáo suy giảm vai trò chính trị nhưng vẫn bền bỉ trong đời sống dân gian.</p>
-                        
-                        <h4>IV. Triều Nguyễn (TK XIX)</h4>
-                        <p>Nhà Nguyễn lấy Nho giáo làm nền tảng, kiểm soát chặt hoạt động tôn giáo. Phật giáo suy giảm về thể chế nhưng vẫn tồn tại trong đời sống tín ngưỡng dân gian.</p>
-                        
-                        <h4>V. Thời Pháp thuộc - Chấn hưng (TK XIX - XX)</h4>
-                        <p>Đầu thế kỷ XX, <strong>Phong trào Chấn hưng Phật giáo</strong> bùng nổ: thành lập các tổ chức Phật giáo, mở trường Phật học, xuất bản báo chí Phật học bằng chữ Quốc ngữ.</p>
-                        
-                        <h4>VI. Hiện nay (TK XX - XXI)</h4>
-                        <p><strong>Giáo hội Phật giáo Việt Nam</strong> (thành lập 1981) là tổ chức thống nhất, hoạt động hợp pháp. Phật giáo tích cực tham gia hoạt động xã hội, nhân đạo, giáo dục.</p>
-                    </div>
-                </section>
+        </section>
 
-                <section class="auto-show" style="padding: 30px; border-radius: 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);">
-                    <h3 style="color: #FFD700; font-size: 1.5rem; margin: 0 0 20px; display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 1.3rem;">🙏</span> Giáo lý & Đức tin
-                    </h3>
-                    <div style="color: #e0e0e8; line-height: 1.8; font-size: 1rem;">
-                        <h4>Giáo lý cốt lõi</h4>
-                        <p><strong>Tứ Diệu Đế:</strong> Khổ đế (bản chất khổ đau), Tập đế (nguyên nhân khổ), Diệt đế (chấm dứt khổ), Đạo đế (con đường diệt khổ).</p>
-                        <p><strong>Bát Chánh Đạo:</strong> Chánh kiến, Chánh tư duy, Chánh ngữ, Chánh nghiệp, Chánh mạng, Chánh tinh tấn, Chánh niệm, Chánh định.</p>
-                        <p><strong>Luật Nhân Quả - Nghiệp báo - Luân hồi:</strong> Mọi hành động đều có quả báo, chúng sinh luân hồi trong sáu cõi cho đến khi giác ngộ.</p>
-                        
-                        <h4>Các hệ phái tại Việt Nam</h4>
-                        <p><strong>Bắc tông (Đại thừa):</strong> Phổ biến nhất, chú trọng cứu độ chúng sinh.</p>
-                        <p><strong>Nam tông (Tiểu thừa):</strong> Gồm Nam tông Kinh và Nam tông Khmer, chú trọng tu tập cá nhân.</p>
-                        <p><strong>Khất sĩ:</strong> Dung hợp Bắc - Nam tông, do Tổ sư Minh Đăng Quang sáng lập (1944).</p>
-                        
-                        <h4>Thực hành tu tập</h4>
-                        <p>Thiền định, tụng kinh, niệm Phật, ăn chay, giữ giới, làm việc thiện, phóng sinh, cúng dường Tam Bảo.</p>
-                    </div>
-                </section>
+        <!-- Historical Periods Grid -->
+        <section class="periods-section">
+            <div class="container">
+                <header class="periods-section__header">
+                    <h2 class="periods-section__title">Các Thời Kỳ Lịch Sử</h2>
+                    <p class="periods-section__subtitle">Khám phá hành trình phát triển của Phật giáo Việt Nam qua 6
+                        giai đoạn lịch sử quan trọng</p>
+                </header>
 
-                <section class="auto-show" style="padding: 30px; border-radius: 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);">
-                    <h3 style="color: #FFD700; font-size: 1.5rem; margin: 0 0 20px; display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 1.3rem;">🏛️</span> Tổ chức
-                    </h3>
-                    <div style="color: #e0e0e8; line-height: 1.8; font-size: 1rem;">
-                        <h4>Giáo hội Phật giáo Việt Nam (GHPGVN)</h4>
-                        <p>Thành lập ngày 07/11/1981, là tổ chức thống nhất đại diện cho Phật giáo Việt Nam với phương châm <strong>'Đạo pháp - Dân tộc - Chủ nghĩa xã hội'</strong>.</p>
-                        
-                        <h4>Cơ cấu tổ chức</h4>
-                        <p><strong>Hội đồng Chứng minh:</strong> Gồm các bậc cao tăng, giữ vai trò chứng minh, cố vấn tối cao.</p>
-                        <p><strong>Hội đồng Trị sự:</strong> Cơ quan điều hành, gồm các ban chuyên môn.</p>
-                        <p><strong>Ban Trị sự cấp tỉnh/thành:</strong> Điều hành hoạt động Phật sự tại địa phương.</p>
-                        
-                        <h4>Hệ thống giáo dục</h4>
-                        <p>4 Học viện Phật giáo (Hà Nội, Huế, TP.HCM, Cần Thơ), hàng chục trường Trung cấp Phật học.</p>
-                        
-                        <h4>Quy mô hiện tại</h4>
-                        <p>Hơn <strong>18.000 cơ sở thờ tự</strong>, khoảng <strong>55.000 tăng ni</strong>, trên <strong>14 triệu tín đồ</strong> chính thức.</p>
-                        
-                        <h4>Hoạt động xã hội</h4>
-                        <p>Hàng ngàn Tuệ Tĩnh đường (phòng khám Đông y miễn phí), trường mầm non, cơ sở nuôi dạy trẻ mồ côi, chương trình cứu trợ thiên tai.</p>
-                    </div>
-                </section>
+                <div class="periods-grid">
+                    <!-- Period 1: Bắc thuộc -->
+                    <a href="buddhism-period-1.html" class="period-card auto-show">
+                        <div class="period-card__image">
+                            <img src="assets/images/buddhism-bacthuoc.png" alt="Phật giáo thời kỳ du nhập và Bắc thuộc">
+                            <div class="period-card__overlay"></div>
+                            <div class="period-card__number">I</div>
+                        </div>
+                        <div class="period-card__content">
+                            <div class="period-card__era">Thế kỷ I – X</div>
+                            <h3 class="period-card__title">Du Nhập & Bắc Thuộc</h3>
+                            <p class="period-card__description">Phật giáo du nhập từ Ấn Độ qua đường biển, hình thành
+                                trung tâm Luy Lâu và các dòng thiền đầu tiên.</p>
+                            <span class="period-card__cta">
+                                Khám phá chi tiết
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Period 2: Lý - Trần -->
+                    <a href="buddhism-period-2.html" class="period-card auto-show">
+                        <div class="period-card__image">
+                            <img src="assets/images/buddhism-lytran.png" alt="Phật giáo thời Lý - Trần">
+                            <div class="period-card__overlay"></div>
+                            <div class="period-card__number">II</div>
+                        </div>
+                        <div class="period-card__content">
+                            <div class="period-card__era">Thế kỷ X – XIV</div>
+                            <h3 class="period-card__title">Thời Lý - Trần: Đỉnh Cao</h3>
+                            <p class="period-card__description">Phật giáo cực thịnh, trở thành quốc giáo. Ra đời Thiền
+                                phái Trúc Lâm Yên Tử - dòng thiền thuần Việt.</p>
+                            <span class="period-card__cta">
+                                Khám phá chi tiết
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Period 3: Hậu Lê - Tây Sơn -->
+                    <a href="buddhism-period-3.html" class="period-card auto-show">
+                        <div class="period-card__image">
+                            <img src="assets/images/buddhism-haule.png" alt="Phật giáo thời Hậu Lê - Tây Sơn">
+                            <div class="period-card__overlay"></div>
+                            <div class="period-card__number">III</div>
+                        </div>
+                        <div class="period-card__content">
+                            <div class="period-card__era">Thế kỷ XV – XVIII</div>
+                            <h3 class="period-card__title">Hậu Lê - Tây Sơn</h3>
+                            <p class="period-card__description">Nho giáo trở thành chính thống, Phật giáo lui về dân
+                                gian nhưng vẫn là chỗ dựa tinh thần của nhân dân.</p>
+                            <span class="period-card__cta">
+                                Khám phá chi tiết
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Period 4: Triều Nguyễn -->
+                    <a href="buddhism-period-4.html" class="period-card auto-show">
+                        <div class="period-card__image">
+                            <img src="assets/images/buddhism-truclam.png" alt="Phật giáo triều Nguyễn">
+                            <div class="period-card__overlay"></div>
+                            <div class="period-card__number">IV</div>
+                        </div>
+                        <div class="period-card__content">
+                            <div class="period-card__era">Thế kỷ XIX</div>
+                            <h3 class="period-card__title">Triều Nguyễn</h3>
+                            <p class="period-card__description">Nhà Nguyễn kiểm soát chặt hoạt động tôn giáo, Phật giáo
+                                trầm lắng nhưng vẫn bền bỉ trong tín ngưỡng dân gian.</p>
+                            <span class="period-card__cta">
+                                Khám phá chi tiết
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Period 5: Pháp thuộc -->
+                    <a href="buddhism-period-5.html" class="period-card auto-show">
+                        <div class="period-card__image">
+                            <img src="assets/images/buddhism-phapthuoc.png" alt="Phật giáo thời Pháp thuộc">
+                            <div class="period-card__overlay"></div>
+                            <div class="period-card__number">V</div>
+                        </div>
+                        <div class="period-card__content">
+                            <div class="period-card__era">Cuối TK XIX – Đầu TK XX</div>
+                            <h3 class="period-card__title">Pháp Thuộc & Chấn Hưng</h3>
+                            <p class="period-card__description">Phong trào Chấn hưng Phật giáo bùng nổ, hiện đại hóa
+                                giáo dục và xuất bản Phật học bằng chữ Quốc ngữ.</p>
+                            <span class="period-card__cta">
+                                Khám phá chi tiết
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Period 6: Hiện đại -->
+                    <a href="buddhism-period-6.html" class="period-card auto-show">
+                        <div class="period-card__image">
+                            <img src="assets/images/buddhism-hiennay.png" alt="Phật giáo Việt Nam hiện nay">
+                            <div class="period-card__overlay"></div>
+                            <div class="period-card__number">VI</div>
+                        </div>
+                        <div class="period-card__content">
+                            <div class="period-card__era">Cuối TK XX – Hiện nay</div>
+                            <h3 class="period-card__title">Phật Giáo Hiện Đại</h3>
+                            <p class="period-card__description">Giáo hội Phật giáo Việt Nam thống nhất, tích cực tham
+                                gia hoạt động xã hội, nhân đạo và hội nhập quốc tế.</p>
+                            <span class="period-card__cta">
+                                Khám phá chi tiết
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                </div>
             </div>
-        </article>
+        </section>
+
+        <!-- Quick Info Section -->
+        <section class="quick-info">
+            <div class="quick-info__grid">
+                <div class="quick-info__card auto-show">
+                    <h3>🙏 Giáo Lý Cốt Lõi</h3>
+                    <p><strong>Tứ Diệu Đế</strong> (Khổ, Tập, Diệt, Đạo) và <strong>Bát Chánh Đạo</strong> là nền tảng
+                        của giáo lý Phật giáo. Mục tiêu cuối cùng là đạt Niết Bàn - trạng thái giác ngộ, thoát khỏi luân
+                        hồi.</p>
+                </div>
+                <div class="quick-info__card auto-show">
+                    <h3>🏛️ Tổ Chức</h3>
+                    <p><strong>Giáo hội Phật giáo Việt Nam</strong> (thành lập 1981) là tổ chức thống nhất với cơ cấu từ
+                        trung ương đến địa phương, điều hành các hoạt động Phật sự trên toàn quốc.</p>
+                </div>
+                <div class="quick-info__card auto-show">
+                    <h3>📚 Các Hệ Phái</h3>
+                    <p><strong>Bắc tông (Đại thừa)</strong> phổ biến nhất, <strong>Nam tông</strong> gồm Kinh và Khmer,
+                        <strong>Khất sĩ</strong> do Tổ sư Minh Đăng Quang sáng lập năm 1944.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section cta-footer bg-gradient">
+            <div class="container text-center">
+                <h2 class="cta-footer__title">Tiếp Tục Khám Phá</h2>
+                <p class="cta-footer__text">Tìm hiểu về các tôn giáo khác tại Việt Nam</p>
+                <div class="cta-footer__links flex justify-center gap-md flex-wrap">
+                    <a href="mosaic.html" class="btn btn-white" data-magnetic>← Quay lại Mosaic</a>
+                    <a href="religion-catholicism.html" class="btn btn-outline-white" data-magnetic>Công Giáo</a>
+                    <a href="religion-caodaism.html" class="btn btn-outline-white" data-magnetic>Cao Đài</a>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content text-center">
+                <p class="footer__copyright">© 2026 Đa Dạng Tôn Giáo Việt Nam. Website học tập của sinh viên FPT.</p>
+                <nav class="footer__nav" aria-label="Footer navigation">
+                    <a href="about.html" class="footer__link">Giới Thiệu</a>
+                    <span class="footer__separator" aria-hidden="true">|</span>
+                    <a href="about.html#references" class="footer__link">Tài Liệu Tham Khảo</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/scroll-effects.js"></script>
+    <script type="module" src="js/animations.js"></script>
 </body>
+
 </html>

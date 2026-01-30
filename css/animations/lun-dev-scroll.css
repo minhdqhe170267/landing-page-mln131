@@ -85,6 +85,18 @@ section.auto-show:last-of-type {
     animation-range: entry 0% entry 60%;
 }
 
+/* Fix for period pages - last elements near bottom */
+.period-nav.auto-show,
+.period-content .content-section:last-of-type.auto-show,
+.period-content .image-gallery:last-of-type.auto-show {
+    animation-range: entry 0% entry 50%;
+}
+
+/* Ensure footer and navigation at bottom are always visible */
+.period-content__container > *:nth-last-child(-n+2).auto-show {
+    animation-range: entry 0% entry 40%;
+}
+
 /* Staggered delays for children if needed */
 .auto-show-stagger>*:nth-child(1) {
     animation-range: entry 5% cover 30%;

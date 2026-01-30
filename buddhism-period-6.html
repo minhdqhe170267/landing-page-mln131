@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Phật giáo Việt Nam hiện nay - Giáo hội Phật giáo Việt Nam và vai trò trong xã hội đương đại">
+    <title>Phật Giáo Hiện Đại - Đa Dạng Tôn Giáo Việt Nam</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/mosaic.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations/cinematic-base.css">
+    <link rel="stylesheet" href="css/animations/lun-dev-scroll.css">
+    <style>
+        :root {
+            --period-color: #FFD700;
+        }
+
+        .period-hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a2e, #0f3460);
+            overflow: hidden;
+        }
+
+        .period-hero__bg {
+            position: absolute;
+            inset: 0;
+        }
+
+        .period-hero__bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.35;
+        }
+
+        .period-hero__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.85), rgba(15, 52, 96, 0.7));
+        }
+
+        .period-hero__content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 30px 60px;
+            text-align: center;
+        }
+
+        .period-hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 24px;
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50px;
+            color: var(--period-color);
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .period-hero__badge-number {
+            width: 32px;
+            height: 32px;
+            background: var(--period-color);
+            color: #1a1a2e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .period-hero__title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .period-hero__era {
+            font-size: 1.4rem;
+            color: var(--period-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .period-hero__desc {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .period-content {
+            padding: 80px 20px;
+            background: var(--bg-primary);
+        }
+
+        .period-content__container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            margin-bottom: 60px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .content-section__header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .content-section__icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--period-color), #FFA500);
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+
+        .content-section__title {
+            font-size: 1.6rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .content-section__body {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.9;
+            font-size: 1.05rem;
+        }
+
+        .content-section__body h4 {
+            color: var(--period-color);
+            font-size: 1.2rem;
+            margin: 30px 0 15px;
+            font-weight: 600;
+        }
+
+        .content-section__body p {
+            margin-bottom: 18px;
+        }
+
+        .content-section__body strong {
+            color: #fff;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .image-gallery__item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+        }
+
+        .image-gallery__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .image-gallery__item:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-gallery__caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .key-point {
+            padding: 25px;
+            background: rgba(255, 215, 0, 0.08);
+            border-radius: 12px;
+            border-left: 4px solid var(--period-color);
+        }
+
+        .key-point__title {
+            color: var(--period-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .key-point__text {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 25px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 16px;
+        }
+
+        .stat-item__value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--period-color);
+        }
+
+        .stat-item__label {
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 8px;
+        }
+
+        .period-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            margin-top: 40px;
+        }
+
+        .period-nav__link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+            flex: 1;
+            max-width: 45%;
+        }
+
+        .period-nav__link:hover {
+            background: rgba(255, 215, 0, 0.15);
+        }
+
+        .period-nav__link--next {
+            justify-content: flex-end;
+            text-align: right;
+            margin-left: auto;
+        }
+
+        .period-nav__label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .period-nav__title {
+            font-weight: 600;
+            color: var(--period-color);
+        }
+
+        .period-nav__icon {
+            font-size: 1.5rem;
+            color: var(--period-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: #0a0a14 !important;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer__content {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer__link {
+            color: var(--period-color);
+        }
+
+        @media (max-width: 768px) {
+            .period-nav {
+                flex-direction: column;
+            }
+
+            .period-nav__link {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="mosaic-page--premium">
+    <header class="header">
+        <nav class="nav">
+            <div class="container nav__container">
+                <a href="index.html" class="nav__brand"><img src="assets/images/logo.svg" alt="Logo"
+                        class="nav__brand-logo" /><span class="nav__brand-text">Đa Dạng Tôn Giáo</span></a>
+                <ul class="nav__menu">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Trang Chủ</a></li>
+                    <li class="nav__item"><a href="mosaic.html" class="nav__link nav__link--active">Tôn Giáo</a></li>
+                    <li class="nav__item"><a href="about.html" class="nav__link">Giới Thiệu</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="period-hero">
+            <div class="period-hero__bg"><img src="assets/images/buddhism-hiennay.png" alt="Phật giáo hiện đại"></div>
+            <div class="period-hero__overlay"></div>
+            <div class="period-hero__content">
+                <div class="period-hero__badge"><span class="period-hero__badge-number">VI</span><span>Thời kỳ hiện
+                        đại</span></div>
+                <h1 class="period-hero__title">Phật Giáo Hiện Đại</h1>
+                <p class="period-hero__era">Cuối TK XX – Hiện nay</p>
+                <p class="period-hero__desc">Giáo hội Phật giáo Việt Nam thống nhất, tích cực tham gia hoạt động xã hội,
+                    nhân đạo và hội nhập quốc tế.</p>
+            </div>
+        </section>
+        <section class="period-content">
+            <div class="period-content__container">
+                <div class="content-section auto-show">
+                    <div class="content-section__header">
+                        <div class="content-section__icon">🏛️</div>
+                        <h2 class="content-section__title">Giáo Hội Phật Giáo Việt Nam</h2>
+                    </div>
+                    <div class="content-section__body">
+                        <p><strong>Giáo hội Phật giáo Việt Nam (GHPGVN)</strong> được thành lập năm 1981, là tổ chức đại
+                            diện thống nhất cho Phật giáo Việt Nam với phương châm <strong>"Đạo pháp - Dân tộc - Chủ
+                                nghĩa xã hội"</strong>.</p>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-item__value">14+</div>
+                                <div class="stat-item__label">Triệu tín đồ</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-item__value">55K+</div>
+                                <div class="stat-item__label">Tăng ni</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-item__value">18K+</div>
+                                <div class="stat-item__label">Cơ sở thờ tự</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-item__value">4</div>
+                                <div class="stat-item__label">Học viện Phật giáo</div>
+                            </div>
+                        </div>
+                        <h4>Cơ cấu tổ chức</h4>
+                        <p>Giáo hội có cơ cấu chặt chẽ từ trung ương đến địa phương: <strong>Hội đồng Chứng
+                                minh</strong> (các bậc cao tăng), <strong>Hội đồng Trị sự</strong> (cơ quan điều hành),
+                            và <strong>Ban Trị sự</strong> các tỉnh thành.</p>
+                    </div>
+                </div>
+                <div class="image-gallery auto-show">
+                    <div class="image-gallery__item"><img src="assets/images/buddhism-hiennay.png"
+                            alt="Phật giáo hiện đại">
+                        <div class="image-gallery__caption">Phật giáo trong đời sống hiện đại</div>
+                    </div>
+                    <div class="image-gallery__item"><img src="assets/images/buddhism-phapthuoc.png"
+                            alt="Hoạt động Phật sự">
+                        <div class="image-gallery__caption">Hoạt động Phật sự và giáo dục</div>
+                    </div>
+                </div>
+                <div class="content-section auto-show">
+                    <div class="content-section__header">
+                        <div class="content-section__icon">🙏</div>
+                        <h2 class="content-section__title">Hoạt Động Tôn Giáo</h2>
+                    </div>
+                    <div class="content-section__body">
+                        <p>Sinh hoạt Phật giáo truyền thống được duy trì rộng rãi: lễ <strong>Phật đản</strong>, lễ
+                            <strong>Vu Lan</strong>, các khóa tu, giảng pháp, tụng kinh hằng ngày.
+                        </p>
+                        <h4>Giáo dục Phật giáo</h4>
+                        <p>Hệ thống giáo dục gồm 4 Học viện Phật giáo (Hà Nội, Huế, TP.HCM, Cần Thơ) và nhiều trường
+                            Trung cấp Phật học. Nội dung đào tạo kết hợp giáo lý truyền thống với kiến thức hiện đại.
+                        </p>
+                    </div>
+                </div>
+                <div class="content-section auto-show">
+                    <div class="content-section__header">
+                        <div class="content-section__icon">❤️</div>
+                        <h2 class="content-section__title">Hoạt Động Xã Hội</h2>
+                    </div>
+                    <div class="content-section__body">
+                        <p>Phật giáo tham gia tích cực vào các hoạt động xã hội và nhân đạo:</p>
+                        <div class="key-points">
+                            <div class="key-point">
+                                <div class="key-point__title">Cứu trợ thiên tai</div>
+                                <div class="key-point__text">Hỗ trợ người dân vùng bão lũ, thiên tai, đại dịch.</div>
+                            </div>
+                            <div class="key-point">
+                                <div class="key-point__title">Hỗ trợ người nghèo</div>
+                                <div class="key-point__text">Xây nhà tình nghĩa, trường học, cầu đường cho vùng khó
+                                    khăn.</div>
+                            </div>
+                            <div class="key-point">
+                                <div class="key-point__title">Y tế cộng đồng</div>
+                                <div class="key-point__text">Hàng ngàn Tuệ Tĩnh đường (phòng khám Đông y miễn phí).
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-section auto-show">
+                    <div class="content-section__header">
+                        <div class="content-section__icon">🌐</div>
+                        <h2 class="content-section__title">Hiện Đại Hóa & Hội Nhập</h2>
+                    </div>
+                    <div class="content-section__body">
+                        <p>Phật giáo Việt Nam ứng dụng <strong>công nghệ số</strong> và truyền thông hiện đại: giảng
+                            pháp trực tuyến, phổ biến tri thức Phật học trên các nền tảng số.</p>
+                        <p>Tích cực tham gia <strong>các diễn đàn Phật giáo quốc tế</strong>, đối thoại liên tôn và các
+                            sáng kiến vì hòa bình, phát triển bền vững. Việt Nam đã đăng cai tổ chức Đại lễ Vesak Liên
+                            Hợp Quốc nhiều lần.</p>
+                    </div>
+                </div>
+                <div class="image-gallery auto-show">
+                    <div class="image-gallery__item"><img src="assets/images/buddhism-lytran.png"
+                            alt="Di sản Phật giáo">
+                        <div class="image-gallery__caption">Bảo tồn di sản văn hóa Phật giáo</div>
+                    </div>
+                </div>
+                <div class="content-section auto-show">
+                    <div class="content-section__header">
+                        <div class="content-section__icon">📝</div>
+                        <h2 class="content-section__title">Nhận Định Tổng Quát</h2>
+                    </div>
+                    <div class="content-section__body">
+                        <p>Phật giáo Việt Nam tiếp tục khẳng định vai trò là <strong>tôn giáo lớn với truyền thống lịch
+                                sử lâu dài</strong>, đồng thời là lực lượng xã hội tích cực tham gia các hoạt động nhân
+                            đạo, văn hóa và giáo dục.</p>
+                        <p>Sự phát triển hiện đại phản ánh quá trình <strong>thích ứng linh hoạt giữa truyền thống và
+                                hiện đại</strong>, giữa tôn giáo và xã hội, giữa bản sắc dân tộc và xu thế toàn cầu hóa.
+                        </p>
+                    </div>
+                </div>
+                <div class="period-nav auto-show">
+                    <a href="buddhism-period-5.html" class="period-nav__link"><span class="period-nav__icon">←</span>
+                        <div>
+                            <div class="period-nav__label">Thời kỳ trước</div>
+                            <div class="period-nav__title">Pháp Thuộc & Chấn Hưng</div>
+                        </div>
+                    </a>
+                    <a href="religion-buddhism.html" class="period-nav__link period-nav__link--next">
+                        <div>
+                            <div class="period-nav__label">Quay lại</div>
+                            <div class="period-nav__title">Tổng Quan Phật Giáo</div>
+                        </div><span class="period-nav__icon">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content text-center">
+                <p class="footer__copyright">© 2026 Đa Dạng Tôn Giáo Việt Nam</p>
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

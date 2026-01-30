@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Phật giáo Việt Nam thời kỳ du nhập và Bắc thuộc (Thế kỷ I - X) - Trung tâm Luy Lâu và các dòng thiền đầu tiên">
+    <title>Du Nhập & Bắc Thuộc - Phật giáo Việt Nam</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/mosaic.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations/cinematic-base.css">
+    <link rel="stylesheet" href="css/animations/lun-dev-scroll.css">
+
+    <style>
+        /* Period Detail Page Styles */
+        :root {
+            --period-color: #FFD700;
+            --period-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        .period-hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            background: var(--period-gradient);
+            overflow: hidden;
+        }
+
+        .period-hero__bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .period-hero__bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.35;
+        }
+
+        .period-hero__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.85), rgba(15, 52, 96, 0.7));
+        }
+
+        .period-hero__content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 30px 60px;
+            text-align: center;
+        }
+
+        .period-hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 24px;
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50px;
+            color: var(--period-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .period-hero__badge-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--period-color);
+            color: #1a1a2e;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .period-hero__title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .period-hero__era {
+            font-size: 1.4rem;
+            color: var(--period-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .period-hero__desc {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Content Section */
+        .period-content {
+            padding: 80px 20px;
+            background: var(--bg-primary);
+        }
+
+        .period-content__container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            margin-bottom: 60px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .content-section__header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .content-section__icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--period-color), #FFA500);
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+
+        .content-section__title {
+            font-size: 1.6rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .content-section__body {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.9;
+            font-size: 1.05rem;
+        }
+
+        .content-section__body h4 {
+            color: var(--period-color);
+            font-size: 1.2rem;
+            margin: 30px 0 15px;
+            font-weight: 600;
+        }
+
+        .content-section__body h4:first-child {
+            margin-top: 0;
+        }
+
+        .content-section__body p {
+            margin-bottom: 18px;
+        }
+
+        .content-section__body strong {
+            color: #fff;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .image-gallery__item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+        }
+
+        .image-gallery__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .image-gallery__item:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-gallery__caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Key Points */
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .key-point {
+            padding: 25px;
+            background: rgba(255, 215, 0, 0.08);
+            border-radius: 12px;
+            border-left: 4px solid var(--period-color);
+        }
+
+        .key-point__title {
+            color: var(--period-color);
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+
+        .key-point__text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Timeline Navigation */
+        .period-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 40px;
+        }
+
+        .period-nav__link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            flex: 1;
+            max-width: 45%;
+        }
+
+        .period-nav__link:hover {
+            background: rgba(255, 215, 0, 0.15);
+            border-color: var(--period-color);
+        }
+
+        .period-nav__link--prev {
+            justify-content: flex-start;
+        }
+
+        .period-nav__link--next {
+            justify-content: flex-end;
+            text-align: right;
+            margin-left: auto;
+        }
+
+        .period-nav__label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .period-nav__title {
+            font-weight: 600;
+            color: var(--period-color);
+        }
+
+        .period-nav__icon {
+            font-size: 1.5rem;
+            color: var(--period-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: #0a0a14 !important;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer__content {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer__link {
+            color: var(--period-color);
+        }
+
+        .footer__separator {
+            color: rgba(255, 255, 255, 0.3);
+            margin: 0 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .period-hero {
+                min-height: 60vh;
+            }
+
+            .period-hero__content {
+                padding: 80px 20px 40px;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .period-nav {
+                flex-direction: column;
+            }
+
+            .period-nav__link {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="mosaic-page--premium">
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+            <div class="container nav__container">
+                <a href="index.html" class="nav__brand">
+                    <img src="assets/images/logo.svg" alt="Logo" class="nav__brand-logo" />
+                    <span class="nav__brand-text">Đa Dạng Tôn Giáo</span>
+                </a>
+
+                <button class="nav__hamburger" type="button" aria-label="Mở menu">
+                    <span class="nav__hamburger-line"></span>
+                    <span class="nav__hamburger-line"></span>
+                    <span class="nav__hamburger-line"></span>
+                </button>
+
+                <ul class="nav__menu" id="nav-menu">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Trang Chủ</a></li>
+                    <li class="nav__item"><a href="timeline.html" class="nav__link">Lịch Sử</a></li>
+                    <li class="nav__item"><a href="mosaic.html" class="nav__link nav__link--active">Tôn Giáo</a></li>
+                    <li class="nav__item"><a href="fpt-students.html" class="nav__link">Sinh Viên FPT</a></li>
+                    <li class="nav__item"><a href="about.html" class="nav__link">Giới Thiệu</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="period-hero">
+            <div class="period-hero__bg">
+                <img src="assets/images/buddhism-bacthuoc.png" alt="Phật giáo thời kỳ du nhập">
+            </div>
+            <div class="period-hero__overlay"></div>
+            <div class="period-hero__content">
+                <div class="period-hero__badge">
+                    <span class="period-hero__badge-number">I</span>
+                    <span>Thời kỳ đầu tiên</span>
+                </div>
+                <h1 class="period-hero__title">Du Nhập & Bắc Thuộc</h1>
+                <p class="period-hero__era">Thế kỷ I – đầu thế kỷ X</p>
+                <p class="period-hero__desc">Phật giáo du nhập vào Việt Nam từ thế kỷ I qua đường biển trực tiếp từ Ấn
+                    Độ, đặt nền móng cho một truyền thống tâm linh gắn bó sâu sắc với dân tộc suốt gần 2000 năm.</p>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="period-content">
+            <div class="period-content__container">
+
+                <!-- Bối cảnh lịch sử -->
+                <div class="content-section auto-show">
+                    <div class="content-section__header">
+                        <div class="content-section__icon">📜</div>
+                        <h2 class="content-section__title">Bối Cảnh Lịch Sử</h2>
+                    </div>
+                    <div class="content-section__body">
+                        <p>Từ thế kỷ I sau Công nguyên, lãnh thổ Việt Nam – khi đó thuộc khu vực <strong>Giao
+                                Chỉ</strong> – nằm dưới sự cai trị của các triều đại phong kiến phương Bắc. Đây là một
+                            giai đoạn lịch sử kéo dài, đặc trưng bởi sự áp đặt mạnh mẽ về bộ máy hành chính, luật pháp,
+                            tư tưởng chính trị và các yếu tố văn hóa Hán đối với xã hội bản địa.</p>
+
+                        <p>Tuy nhiên, song song với quá trình Hán hóa, người Việt vẫn duy trì một hệ thống <strong>tín
+                                ngưỡng dân gian lâu đời</strong> gắn với tự nhiên, nông nghiệp và thờ cúng tổ tiên.</p>
+
+                        <div class="key-points">
+                            <div class="key-point">
+                                <div class="key-point__title">Nhu cầu tâm linh</div>
+                                <div class="key-point__text">Trong hoàn cảnh bị đô hộ, người Việt cần một hệ tư tưởng có
+                                    khả năng an ủi tinh thần, giúp vượt qua khổ đau.</div>
+                            </div>
+                            <div class="key-point">
+                                <div class="key-point__title">Sự phù hợp của Phật giáo</div>
+                                <div class="key-point__text">Phật giáo với tư tưởng từ bi, cứu khổ, bình đẳng và không
+                                    mang tính chính trị đối kháng đã đáp ứng đầy đủ những nhu cầu đó.</div>
+                            </div>
+                            <div class="key-point">
+                                <div class="key-point__title">Tính dung hợp cao</div>
+                                <div class="key-point__text">Khả năng dung hợp cao giúp Phật giáo dễ dàng hòa nhập với
+                                    tín ngưỡng bản địa, nhanh chóng được người dân chấp nhận.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Gallery -->
+                <div class="image-gallery auto-show">
+                    <div class="image-gallery__item">
+                        <img src="assets/images/buddhism-bacthuoc.png" alt="Chùa cổ thời Bắc thuộc">
+                        <div class="image-gallery__caption">Trung tâm Phật giáo Luy Lâu (Bắc Ninh)</div>
+                    </div>
+                    <div class="image-gallery__item">
+                        <img src="assets/images/buddhism-truclam.png" alt="Thiền sư tu tập">
+                        <div class="image-gallery__caption">Các thiền sư tu tập và thiền định</div>
+                    </div>
+                </div>
+
+                <!-- Con đường du nhập -->
+                <div class="content-section auto-show">
+                    <div class="content-section__header">
+                        <div class="content-section__icon">🚢</div>
+                        <h2 class="content-section__title">Con Đường Du Nhập</h2>
+                    </div>
+                    <div class="content-section__body">
+                        <p>Theo nhiều công trình nghiên cứu và sử liệu, Phật giáo đã du nhập vào Việt Nam khá sớm, có
+                            thể từ khoảng <strong>thế kỷ I</strong>, thông qua <strong>con đường giao thương đường
+                                biển</strong> trực tiếp từ Ấn Độ và các khu vực Nam Á.</p>
+
+                        <p>Các thương nhân, tăng sĩ và học giả Ấn Độ theo các tuyến hàng hải quốc tế đã cập bến vùng
+                            Giao Chỉ, mang theo giáo lý Phật giáo cùng các hình thức tu tập và nghi lễ.</p>
+
+                        <h4>Đặc điểm quan trọng</h4>
+                        <p>Điểm đặc biệt của Phật giáo Việt Nam thời kỳ đầu là <strong>không hoàn toàn phụ thuộc vào
+                                trung gian Trung Hoa</strong> như ở một số khu vực khác trong khu vực Đông Á. Việc tiếp
+                            nhận trực tiếp từ Ấn Độ giúp Phật giáo tại Việt Nam mang đậm màu sắc Nam Á, thể hiện ở tinh
+                            thần cởi mở, thực tiễn và ít giáo điều.</p>
+
+                        <p>Chính điều này đã tạo nên nền tảng cho một truyền thống Phật giáo mang <strong>bản sắc
+                                riêng</strong>, không rập khuôn theo mô hình Trung Hoa ngay từ buổi đầu hình thành.</p>
+                    </div>
+                </div>
+
+                <!-- Trung tâm Luy Lâu -->
+                <div class="content-section auto-show">
+                    <div class="content-section__header">
+                        <div class="content-section__icon">🏛️</div>
+                        <h2 class="content-section__title">Trung Tâm Phật Giáo Luy Lâu</h2>
+                    </div>
+                    <div class="content-section__body">
+                        <p>Trong tiến trình du nhập và phát triển của Phật giáo Việt Nam thời kỳ Bắc thuộc, <strong>Luy
+                                Lâu</strong> (nay thuộc tỉnh Bắc Ninh) giữ vai trò đặc biệt quan trọng. Đây được xem là
+                            một trong những <strong>trung tâm Phật giáo sớm và lớn nhất</strong> không chỉ của Việt Nam
+                            mà còn của toàn khu vực Đông Nam Á thời bấy giờ.</p>
+
+                        <p>Nhờ vị trí địa lý thuận lợi và vai trò là trung tâm hành chính – kinh tế của Giao Chỉ, Luy
+                            Lâu trở thành nơi hội tụ của các tăng sĩ đến từ Ấn Độ, Trung Á và Trung Hoa.</p>
+
+                        <h4>Các chùa cổ tiêu biểu</h4>
+                        <p>Tại Luy Lâu, các kinh điển Phật giáo đã được giảng dạy, truyền bá và phiên dịch từ rất sớm.
+                            Hệ thống chùa chiền cổ kính như <strong>chùa Dâu, chùa Tướng, chùa Pháp Vân</strong> được
+                            hình thành, phản ánh sự gắn bó chặt chẽ giữa Phật giáo và đời sống cộng đồng.</p>
+
+                        <h4>Tín ngưỡng Tứ Pháp</h4>
+                        <p>Đặc biệt, Phật giáo tại đây đã dung hợp sâu sắc với tín ngưỡng nông nghiệp bản địa, tiêu biểu
+                            là <strong>tín ngưỡng Tứ Pháp</strong> (thờ Mây, Mưa, Sấm, Chớp). Sự kết hợp này cho thấy
+                            ngay từ đầu, Phật giáo Việt Nam đã mang <strong>tính bản địa hóa mạnh mẽ</strong>, thích ứng
+                            linh hoạt với môi trường văn hóa bản xứ.</p>
+                    </div>
+                </div>
+
+                <!-- Image Gallery 2 -->
+                <div class="image-gallery auto-show">
+                    <div class="image-gallery__item">
+                        <img src="assets/images/buddhism-lytran.png" alt="Kiến trúc chùa cổ">
+                        <div class="image-gallery__caption">Kiến trúc chùa truyền thống Việt Nam</div>
+                    </div>
+                </div>
+
+                <!-- Các dòng thiền -->
+                <div class="content-section auto-show">
+                    <div class="content-section__header">
+                        <div class="content-section__icon">🧘</div>
+                        <h2 class="content-section__title">Sự Hình Thành Các Dòng Thiền</h2>
+                    </div>
+                    <div class="content-section__body">
+                        <p>Trong giai đoạn Phật giáo du nhập và phát triển dưới thời Bắc thuộc, các dòng thiền bắt đầu
+                            hình thành, đặt nền móng cho truyền thống thiền học Việt Nam sau này.</p>
+
+                        <div class="key-points">
+                            <div class="key-point">
+                                <div class="key-point__title">Thiền Tì Ni Đa Lưu Chi – Pháp Hiền</div>
+                                <div class="key-point__text">Chú trọng vào tu tập nội tâm, đề cao sự giác ngộ trực tiếp
+                                    thông qua thiền định. Có ảnh hưởng đáng kể đến tầng lớp tăng sĩ trí thức.</div>
+                            </div>
+                            <div class="key-point">
+                                <div class="key-point__title">Thiền Vô Ngôn Thông – Cảm Thành – Thiện Hội</div>
+                                <div class="key-point__text">Nhấn mạnh yếu tố trực giác, tinh thần "bất lập văn tự", coi
+                                    trọng trải nghiệm trực tiếp hơn kinh điển chữ nghĩa. Phù hợp với tâm lý giản dị của
+                                    người Việt.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vai trò lịch sử -->
+                <div class="content-section auto-show">
+                    <div class="content-section__header">
+                        <div class="content-section__icon">⭐</div>
+                        <h2 class="content-section__title">Vai Trò Lịch Sử</h2>
+                    </div>
+                    <div class="content-section__body">
+                        <p>Trong suốt thời kỳ Bắc thuộc, Phật giáo không chỉ đóng vai trò là một tôn giáo mà còn là
+                            <strong>chỗ dựa tinh thần quan trọng</strong> của người Việt. Thông qua giáo lý từ bi và cứu
+                            khổ, Phật giáo góp phần nuôi dưỡng đời sống tinh thần, giúp cộng đồng duy trì bản sắc văn
+                            hóa trong bối cảnh bị đô hộ kéo dài.
+                        </p>
+
+                        <p>Đồng thời, Phật giáo cũng <strong>đặt nền tảng tư tưởng cho các triều đại độc lập sau
+                                này</strong>, đặc biệt là trong thời kỳ Lý – Trần, khi Phật giáo trở thành quốc giáo.
+                            Những giá trị được hình thành từ thời kỳ du nhập và Bắc thuộc đã góp phần định hình một
+                            truyền thống Phật giáo Việt Nam mang <strong>tính độc lập, dung hợp và gắn bó sâu sắc với
+                                vận mệnh dân tộc</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="period-nav auto-show">
+                    <a href="religion-buddhism.html" class="period-nav__link period-nav__link--prev">
+                        <span class="period-nav__icon">←</span>
+                        <div>
+                            <div class="period-nav__label">Quay lại</div>
+                            <div class="period-nav__title">Tổng quan Phật giáo</div>
+                        </div>
+                    </a>
+                    <a href="buddhism-period-2.html" class="period-nav__link period-nav__link--next">
+                        <div>
+                            <div class="period-nav__label">Thời kỳ tiếp theo</div>
+                            <div class="period-nav__title">Thời Lý - Trần</div>
+                        </div>
+                        <span class="period-nav__icon">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content text-center">
+                <p class="footer__copyright">© 2026 Đa Dạng Tôn Giáo Việt Nam. Website học tập của sinh viên FPT.</p>
+                <nav class="footer__nav" aria-label="Footer navigation">
+                    <a href="about.html" class="footer__link">Giới Thiệu</a>
+                    <span class="footer__separator" aria-hidden="true">|</span>
+                    <a href="about.html#references" class="footer__link">Tài Liệu Tham Khảo</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/scroll-effects.js"></script>
+    <script type="module" src="js/animations.js"></script>
+</body>
+
+</html>

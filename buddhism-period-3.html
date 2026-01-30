@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Phật giáo Việt Nam thời Hậu Lê đến Tây Sơn (Thế kỷ XV - XVIII) - Sự chuyển biến từ quốc giáo sang tôn giáo dân gian">
+    <title>Hậu Lê - Tây Sơn - Phật giáo Việt Nam</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/mosaic.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations/cinematic-base.css">
+    <link rel="stylesheet" href="css/animations/lun-dev-scroll.css">
+
+    <style>
+        :root {
+            --period-color: #FFD700;
+            --period-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        .period-hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            background: var(--period-gradient);
+            overflow: hidden;
+        }
+
+        .period-hero__bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .period-hero__bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.35;
+        }
+
+        .period-hero__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.85), rgba(15, 52, 96, 0.7));
+        }
+
+        .period-hero__content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 30px 60px;
+            text-align: center;
+        }
+
+        .period-hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 24px;
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50px;
+            color: var(--period-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .period-hero__badge-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--period-color);
+            color: #1a1a2e;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .period-hero__title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .period-hero__era {
+            font-size: 1.4rem;
+            color: var(--period-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .period-hero__desc {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .period-content {
+            padding: 80px 20px;
+            background: var(--bg-primary);
+        }
+
+        .period-content__container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            margin-bottom: 60px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .content-section__header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .content-section__icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--period-color), #FFA500);
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+
+        .content-section__title {
+            font-size: 1.6rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .content-section__body {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.9;
+            font-size: 1.05rem;
+        }
+
+        .content-section__body h4 {
+            color: var(--period-color);
+            font-size: 1.2rem;
+            margin: 30px 0 15px;
+            font-weight: 600;
+        }
+
+        .content-section__body h4:first-child {
+            margin-top: 0;
+        }
+
+        .content-section__body p {
+            margin-bottom: 18px;
+        }
+
+        .content-section__body strong {
+            color: #fff;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .image-gallery__item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+        }
+
+        .image-gallery__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .image-gallery__item:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-gallery__caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .key-point {
+            padding: 25px;
+            background: rgba(255, 215, 0, 0.08);
+            border-radius: 12px;
+            border-left: 4px solid var(--period-color);
+        }
+
+        .key-point__title {
+            color: var(--period-color);
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+
+        .key-point__text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .period-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 40px;
+        }
+
+        .period-nav__link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            flex: 1;
+            max-width: 45%;
+        }
+
+        .period-nav__link:hover {
+            background: rgba(255, 215, 0, 0.15);
+        }
+
+        .period-nav__link--prev {
+            justify-content: flex-start;
+        }
+
+        .period-nav__link--next {
+            justify-content: flex-end;
+            text-align: right;
+            margin-left: auto;
+        }
+
+        .period-nav__label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .period-nav__title {
+            font-weight: 600;
+            color: var(--period-color);
+        }
+
+        .period-nav__icon {
+            font-size: 1.5rem;
+            color: var(--period-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: #0a0a14 !important;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer__content {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer__link {
+            color: var(--period-color);
+        }
+
+        .footer__separator {
+            color: rgba(255, 255, 255, 0.3);
+            margin: 0 10px;
+        }
+
+        @media (max-width: 768px) {
+            .period-hero {
+                min-height: 60vh;
+            }
+
+            .period-hero__content {
+                padding: 80px 20px 40px;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .period-nav {
+                flex-direction: column;
+            }
+
+            .period-nav__link {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="mosaic-page--premium">
+    <header class="header">
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+            <div class="container nav__container">
+                <a href="index.html" class="nav__brand">
+                    <img src="assets/images/logo.svg" alt="Logo" class="nav__brand-logo" />
+                    <span class="nav__brand-text">Đa Dạng Tôn Giáo</span>
+                </a>
+                <button class="nav__hamburger" type="button" aria-label="Mở menu">
+                    <span class="nav__hamburger-line"></span>
+                    <span class="nav__hamburger-line"></span>
+                    <span class="nav__hamburger-line"></span>
+                </button>
+                <ul class="nav__menu" id="nav-menu">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Trang Chủ</a></li>
+                    <li class="nav__item"><a href="timeline.html" class="nav__link">Lịch Sử</a></li>
+                    <li class="nav__item"><a href="mosaic.html" class="nav__link nav__link--active">Tôn Giáo</a></li>
+                    <li class="nav__item"><a href="fpt-students.html" class="nav__link">Sinh Viên FPT</a></li>
+                    <li class="nav__item"><a href="about.html" class="nav__link">Giới Thiệu</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="period-hero">
+            <div class="period-hero__bg">
+                <img src="assets/images/buddhism-haule.png" alt="Phật giáo thời Hậu Lê - Tây Sơn">
+            </div>
+            <div class="period-hero__overlay"></div>
+            <div class="period-hero__content">
+                <div class="period-hero__badge">
+                    <span class="period-hero__badge-number">III</span>
+                    <span>Thời kỳ chuyển biến</span>
+                </div>
+                <h1 class="period-hero__title">Hậu Lê - Tây Sơn</h1>
+                <p class="period-hero__era">Thế kỷ XV – XVIII</p>
+                <p class="period-hero__desc">Nho giáo trở thành tư tưởng chính thống, Phật giáo lui về dân gian nhưng
+                    vẫn bền bỉ tồn tại như chỗ dựa tinh thần của nhân dân trong thời loạn lạc.</p>
+            </div>
+        </section>
+
+        <section class="period-content">
+            <div class="period-content__container">
+
+                <div class="content-section auto-show">
+                    <div class="content-section__header">
+                        <div class="content-section__icon">📚</div>
+                        <h2 class="content-section__title">Phật Giáo Dưới Triều Hậu Lê</h2>
+                    </div>
+                    <div class="content-section__body">
+                        <p>Bước sang thời Hậu Lê, đặc biệt từ thế kỷ XV, bối cảnh tư tưởng – chính trị của Việt Nam có
+                            sự chuyển biến căn bản. <strong>Nho giáo được đề cao tuyệt đối</strong> và trở thành hệ tư
+                            tưởng chính thống của nhà nước quân chủ trung ương tập quyền.</p>
+
+                        <p>Thông qua hệ thống khoa cử, luật pháp và giáo dục, Nho giáo giữ vai trò chi phối trong việc
+                            tổ chức bộ máy nhà nước cũng như định hướng đạo đức xã hội. Trong bối cảnh đó, Phật giáo dần
+                            bị gạt ra khỏi trung tâm quyền lực chính trị và <strong>không còn giữ vị thế ưu
+                                trội</strong> như trong các triều đại Lý – Trần trước đó.</p>
+
+                        <h4>Sự suy thoái nội bộ</h4>
+                        <p>Sự suy giảm vai trò của Phật giáo ở tầng lớp cầm quyền kéo theo những biến đổi trong nội bộ
+                            Phật giáo. Do thiếu sự bảo trợ của nhà nước và không còn giữ vai trò tư tưởng chủ đạo, tăng
+                            đoàn bước vào giai đoạn <strong>suy thoái về tổ chức và đạo hạnh</strong>.</p>
+
+                        <p>Một bộ phận tăng sĩ sa sút trong việc tu hành, Phật giáo bị dân gian hóa mạnh mẽ và đôi khi
+                            pha trộn với yếu tố mê tín. Tuy nhiên, Phật giáo vẫn tiếp tục tồn tại bền bỉ trong đời sống
+                            tinh thần của nhân dân, nhất là ở nông thôn và các cộng đồng làng xã.</p>
+                    </div>
+                </div>
+
+                <div class="image-gallery auto-show">
+                    <div class="image-gallery__item">
+                        <img src="assets/images/buddhism-haule.png" alt="Chùa làng thời Hậu Lê">
+                        <div class="image-gallery__caption">Chùa làng - nơi sinh hoạt tâm linh của cộng đồng</div>
+                    </div>
+                    <div class="image-gallery__item">
+                        <img src="assets/images/buddhism-bacthuoc.png" alt="Người dân cầu nguyện">
+                        <div class="image-gallery__caption">Phật giáo trong đời sống dân gian</div>
+                    </div>
+                </div>
+
+                <div class="content-section auto-show">
+                    <div class="content-section__header">
+                        <div class="content-section__icon">⚔️</div>
+                        <h2 class="content-section__title">Thời Kỳ Phân Tranh Trịnh – Nguyễn</h2>
+                    </div>
+                    <div class="content-section__body">
+                        <p>Từ thế kỷ XVII đến XVIII, đất nước rơi vào tình trạng <strong>phân tranh kéo dài</strong>
+                            giữa các thế lực Trịnh ở Đàng Ngoài và Nguyễn ở Đàng Trong. Chiến tranh liên miên không chỉ
+                            gây tổn thất nặng nề về kinh tế mà còn khiến đời sống của nhân dân trở nên cực kỳ khó khăn,
+                            bất ổn.</p>
+
+                        <p>Trong bối cảnh xã hội rối ren và khổ đau đó, nhu cầu tìm kiếm một chỗ dựa tinh thần để an ủi
+                            và giải tỏa tâm lý ngày càng gia tăng. <strong>Phật giáo</strong>, với giáo lý từ bi, cứu
+                            khổ và hướng con người đến sự an nhiên, đã đáp ứng hiệu quả nhu cầu tâm linh của quần chúng.
+                        </p>
+
+                        <div class="key-points">
+                            <div class="key-point">
+                                <div class="key-point__title">Lan tỏa trong dân gian</div>
+                                <div class="key-point__text">Phật giáo chủ yếu lan tỏa sâu rộng trong dân gian, chùa
+                                    chiền trở thành không gian sinh hoạt tâm linh và cầu bình an.</div>
+                            </div>
+                            <div class="key-point">
+                                <div class="key-point__title">Phát triển ở Đàng Trong</div>
+                                <div class="key-point__text">Tại Đàng Trong, dưới sự bảo trợ cởi mở của các chúa Nguyễn,
+                                    Phật giáo có điều kiện phục hồi và phát triển mạnh mẽ.</div>
+                            </div>
+                            <div class="key-point">
+                                <div class="key-point__title">Tính nhập thế</div>
+                                <div class="key-point__text">Phật giáo giai đoạn này mang đậm tính dân gian và nhập thế,
+                                    gắn bó chặt chẽ với đời sống cộng đồng.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-gallery auto-show">
+                    <div class="image-gallery__item">
+                        <img src="assets/images/buddhism-truclam.png" alt="Tu hành thời loạn">
+                        <div class="image-gallery__caption">Thiền sư tu tập trong thời loạn lạc</div>
+                    </div>
+                </div>
+
+                <div class="content-section auto-show">
+                    <div class="content-section__header">
+                        <div class="content-section__icon">📋</div>
+                        <h2 class="content-section__title">Đặc Điểm Chung Giai Đoạn XV – XVIII</h2>
+                    </div>
+                    <div class="content-section__body">
+                        <p>Nhìn tổng thể, Phật giáo từ thời Hậu Lê đến Tây Sơn không còn giữ vai trò tư tưởng chính
+                            thống của nhà nước, nhưng lại thể hiện <strong>sức sống bền bỉ trong đời sống xã
+                                hội</strong>.</p>
+
+                        <p>Tôn giáo này chuyển từ vị thế trung tâm quyền lực sang vai trò <strong>tôn giáo dân
+                                gian</strong>, chú trọng đáp ứng nhu cầu tinh thần của quần chúng hơn là tham gia vào
+                            chính trị.</p>
+
+                        <p>Chính sự "lùi bước" khỏi chính trường đã giúp Phật giáo <strong>bảo tồn được bản chất từ bi,
+                                dung hòa và linh hoạt</strong>, tiếp tục thích ứng với những biến động lớn của lịch sử.
+                            Giai đoạn này, dù không rực rỡ như thời Lý – Trần, vẫn đóng vai trò quan trọng trong việc
+                            duy trì mạch sống của Phật giáo Việt Nam, làm tiền đề cho sự phục hưng và biến đổi trong các
+                            giai đoạn lịch sử tiếp theo.</p>
+                    </div>
+                </div>
+
+                <div class="period-nav auto-show">
+                    <a href="buddhism-period-2.html" class="period-nav__link period-nav__link--prev">
+                        <span class="period-nav__icon">←</span>
+                        <div>
+                            <div class="period-nav__label">Thời kỳ trước</div>
+                            <div class="period-nav__title">Thời Lý - Trần</div>
+                        </div>
+                    </a>
+                    <a href="buddhism-period-4.html" class="period-nav__link period-nav__link--next">
+                        <div>
+                            <div class="period-nav__label">Thời kỳ tiếp theo</div>
+                            <div class="period-nav__title">Triều Nguyễn</div>
+                        </div>
+                        <span class="period-nav__icon">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content text-center">
+                <p class="footer__copyright">© 2026 Đa Dạng Tôn Giáo Việt Nam. Website học tập của sinh viên FPT.</p>
+                <nav class="footer__nav" aria-label="Footer navigation">
+                    <a href="about.html" class="footer__link">Giới Thiệu</a>
+                    <span class="footer__separator" aria-hidden="true">|</span>
+                    <a href="about.html#references" class="footer__link">Tài Liệu Tham Khảo</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/scroll-effects.js"></script>
+    <script type="module" src="js/animations.js"></script>
+</body>
+
+</html>
