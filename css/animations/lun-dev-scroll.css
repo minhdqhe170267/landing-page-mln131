@@ -97,6 +97,19 @@ section.auto-show:last-of-type {
     animation-range: entry 0% entry 40%;
 }
 
+/* Fix for religion pages - quick info cards at bottom */
+.quick-info__card.auto-show,
+.quick-info__grid .auto-show {
+    animation-range: entry 0% entry 50%;
+}
+
+/* General fix for last auto-show elements in any container */
+.auto-show:last-child,
+*:last-child > .auto-show,
+section:last-of-type .auto-show {
+    animation-range: entry 0% entry 50%;
+}
+
 /* Staggered delays for children if needed */
 .auto-show-stagger>*:nth-child(1) {
     animation-range: entry 5% cover 30%;

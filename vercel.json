@@ -1,3 +1,11 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/buddhism-period-1", "destination": "/buddhism-period-1.html" },
+    { "source": "/buddhism-period-2", "destination": "/buddhism-period-2.html" },
+    { "source": "/buddhism-period-3", "destination": "/buddhism-period-3.html" },
+    { "source": "/buddhism-period-4", "destination": "/buddhism-period-4.html" },
+    { "source": "/buddhism-period-5", "destination": "/buddhism-period-5.html" },
+    { "source": "/buddhism-period-6", "destination": "/buddhism-period-6.html" }
+  ]
 }
