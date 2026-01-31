@@ -523,7 +523,7 @@ const TimelineController = (function () {
   function fetchTimelineData() {
     // Try to use DataFetcher if available (from main.js)
     if (typeof DataFetcher !== 'undefined' && DataFetcher.fetchData) {
-      DataFetcher.fetchData('assets/data.json')
+      DataFetcher.fetchData('/data.json')
         .then(function (data) {
           if (data && data.timeline) {
             timelineData = data.timeline;
@@ -536,7 +536,7 @@ const TimelineController = (function () {
         });
     } else {
       // Fallback: fetch directly
-      fetch('assets/data.json')
+      fetch('/data.json')
         .then(function (response) {
           if (!response.ok) {
             throw new Error('Network response was not ok');

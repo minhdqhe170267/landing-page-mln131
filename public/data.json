@@ -1,0 +1,204 @@
+{
+  "site": {
+    "title": "Đa Dạng Tôn Giáo Việt Nam",
+    "description": "Website học tập về đa dạng tôn giáo và chính sách tôn giáo Việt Nam - Sản phẩm của sinh viên FPT"
+  },
+  "stats": [
+    {
+      "id": "stat-religions",
+      "value": 16,
+      "label": "Tôn giáo được công nhận",
+      "suffix": ""
+    },
+    {
+      "id": "stat-followers",
+      "value": 27,
+      "label": "Triệu tín đồ",
+      "suffix": "+"
+    },
+    {
+      "id": "stat-facilities",
+      "value": 29800,
+      "label": "Cơ sở thờ tự",
+      "suffix": "+"
+    },
+    {
+      "id": "stat-organizations",
+      "value": 43,
+      "label": "Tổ chức tôn giáo",
+      "suffix": ""
+    }
+  ],
+  "timeline": [
+    {
+      "id": "period-1",
+      "years": "1945-1954",
+      "title": "Thời kỳ kháng chiến chống Pháp",
+      "summary": "Chính sách 'Tín ngưỡng tự do, Lương giáo đoàn kết' - Nền tảng pháp lý đầu tiên cho tự do tôn giáo.",
+      "details": "<h4>🏛️ Bối cảnh lịch sử</h4><p>Ngay sau khi Cách mạng Tháng Tám thành công (19/8/1945), nước Việt Nam Dân chủ Cộng hòa non trẻ phải đối mặt với 'thù trong giặc ngoài': nạn đói hoành hành, 95% dân số mù chữ, và nguy cơ xâm lược từ nhiều phía. Trong bối cảnh đó, việc đoàn kết toàn dân - không phân biệt lương giáo, dân tộc - trở thành yêu cầu sống còn của cách mạng.</p><h4>📜 Các văn kiện pháp lý quan trọng</h4><ul><li><strong>03/09/1945:</strong> Trong phiên họp đầu tiên của Chính phủ Lâm thời, Chủ tịch Hồ Chí Minh tuyên bố 6 nhiệm vụ cấp bách, trong đó có: <em>'Tín ngưỡng tự do và Lương Giáo đoàn kết'</em>.</li><li><strong>09/11/1946:</strong> Hiến pháp đầu tiên của nước Việt Nam Dân chủ Cộng hòa được thông qua. <strong>Điều 10</strong> khẳng định: <em>'Công dân Việt Nam có quyền tự do tín ngưỡng'</em>.</li><li><strong>14/06/1955:</strong> Chủ tịch Hồ Chí Minh ký <strong>Sắc lệnh 234/SL</strong> - văn bản pháp quy đặc biệt quan trọng, quy định chi tiết về bảo vệ nơi thờ tự, quyền tự do hành đạo, và nghiêm cấm xâm phạm tín ngưỡng.</li></ul><h4>🤝 Thực tiễn đoàn kết tôn giáo</h4><p>Hàng ngàn thanh niên Công giáo, Phật tử đã tham gia Vệ quốc đoàn. Các linh mục như Phạm Bá Trực, các nhà sư như Thích Mật Thể tích cực tham gia 'Tuần lễ Vàng', ủng hộ kháng chiến. Khẩu hiệu <strong>'Kính Chúa yêu nước'</strong> (Công giáo), <strong>'Đạo pháp - Dân tộc'</strong> (Phật giáo) bắt đầu hình thành và lan tỏa, thể hiện tinh thần gắn bó giữa tôn giáo và vận mệnh dân tộc.</p><h4>📊 Số liệu tiêu biểu</h4><ul><li>Hơn <strong>500 linh mục</strong> Công giáo tham gia kháng chiến</li><li>Nhiều chùa chiền trở thành cơ sở cách mạng, nuôi giấu cán bộ</li><li>Phong trào 'Phật tử cứu quốc' lan rộng khắp cả nước</li></ul>",
+      "image": "assets/images/timeline-1945.png"
+    },
+    {
+      "id": "period-2",
+      "years": "1954-1975",
+      "title": "Thời kỳ kháng chiến chống Mỹ",
+      "summary": "Sức mạnh đoàn kết tôn giáo trong đấu tranh thống nhất đất nước và khủng hoảng Phật giáo 1963.",
+      "details": "<h4>🏛️ Tại miền Bắc - Xây dựng CNXH</h4><p>Đảng và Nhà nước thực hiện nhất quán chính sách tôn trọng tự do tín ngưỡng. Các chức sắc, nhà tu hành được tạo điều kiện tham gia các tổ chức chính trị - xã hội như Mặt trận Tổ quốc, Hội đồng nhân dân các cấp. Phong trào <strong>'Ba đảm đang'</strong>, <strong>'Thanh niên xung phong'</strong> thu hút đông đảo thanh niên có đạo tham gia.</p><h4>⚔️ Tại miền Nam - Khủng hoảng Phật giáo 1963</h4><p>Chính quyền Ngô Đình Diệm thực hiện chính sách kỳ thị tôn giáo, ưu đãi Công giáo và đàn áp Phật giáo. Sự kiện <strong>Phật Đản 1963</strong> tại Huế (cấm treo cờ Phật giáo) châm ngòi cho phong trào đấu tranh rộng khắp.</p><p>Đỉnh điểm là sự kiện <strong>Hòa thượng Thích Quảng Đức tự thiêu</strong> ngày 11/06/1963 tại ngã tư Phan Đình Phùng - Lê Văn Duyệt (Sài Gòn), gây chấn động toàn cầu. Hình ảnh này trở thành biểu tượng của cuộc đấu tranh cho tự do tôn giáo.</p><h4>🤝 Đoàn kết tôn giáo trong kháng chiến</h4><p><strong>Mặt trận Dân tộc Giải phóng miền Nam Việt Nam</strong> (thành lập 20/12/1960) đã tập hợp rộng rãi các chức sắc, tín đồ yêu nước không phân biệt tôn giáo:</p><ul><li>Linh mục <strong>Nguyễn Ngọc Lan</strong> - thành viên Ủy ban Trung ương MTDTGP</li><li>Hòa thượng <strong>Thích Đôn Hậu</strong> - Phó Chủ tịch MTDTGP</li><li>Nhiều chức sắc Cao Đài, Hòa Hảo tham gia kháng chiến</li></ul><h4>🎯 Kết quả</h4><p>Sức mạnh đoàn kết tôn giáo góp phần to lớn vào <strong>Đại thắng mùa Xuân 1975</strong>, thống nhất đất nước. Đây là minh chứng cho chính sách đúng đắn về tôn giáo của Đảng và Nhà nước.</p>",
+      "image": "assets/images/timeline-1954.png"
+    },
+    {
+      "id": "period-3",
+      "years": "1975-1986",
+      "title": "Thời kỳ thống nhất đất nước",
+      "summary": "Thống nhất các tổ chức tôn giáo, khắc phục hậu quả chiến tranh và Nghị quyết 297-CP.",
+      "details": "<h4>🏛️ Thống nhất tổ chức tôn giáo</h4><p>Sau năm 1975, cùng với sự thống nhất về mặt nhà nước, các tôn giáo cũng có nhu cầu thống nhất về mặt tổ chức để phù hợp với tình hình mới:</p><ul><li><strong>07/11/1981:</strong> Đại hội đại biểu thống nhất Phật giáo Việt Nam tại chùa Quán Sứ (Hà Nội), thành lập <strong>Giáo hội Phật giáo Việt Nam</strong> với phương châm <em>'Đạo pháp - Dân tộc - Chủ nghĩa xã hội'</em>. Hòa thượng Thích Đức Nhuận được suy tôn làm Pháp chủ đầu tiên.</li><li><strong>1983:</strong> Thành lập <strong>Ủy ban Đoàn kết Công giáo Việt Nam</strong> yêu nước, tập hợp các linh mục, tu sĩ, giáo dân yêu nước.</li><li>Các tôn giáo khác (Cao Đài, Hòa Hảo, Tin Lành) cũng dần ổn định tổ chức.</li></ul><h4>📜 Chính sách Nhà nước</h4><p>Năm 1977, Hội đồng Chính phủ ban hành <strong>Nghị quyết 297-CP</strong> về một số chính sách đối với tôn giáo. Đây là văn bản pháp lý quan trọng trong giai đoạn này.</p><h4>⚠️ Khó khăn và hạn chế</h4><p>Do hoàn cảnh khó khăn sau chiến tranh và tư duy bao cấp, việc thực hiện chính sách tôn giáo còn một số hạn chế:</p><ul><li>Đôi khi còn nặng nề về biện pháp hành chính</li><li>Một số hiện tượng sinh hoạt tôn giáo chưa thực sự thuận lợi</li><li>Quan hệ với Vatican chưa được cải thiện</li></ul><p>Tuy nhiên, đây là giai đoạn đặt nền móng cho sự đổi mới tư duy về tôn giáo sau này.</p>",
+      "image": "assets/images/timeline-1975.png"
+    },
+    {
+      "id": "period-4",
+      "years": "1986-2000",
+      "title": "Thời kỳ Đổi mới",
+      "summary": "Nghị quyết 24-NQ/TW (1990) - Bước ngoặt đổi mới tư duy: Tôn giáo là nhu cầu văn hóa, tinh thần.",
+      "details": "<h4>🔄 Đổi mới tư duy lý luận</h4><p><strong>Đại hội VI</strong> (12/1986) khởi xướng công cuộc Đổi mới toàn diện đất nước. Đối với tôn giáo, Đảng ta nhận định lại vai trò và vị trí của nó trong xã hội XHCN, từ bỏ quan điểm coi tôn giáo chỉ là 'thuốc phiện của nhân dân'.</p><h4>📜 Văn kiện lịch sử - Nghị quyết 24-NQ/TW</h4><p>Ngày <strong>16/10/1990</strong>, Bộ Chính trị ban hành <strong>Nghị quyết 24-NQ/TW</strong> về tăng cường công tác tôn giáo trong tình hình mới. Đây là cột mốc quan trọng nhất, khẳng định <strong>3 quan điểm cốt lõi</strong>:</p><ol><li><strong>Tôn giáo là vấn đề còn tồn tại lâu dài</strong> - không thể xóa bỏ bằng mệnh lệnh hành chính</li><li><strong>Tín ngưỡng, tôn giáo là nhu cầu tinh thần</strong> của một bộ phận nhân dân - cần được tôn trọng</li><li><strong>Đạo đức tôn giáo có nhiều điều phù hợp</strong> với công cuộc xây dựng xã hội mới - cần phát huy</li></ol><h4>✅ Hiệu quả thực tế</h4><ul><li>Sinh hoạt tôn giáo trở nên sôi động, cởi mở hơn</li><li>Hàng ngàn cơ sở thờ tự được trùng tu, tôn tạo, xây mới</li><li>Số lượng tín đồ, chức sắc tăng nhanh</li><li>Nhà nước bắt đầu mở rộng quan hệ quốc tế về tôn giáo</li><li>Năm 1989: Lần đầu tiên Việt Nam tiếp đón phái đoàn Vatican</li></ul><h4>📊 Số liệu</h4><p>Đến năm 2000, Việt Nam có khoảng <strong>20 triệu tín đồ</strong> các tôn giáo, <strong>20.000 cơ sở thờ tự</strong>, và <strong>34 tổ chức tôn giáo</strong> được công nhận.</p>",
+      "image": "assets/images/timeline-1986.png"
+    },
+    {
+      "id": "period-5",
+      "years": "2000-2016",
+      "title": "Hoàn thiện pháp luật & Hội nhập",
+      "summary": "Ban hành Nghị quyết 25-NQ/TW và Pháp lệnh 2004: Pháp điển hóa và hội nhập quốc tế.",
+      "details": "<h4>📜 Nghị quyết 25-NQ/TW (2003)</h4><p>Ngày <strong>12/03/2003</strong>, Ban Chấp hành Trung ương Đảng khóa IX ban hành <strong>Nghị quyết 25-NQ/TW</strong> về công tác tôn giáo. Đây là văn kiện quan trọng, khẳng định:</p><ul><li><strong>'Công tác tôn giáo là trách nhiệm của cả hệ thống chính trị'</strong> - không chỉ riêng ngành quản lý nhà nước về tôn giáo</li><li>Tín ngưỡng, tôn giáo là <strong>nhu cầu tinh thần của một bộ phận nhân dân</strong>, đang và sẽ tồn tại cùng dân tộc</li><li>Đảng, Nhà nước thực hiện nhất quán chính sách <strong>đại đoàn kết toàn dân tộc</strong></li><li>Nội dung cốt lõi của công tác tôn giáo là <strong>công tác vận động quần chúng</strong></li></ul><h4>⚖️ Pháp lệnh Tín ngưỡng, tôn giáo (2004)</h4><p>Ngày <strong>18/06/2004</strong>, Ủy ban Thường vụ Quốc hội ban hành <strong>Pháp lệnh Tín ngưỡng, tôn giáo</strong> - văn bản pháp lý cao nhất về tôn giáo lúc bấy giờ. Những điểm đột phá:</p><ul><li>Lần đầu tiên quy định <strong>đầy đủ, hệ thống</strong> quyền và nghĩa vụ của tổ chức, cá nhân tôn giáo</li><li>Công nhận <strong>tư cách pháp nhân phi thương mại</strong> cho tổ chức tôn giáo</li><li>Quy định rõ thủ tục <strong>đăng ký, công nhận</strong> tổ chức tôn giáo</li><li>Bảo hộ quyền sở hữu <strong>cơ sở thờ tự, tài sản</strong> của tổ chức tôn giáo</li></ul><h4>🌏 Hội nhập quốc tế về tôn giáo</h4><p>Việt Nam tích cực hội nhập quốc tế, trong đó có lĩnh vực tôn giáo:</p><ul><li><strong>2007:</strong> Gia nhập WTO, cam kết đảm bảo quyền con người theo chuẩn mực quốc tế</li><li><strong>2008:</strong> Đăng cai tổ chức <strong>Đại lễ Vesak Liên Hợp Quốc</strong> lần đầu tiên tại Việt Nam (Hà Nội), với sự tham dự của hàng ngàn đại biểu từ 74 quốc gia</li><li><strong>2009:</strong> Việt Nam được bầu vào <strong>Hội đồng Nhân quyền Liên Hợp Quốc</strong> nhiệm kỳ 2014-2016</li><li><strong>2014:</strong> Tổ chức Đại lễ Vesak LHQ lần thứ 2 tại chùa Bái Đính (Ninh Bình)</li></ul><h4>📊 Kết quả nổi bật</h4><ul><li>Công nhận thêm nhiều tổ chức tôn giáo mới: Giáo hội Phật giáo Việt Nam Thống nhất (Gia Lai), Hội thánh Tin Lành Việt Nam (miền Bắc), các hệ phái Cao Đài...</li><li>Số lượng cơ sở thờ tự tăng từ <strong>20.000 (2000)</strong> lên <strong>25.000 (2016)</strong></li><li>Hàng trăm chức sắc được đào tạo tại nước ngoài (Vatican, Ấn Độ, Thái Lan...)</li><li>Quan hệ Việt Nam - Vatican có bước tiến quan trọng: Nhóm công tác hỗn hợp họp định kỳ từ 2009</li></ul>",
+      "image": "assets/images/timeline-2000.png"
+    },
+    {
+      "id": "period-6",
+      "years": "2016-nay",
+      "title": "Luật Tín ngưỡng, tôn giáo",
+      "summary": "Luật Tín ngưỡng, tôn giáo 2016 - Đỉnh cao của tiến trình hoàn thiện thể chế pháp quyền.",
+      "details": "<h4>⚖️ Luật Tín ngưỡng, tôn giáo 2016</h4><p>Ngày <strong>18/11/2016</strong>, Quốc hội khóa XIV thông qua <strong>Luật Tín ngưỡng, tôn giáo</strong> (có hiệu lực từ 01/01/2018). Đây là văn bản pháp luật cao nhất, đánh dấu bước hoàn thiện quan trọng của hệ thống pháp luật về tôn giáo.</p><h4>🔑 Những điểm đột phá của Luật</h4><ul><li><strong>Mở rộng chủ thể quyền:</strong> Quy định 'Mọi người' (thay vì chỉ 'công dân') có quyền tự do tín ngưỡng, tôn giáo - bao gồm cả người nước ngoài cư trú hợp pháp tại Việt Nam</li><li><strong>Cải cách hành chính mạnh mẽ:</strong> Chuyển từ cơ chế <em>'xin - cho'</em> sang cơ chế <em>'đăng ký - thông báo'</em>, giảm thiểu thủ tục hành chính</li><li><strong>Tư cách pháp nhân:</strong> Tổ chức tôn giáo được công nhận là pháp nhân phi thương mại, có quyền sở hữu tài sản, mở tài khoản ngân hàng</li><li><strong>Xã hội hóa:</strong> Tạo điều kiện cho tổ chức tôn giáo tham gia giáo dục, y tế, từ thiện, bảo trợ xã hội</li><li><strong>Hoạt động quốc tế:</strong> Quy định rõ quyền quan hệ quốc tế của tổ chức tôn giáo</li></ul><h4>🤝 Quan hệ Việt Nam - Vatican: Bước tiến lịch sử</h4><p>Quan hệ Việt Nam - Tòa thánh Vatican có những bước tiến quan trọng:</p><ul><li><strong>2011:</strong> Tòa thánh bổ nhiệm <strong>Đại diện không thường trú</strong> đầu tiên tại Việt Nam</li><li><strong>2018:</strong> Nâng cấp lên <strong>Đại diện thường trú</strong> của Tòa thánh tại Việt Nam</li><li><strong>2023:</strong> Chủ tịch nước Võ Văn Thưởng hội kiến Giáo hoàng Francis tại Vatican - cuộc gặp cấp cao nhất trong lịch sử quan hệ hai bên</li><li><strong>2024:</strong> Việt Nam và Vatican chính thức thiết lập <strong>quan hệ ngoại giao</strong>, mở Văn phòng Đại diện thường trú của Tòa thánh tại Hà Nội</li></ul><h4>📊 Thành tựu nổi bật (2016 - nay)</h4><ul><li>Công nhận thêm nhiều tổ chức tôn giáo mới: <strong>Giáo hội Các Thánh hữu Ngày sau của Chúa Giê-su Ki-tô</strong> (Mormon), <strong>Cộng đồng tôn giáo Baha'i</strong>, các hệ phái Tin Lành...</li><li>Tổng số: <strong>16 tôn giáo</strong> được công nhận, <strong>43 tổ chức tôn giáo</strong>, hơn <strong>27 triệu tín đồ</strong></li><li>Hơn <strong>29.800 cơ sở thờ tự</strong>, <strong>55.000 chức sắc</strong>, <strong>145.000 chức việc</strong></li><li>Hàng ngàn cơ sở giáo dục, y tế, từ thiện do các tổ chức tôn giáo thành lập và điều hành</li></ul><h4>🌍 Đánh giá quốc tế</h4><p>Việt Nam được cộng đồng quốc tế ghi nhận về nỗ lực đảm bảo quyền tự do tôn giáo:</p><ul><li>Báo cáo tích cực tại các phiên <strong>Rà soát Định kỳ Phổ quát (UPR)</strong> của Hội đồng Nhân quyền LHQ</li><li>Đón tiếp nhiều đoàn ngoại giao, tổ chức quốc tế đến tìm hiểu thực tế tôn giáo</li><li>Tổ chức thành công <strong>Đại lễ Vesak LHQ 2019</strong> tại Tam Chúc (Hà Nam) với quy mô lớn nhất từ trước đến nay</li></ul>",
+      "image": "assets/images/timeline-2016.png"
+    }
+  ],
+  "religions": [
+    {
+      "id": "buddhism",
+      "name": "Phật giáo",
+      "color": "#FFD700",
+      "followers": "Trên 14 triệu",
+      "description": "<p><strong>1. Lịch sử & Vị thế:</strong><br>Du nhập vào Việt Nam từ khoảng đầu Công nguyên. Trải qua hơn 2000 năm đồng hành cùng dân tộc, Phật giáo Việt Nam được mệnh danh là 'Hộ quốc an dân', luôn gắn liền với vận mệnh đất nước (thời Lý - Trần là đỉnh cao).</p><p><strong>2. Hệ phái chính:</strong><br>Phật giáo Bắc tông (Đại thừa), Phật giáo Nam tông (Tiểu thừa - bao gồm Nam tông Kinh và Nam tông Khmer), Khất sĩ.</p><p><strong>3. Văn hóa & Kiến trúc:</strong><br>Di sản kiến trúc đồ sộ: Chùa Một Cột, Chùa Hương, Chùa Bái Đính, Tam Chúc...<br>Lễ hội lớn: Lễ Phật Đản (Vesak - được LHQ công nhận), Lễ Vu Lan (báo hiếu cha mẹ).</p><p><strong>4. Đóng góp xã hội:</strong><br>Hàng ngàn Tuệ Tĩnh đường (phòng khám Đông y miễn phí), trường mầm non, trường nghề, và các hoạt động cứu trợ thiên tai.</p>",
+      "history": "<h4>I. Thời kỳ du nhập và Bắc thuộc (TK I - X)</h4><p>Phật giáo du nhập vào Việt Nam từ thế kỷ I qua đường biển trực tiếp từ Ấn Độ. <strong>Trung tâm Luy Lâu</strong> (Bắc Ninh) là một trong những trung tâm Phật giáo sớm nhất Đông Nam Á, nơi hình thành các chùa cổ như chùa Dâu, chùa Pháp Vân. Phật giáo dung hợp với tín ngưỡng Tứ Pháp (Mây, Mưa, Sấm, Chớp), thể hiện tính bản địa hóa mạnh mẽ.</p><p>Các dòng thiền đầu tiên hình thành: <strong>Tì Ni Đa Lưu Chi</strong> (chú trọng thiền định) và <strong>Vô Ngôn Thông</strong> (đề cao trực giác, 'bất lập văn tự').</p><h4>II. Thời Lý - Trần: Đỉnh cao (TK X - XIV)</h4><p><strong>Thời Lý:</strong> Phật giáo cực thịnh, các vua sùng Phật, chùa tháp được xây dựng khắp nơi. Phật giáo là nền tảng đạo đức, chi phối văn hóa - nghệ thuật.</p><p><strong>Thời Trần:</strong> Ra đời <strong>Thiền phái Trúc Lâm Yên Tử</strong> do vua Trần Nhân Tông sáng lập - dòng thiền mang bản sắc Việt, đề cao tinh thần nhập thế, gắn tu hành với trách nhiệm quốc gia. Hình ảnh vua - thiền sư trở thành biểu tượng Phật giáo Việt Nam.</p><h4>III. Thời Hậu Lê - Tây Sơn (TK XV - XVIII)</h4><p>Nho giáo trở thành tư tưởng chính thống, Phật giáo suy giảm vai trò chính trị nhưng vẫn bền bỉ trong đời sống dân gian. Thời phân tranh Trịnh - Nguyễn, Phật giáo đáp ứng nhu cầu tâm linh của quần chúng trong bối cảnh chiến tranh, phát triển mạnh ở Đàng Trong dưới sự bảo trợ của các chúa Nguyễn.</p><h4>IV. Triều Nguyễn (TK XIX)</h4><p>Nhà Nguyễn lấy Nho giáo làm nền tảng, kiểm soát chặt hoạt động tôn giáo. Phật giáo suy giảm về thể chế và học thuật, nhưng vẫn tồn tại trong đời sống tín ngưỡng dân gian, bị dân gian hóa mạnh mẽ.</p><h4>V. Thời Pháp thuộc - Chấn hưng (TK XIX - XX)</h4><p>Đầu thế kỷ XX, <strong>Phong trào Chấn hưng Phật giáo</strong> bùng nổ: thành lập các tổ chức Phật giáo, mở trường Phật học, xuất bản báo chí Phật học bằng chữ Quốc ngữ. Phật giáo bước vào đối thoại học thuật hiện đại, gắn với tinh thần dân tộc và phong trào yêu nước.</p><h4>VI. Hiện nay (TK XX - XXI)</h4><p><strong>Giáo hội Phật giáo Việt Nam</strong> (thành lập 1981) là tổ chức thống nhất, hoạt động hợp pháp. Phật giáo tích cực tham gia hoạt động xã hội, nhân đạo, giáo dục. Ứng dụng công nghệ số trong truyền bá giáo lý, tham gia các diễn đàn Phật giáo quốc tế, khẳng định vị thế trong cộng đồng Phật giáo thế giới.</p>",
+      "beliefs": "<h4>Giáo lý cốt lõi</h4><p><strong>Tứ Diệu Đế:</strong> Khổ đế (bản chất khổ đau), Tập đế (nguyên nhân khổ), Diệt đế (chấm dứt khổ), Đạo đế (con đường diệt khổ).</p><p><strong>Bát Chánh Đạo:</strong> Chánh kiến, Chánh tư duy, Chánh ngữ, Chánh nghiệp, Chánh mạng, Chánh tinh tấn, Chánh niệm, Chánh định.</p><p><strong>Luật Nhân Quả - Nghiệp báo - Luân hồi:</strong> Mọi hành động đều có quả báo, chúng sinh luân hồi trong sáu cõi cho đến khi giác ngộ.</p><h4>Các hệ phái tại Việt Nam</h4><p><strong>Bắc tông (Đại thừa):</strong> Phổ biến nhất, chú trọng cứu độ chúng sinh, thờ nhiều vị Phật và Bồ Tát.</p><p><strong>Nam tông (Tiểu thừa):</strong> Gồm Nam tông Kinh và Nam tông Khmer, chú trọng tu tập cá nhân theo nguyên thủy.</p><p><strong>Khất sĩ:</strong> Dung hợp Bắc - Nam tông, do Tổ sư Minh Đăng Quang sáng lập (1944).</p><h4>Thực hành tu tập</h4><p>Thiền định, tụng kinh, niệm Phật, ăn chay, giữ giới, làm việc thiện, phóng sinh, cúng dường Tam Bảo.</p>",
+      "organization": "<h4>Giáo hội Phật giáo Việt Nam (GHPGVN)</h4><p>Thành lập ngày 07/11/1981, là tổ chức thống nhất đại diện cho Phật giáo Việt Nam với phương châm <strong>'Đạo pháp - Dân tộc - Chủ nghĩa xã hội'</strong>.</p><h4>Cơ cấu tổ chức</h4><p><strong>Hội đồng Chứng minh:</strong> Gồm các bậc cao tăng, giữ vai trò chứng minh, cố vấn tối cao.</p><p><strong>Hội đồng Trị sự:</strong> Cơ quan điều hành, gồm các ban chuyên môn (Tăng sự, Giáo dục, Hoằng pháp, Nghi lễ, Văn hóa, Từ thiện xã hội...).</p><p><strong>Ban Trị sự cấp tỉnh/thành:</strong> Điều hành hoạt động Phật sự tại địa phương.</p><h4>Hệ thống giáo dục</h4><p>4 Học viện Phật giáo (Hà Nội, Huế, TP.HCM, Cần Thơ), hàng chục trường Trung cấp Phật học, các lớp Sơ cấp tại địa phương.</p><h4>Quy mô hiện tại</h4><p>Hơn <strong>18.000 cơ sở thờ tự</strong> (chùa, thiền viện, tịnh xá), khoảng <strong>55.000 tăng ni</strong>, trên <strong>14 triệu tín đồ</strong> chính thức và hàng chục triệu người có cảm tình với Phật giáo.</p><h4>Hoạt động xã hội</h4><p>Hàng ngàn Tuệ Tĩnh đường (phòng khám Đông y miễn phí), trường mầm non, cơ sở nuôi dạy trẻ mồ côi, người khuyết tật, chương trình cứu trợ thiên tai, xây cầu đường nông thôn.</p>"
+    },
+    {
+      "id": "catholicism",
+      "name": "Công giáo",
+      "color": "#8B0000",
+      "followers": "Khoảng 7 triệu",
+      "description": "<p><strong>1. Lịch sử:</strong><br>Du nhập từ thế kỷ XVI (Giáo sĩ phương Tây). Năm 1960, Tòa thánh thiết lập hàng giáo phẩm Việt Nam. Cộng đồng Công giáo Việt Nam là cộng đồng lớn thứ 2 ở Đông Nam Á (sau Philippines).</p><p><strong>2. Tổ chức:</strong><br>Gồm 3 Tổng giáo phận (Hà Nội, Huế, TP.HCM) và 27 Giáo phận. Đứng đầu là Hội đồng Giám mục Việt Nam.</p><p><strong>3. Giáo lý & Lối sống:</strong><br>Tôn thờ Thiên Chúa (Đức Chúa Trời). Đề cao 'Kính Chúa - Yêu người', giá trị hôn nhân gia đình bền vững (không ly dị), và đức bác ái.</p><p><strong>4. Đóng góp:</strong><br>Tiên phong trong lĩnh vực giáo dục mầm non, chăm sóc người khuyết tật, người nhiễm HIV/AIDS.</p>",
+      "history": "Công giáo du nhập vào Việt Nam từ thế kỷ XVI qua các giáo sĩ phương Tây (Bồ Đào Nha, Tây Ban Nha, Pháp). Năm 1533, giáo sĩ Inêkhu đến truyền đạo tại Ninh Cường, Nam Định. Năm 1960, Tòa thánh Vatican thiết lập hàng giáo phẩm Việt Nam. Cộng đồng Công giáo Việt Nam hiện là cộng đồng lớn thứ 2 ở Đông Nam Á (sau Philippines).",
+      "beliefs": "Công giáo tôn thờ Thiên Chúa Ba Ngôi (Chúa Cha, Chúa Con, Chúa Thánh Thần). Giáo lý dựa trên Kinh Thánh và Truyền thống Giáo hội. Đề cao 'Kính Chúa - Yêu người', giá trị hôn nhân gia đình bền vững (không ly dị), đức bác ái và phục vụ người nghèo. Các bí tích quan trọng: Rửa tội, Thêm sức, Thánh Thể, Hòa giải, Hôn phối, Truyền chức, Xức dầu.",
+      "organization": "Giáo hội Công giáo Việt Nam gồm 3 Tổng giáo phận (Hà Nội, Huế, TP.HCM) và 27 Giáo phận. Đứng đầu là Hội đồng Giám mục Việt Nam. Cơ cấu: Giáo hoàng → Hồng y → Tổng Giám mục → Giám mục → Linh mục → Phó tế. Hiện có khoảng 6.000 linh mục, 20.000 tu sĩ nam nữ, và hơn 3.000 nhà thờ."
+    },
+    {
+      "id": "protestantism",
+      "name": "Tin Lành",
+      "color": "#4169E1",
+      "followers": "Hơn 1.2 triệu",
+      "description": "<p><strong>1. Đặc điểm nổi bật:</strong><br>Coi Kinh Thánh là thẩm quyền duy nhất. Không thờ tranh tượng, không có hàng giáo phẩm phức tạp như Công giáo (mục sư là người chăn bầy). Lối sống 'Kính Chúa yêu người', đề cao lao động chăm chỉ, tiết kiệm, tránh xa tệ nạn.</p><p><strong>2. Sự phát triển:</strong><br>Phát triển mạnh mẽ trong cộng đồng các dân tộc thiểu số ở Tây Nguyên (người Eđê, Gia Rai...) và Tây Bắc (người H'Mông, Dao). Đã làm thay đổi tích cực bộ mặt đời sống, xóa bỏ nhiều hủ tục lạc hậu.</p><p><strong>3. Tổ chức:</strong><br>Có nhiều hệ phái, lớn nhất là Hội thánh Tin Lành Việt Nam (miền Nam) và Hội thánh Tin Lành Việt Nam (miền Bắc).</p>",
+      "history": "Tin Lành du nhập vào Việt Nam đầu thế kỷ XX qua các giáo sĩ Hội Truyền giáo Phúc âm Liên hiệp (CMA). Năm 1911, nhà thờ Tin Lành đầu tiên được xây dựng tại Đà Nẵng. Sau 1975, đạo Tin Lành phát triển mạnh trong cộng đồng dân tộc thiểu số ở Tây Nguyên và Tây Bắc, góp phần xóa bỏ nhiều hủ tục lạc hậu.",
+      "beliefs": "Tin Lành theo nguyên tắc 'Sola Scriptura' - chỉ Kinh Thánh là thẩm quyền duy nhất. Không thờ tranh tượng, không cầu nguyện qua các thánh. Đề cao đức tin cá nhân vào Chúa Giê-su, lối sống 'Kính Chúa yêu người', lao động chăm chỉ, tiết kiệm, tránh xa rượu chè, cờ bạc, mê tín.",
+      "organization": "Có nhiều hệ phái được công nhận, lớn nhất là: Hội thánh Tin Lành Việt Nam (miền Nam) - thành lập 1927, Hội thánh Tin Lành Việt Nam (miền Bắc) - thành lập 1955. Ngoài ra còn có: Hội thánh Báp-tít, Hội thánh Trưởng lão, Hội thánh Mennonite... Cơ cấu đơn giản: Mục sư là người chăn bầy, không có hàng giáo phẩm phức tạp."
+    },
+    {
+      "id": "islam",
+      "name": "Hồi giáo",
+      "color": "#228B22",
+      "followers": "Khoảng 80,000",
+      "description": "<p><strong>1. Cộng đồng đặc thù:</strong><br>Gắn liền với dân tộc Chăm. Chia làm 2 dòng: Chăm Islam (Chăm Hồi giáo truyền thống, hướng về Mecca) và Chăm Bani (Hồi giáo Bà-ni, đã bản địa hóa, pha trộn với tín ngưỡng dân gian).</p><p><strong>2. Thực hành tôn giáo:</strong><br>Tuân thủ nghiêm ngặt Ngũ trụ: Tuyên xưng (Shahada), Cầu nguyện (Salat) 5 lần/ngày, Bố thí (Zakat), Nhịn chay tháng Ramadan (Sawm), Hành hương Mecca (Hajj).</p><p><strong>3. Văn hóa:</strong><br>Kiến trúc Thánh đường (Mosque) với mái vòm hành tây và tháp Minaret. Thức ăn Halal (không ăn thịt heo). Lễ hội Roya Haji, Roya Iidil Fitri.</p>",
+      "history": "Hồi giáo du nhập vào Việt Nam từ thế kỷ X-XI qua các thương nhân Ả Rập và Ấn Độ. Cộng đồng Hồi giáo Việt Nam gắn liền với dân tộc Chăm, tập trung chủ yếu ở Ninh Thuận, Bình Thuận, An Giang, Tây Ninh và TP.HCM. Chia làm 2 dòng: Chăm Islam (Hồi giáo chính thống) và Chăm Bani (Hồi giáo bản địa hóa).",
+      "beliefs": "Hồi giáo thờ phượng Allah (Thượng đế duy nhất) và tin Muhammad là vị tiên tri cuối cùng. Tuân thủ Ngũ trụ (Five Pillars): Shahada (tuyên xưng đức tin), Salat (cầu nguyện 5 lần/ngày), Zakat (bố thí), Sawm (nhịn chay tháng Ramadan), Hajj (hành hương Mecca). Ăn thức ăn Halal, không ăn thịt heo.",
+      "organization": "Có 2 tổ chức chính: Ban Đại diện Cộng đồng Hồi giáo tại TP.HCM (đại diện Chăm Islam) và Hội đồng Sư cả Hồi giáo Bani (đại diện Chăm Bani). Cơ sở thờ tự gồm các Thánh đường (Mosque) với kiến trúc mái vòm và tháp Minaret đặc trưng. Hiện có khoảng 80 thánh đường trên cả nước."
+    },
+    {
+      "id": "caodaism",
+      "name": "Cao Đài",
+      "color": "#FF6347",
+      "followers": "Trên 2.4 triệu",
+      "description": "<p><strong>1. Tôn giáo nội sinh độc đáo:</strong><br>Ra đời năm 1926 tại Tây Ninh. Là sự dung hợp kỳ diệu của Đông - Tây kim cổ: Phật giáo, Lão giáo, Nho giáo (Tam giáo) và Kitô giáo, Hồi giáo (Ngũ chi).</p><p><strong>2. Biểu tượng & Thờ tự:</strong><br>Biểu tượng là <strong>Thiên Nhãn</strong> (Con mắt trái của Thượng đế). Thờ cúng trang nghiêm, nhạc lễ dân tộc đặc sắc.</p><p><strong>3. Kiến trúc Tòa Thánh:</strong><br>Tòa Thánh Tây Ninh là kiệt tác kiến trúc, kết hợp tháp chuông nhà thờ, bát quái đài Đạo giáo, và hoa văn rồng phượng Á Đông.</p>",
+      "history": "Đạo Cao Đài ra đời ngày 18/11/1926 tại Tây Ninh, do các ông Ngô Văn Chiêu, Lê Văn Trung, Phạm Công Tắc sáng lập. Đây là tôn giáo nội sinh độc đáo của Việt Nam, dung hợp tinh hoa Đông - Tây kim cổ: Phật giáo, Lão giáo, Nho giáo (Tam giáo) và Kitô giáo, Hồi giáo (Ngũ chi). Tên gọi 'Cao Đài' nghĩa là 'Đài cao' - nơi Thượng đế ngự.",
+      "beliefs": "Cao Đài thờ Đức Chí Tôn (Thượng đế) với biểu tượng Thiên Nhãn (Con mắt trái). Giáo lý tổng hợp Tam giáo (Phật - Lão - Nho) và Ngũ chi (Nhân đạo, Thần đạo, Thánh đạo, Tiên đạo, Phật đạo). Tín đồ thực hành ăn chay (ít nhất 6 ngày/tháng), cầu nguyện 4 lần/ngày, tu tâm dưỡng tính.",
+      "organization": "Tòa Thánh Tây Ninh là trung tâm hành chính và tâm linh. Cơ cấu gồm: Cửu Trùng Đài (hành pháp), Hiệp Thiên Đài (lập pháp), Bát Quái Đài (thờ phượng). Hàng giáo phẩm: Giáo Tông → Chưởng Pháp → Đầu Sư → Phối Sư → Giáo Sư → Giáo Hữu → Lễ Sanh. Hiện có hơn 1.000 thánh thất trên cả nước."
+    },
+    {
+      "id": "hoahao",
+      "name": "Hòa Hảo",
+      "color": "#8B4513",
+      "followers": "Trên 1.3 triệu",
+      "description": "<p><strong>1. Tôn giáo nhập thế:</strong><br>Do Đức Huỳnh Phú Sổ khai sáng năm 1939 tại miền Tây Nam Bộ (An Giang). Chủ trương 'Học Phật - Tu Nhân', tu tại gia là chính.</p><p><strong>2. Thực hành giản dị:</strong><br>Không xây chùa to tượng lớn, không cúng sao giải hạn. Chỉ thờ tấm trần dà (tượng trưng cho sự hòa hợp và vũ trụ) và thờ cửu huyền thất tổ. Đề cao 4 ân lớn (Tứ ân).</p><p><strong>3. Hoạt động từ thiện:</strong><br>Tín đồ PGHH nổi tiếng cả nước với các hoạt động xã hội: Bếp ăn từ thiện bệnh viện, xe chuyển bệnh miễn phí, xây cầu nông thôn.</p>",
+      "history": "Phật giáo Hòa Hảo do Đức Huỳnh Phú Sổ (1920-1947) khai sáng ngày 18/5/1939 tại làng Hòa Hảo, huyện Phú Tân, tỉnh An Giang. Đây là tôn giáo nội sinh của Việt Nam, kế thừa truyền thống Bửu Sơn Kỳ Hương của Đức Phật Thầy Tây An. Chủ trương 'Học Phật - Tu Nhân', tu tại gia là chính.",
+      "beliefs": "Phật giáo Hòa Hảo theo giáo lý 'Học Phật - Tu Nhân', đề cao Tứ Ân (ân tổ tiên cha mẹ, ân đất nước, ân tam bảo, ân đồng bào nhân loại). Thực hành giản dị: không xây chùa to tượng lớn, không cúng sao giải hạn, không đốt vàng mã. Chỉ thờ tấm Trần Dà (vải nâu) tượng trưng cho sự thanh bạch.",
+      "organization": "Ban Trị sự Trung ương Giáo hội Phật giáo Hòa Hảo (thành lập 1999) là cơ quan lãnh đạo cao nhất. Cơ cấu gồm: Ban Trị sự Trung ương → Ban Trị sự cấp tỉnh → Ban Trị sự cấp huyện → Ban Trị sự cấp xã. Tín đồ tập trung chủ yếu ở các tỉnh miền Tây Nam Bộ: An Giang, Đồng Tháp, Cần Thơ, Vĩnh Long..."
+    },
+    {
+      "id": "folk-beliefs",
+      "name": "Tín ngưỡng dân gian",
+      "color": "#9932CC",
+      "followers": "Phổ biến rộng rãi",
+      "description": "<p><strong>1. Đặc điểm:</strong><br>Tín ngưỡng dân gian Việt Nam là hệ thống các niềm tin, nghi lễ được truyền từ đời này sang đời khác, gắn liền với đời sống văn hóa tinh thần của người Việt.</p><p><strong>2. Các loại hình chính:</strong><br>Thờ cúng tổ tiên, thờ Mẫu (Đạo Mẫu), thờ Thành hoàng làng, thờ các anh hùng dân tộc (Hai Bà Trưng, Trần Hưng Đạo...).</p><p><strong>3. Giá trị văn hóa:</strong><br>Thể hiện đạo lý 'Uống nước nhớ nguồn', tinh thần yêu nước, và sự gắn kết cộng đồng qua các lễ hội truyền thống.</p>",
+      "history": "Tín ngưỡng dân gian Việt Nam có nguồn gốc từ thời tiền sử, phát triển qua hàng ngàn năm lịch sử. Thờ cúng tổ tiên là nét đặc trưng nhất, thể hiện đạo lý 'Uống nước nhớ nguồn'. Đạo Mẫu (thờ Mẫu Tam phủ, Tứ phủ) được UNESCO công nhận là Di sản văn hóa phi vật thể năm 2016.",
+      "beliefs": "Tín ngưỡng dân gian dựa trên niềm tin vào thế giới tâm linh: linh hồn tổ tiên phù hộ con cháu, các vị thần bảo vệ làng xóm, Mẫu (Mẹ) che chở muôn loài. Thực hành chính: thờ cúng tổ tiên tại gia, lễ hội đình làng, hầu đồng (nghi lễ Đạo Mẫu), cúng giỗ, Tết Nguyên đán.",
+      "organization": "Tín ngưỡng dân gian không có tổ chức giáo hội thống nhất. Hoạt động chủ yếu tại: gia đình (bàn thờ tổ tiên), đình làng (thờ Thành hoàng), đền phủ (thờ Mẫu), miếu (thờ các vị thần). Mỗi làng có Ban Quản lý di tích hoặc Hội đồng Hương lão quản lý các hoạt động tín ngưỡng."
+    },
+    {
+      "id": "non-religious",
+      "name": "Không tôn giáo",
+      "color": "#708090",
+      "followers": "Đa số dân số",
+      "description": "<p><strong>1. Đặc điểm:</strong><br>Phần lớn người Việt Nam tự nhận là 'không theo tôn giáo' nhưng vẫn duy trì các tín ngưỡng truyền thống như thờ cúng tổ tiên.</p><p><strong>2. Thực hành:</strong><br>Tham gia các lễ hội truyền thống, cúng giỗ ông bà, đi chùa vào các dịp lễ Tết mà không nhất thiết là tín đồ Phật giáo.</p><p><strong>3. Quan điểm:</strong><br>Tôn trọng tự do tín ngưỡng, sống hòa hợp với các cộng đồng tôn giáo khác trong xã hội.</p>",
+      "history": "Việt Nam là quốc gia có tỷ lệ người 'không tôn giáo' cao (khoảng 70-80% dân số theo các thống kê). Tuy nhiên, đây không đồng nghĩa với vô thần hoàn toàn. Người Việt có truyền thống 'tam giáo đồng nguyên' (Phật - Lão - Nho hòa quyện), kết hợp với tín ngưỡng dân gian, tạo nên đời sống tâm linh phong phú mà không nhất thiết theo một tôn giáo cụ thể.",
+      "beliefs": "Người không theo tôn giáo tại Việt Nam thường vẫn tin vào: linh hồn tổ tiên, luật nhân quả, số mệnh. Họ thực hành thờ cúng tổ tiên, đi chùa cầu may vào dịp Tết, tham gia lễ hội truyền thống. Đây là biểu hiện của 'tín ngưỡng' (beliefs) chứ không phải 'tôn giáo' (religion) theo định nghĩa học thuật.",
+      "organization": "Không có tổ chức. Người không theo tôn giáo sinh hoạt tâm linh chủ yếu trong phạm vi gia đình (thờ cúng tổ tiên) và cộng đồng (lễ hội làng xã). Họ có thể tham gia các hoạt động tôn giáo như đi chùa, nhà thờ với tư cách khách tham quan hoặc cầu nguyện cá nhân mà không gia nhập tổ chức tôn giáo nào."
+    }
+  ],
+  "principles": [
+    {
+      "id": "respect",
+      "title": "Tôn trọng",
+      "description": "Tôn trọng quyền tự do tín ngưỡng của mọi người và sự khác biệt về văn hóa."
+    }
+  ],
+  "studentScenarios": [
+    {
+      "id": "scenario-1",
+      "title": "Bạn cùng phòng cầu nguyện",
+      "situation": "Bạn ở KTX cùng một bạn theo đạo Hồi (hoặc Công giáo), bạn ấy thường cầu nguyện vào các giờ cố định.",
+      "action": "Giữ im lặng, tránh làm ồn hoặc đi lại trước mặt bạn ấy trong lúc cầu nguyện. Tôn trọng không gian riêng tư tâm linh của bạn.",
+      "icon": "🤫"
+    },
+    {
+      "id": "scenario-2",
+      "title": "Mời ăn uống",
+      "situation": "Lớp tổ chức tiệc, có bạn theo đạo Phật (ăn chay) hoặc đạo Hồi (kiêng thịt heo).",
+      "action": "Chủ động hỏi trước về chế độ ăn uống. Chuẩn bị thêm các món chay hoặc món không có thịt heo (Halal) để mọi người đều vui vẻ.",
+      "icon": "tim_an_uong"
+    },
+    {
+      "id": "scenario-3",
+      "title": "Tranh luận về tôn giáo",
+      "situation": "Trong giờ học triết học, có cuộc tranh luận về thế giới quan duy vật và duy tâm tôn giáo.",
+      "action": "Tranh luận trên tinh thần học thuật, tôn trọng quan điểm cá nhân. Không chỉ trích, xúc phạm niềm tin của người khác. Lắng nghe để hiểu sự đa dạng.",
+      "icon": "🤝"
+    },
+    {
+      "id": "scenario-4",
+      "title": "Tham quan cơ sở thờ tự",
+      "situation": "Nhóm đi thực tế tại chùa hoặc nhà thờ.",
+      "action": "Ăn mặc lịch sự (không mặc quần đùi, áo hai dây). Tuân thủ quy định của nơi thờ tự (bỏ giày dép, không chụp ảnh nơi cấm).",
+      "icon": "cầu_nguyện"
+    }
+  ],
+  "guidelines": [],
+  "testimonials": [],
+  "references": []
+}

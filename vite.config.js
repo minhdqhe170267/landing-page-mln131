@@ -27,6 +27,7 @@ export default defineConfig({
                 buddhismPeriod6: resolve(__dirname, 'buddhism-period-6.html'),
             },
         },
+        copyPublicDir: true,
     },
     server: {
         port: 3000,
